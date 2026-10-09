@@ -1,0 +1,382 @@
+{
+  "routes": [
+    {
+      "id": "route_ortayli",
+      "title": "İlber Ortaylı'nın Sur İçi İstanbul Rotası",
+      "subtitle": "Bizans ve Osmanlı Medeniyet Katmanları Yürüyüş Hattı",
+      "curator": "Prof. Dr. İlber Ortaylı (Litros Sanat & Seyahat Notları)",
+      "video_url": "assets/video/ilber_ortayli.mp4",
+      "has_video": true,
+      "color": "#ffd700",
+      "total_distance_km": 9.4,
+      "estimated_time": "5 - 6 Saat (Yürüyerek)",
+      "region": "İstanbul / Tarihi Yarımada",
+      "quote": "“Surun içine girin! İstanbul’un gerçek ruhunu anlamak istiyorsanız sokak sokak yürüyün, not tutun ve taşların dilini dinleyin.” — İlber Ortaylı",
+      "overview": "Eminönü ticaret aksından başlayıp Süleymaniye, Zeyrek ve Fatih üzerinden surlara; Kariye ve Yedikule'den tekrar merkeze uzanan, şehrin 2000 yıllık hafızasını birleştiren en kapsamlı yürüyüş güzergahı.",
+      "stops": [
+        {
+          "order": 1,
+          "name": "Eminönü Meydanı & Yeni Cami",
+          "coords": [28.9705, 41.0175],
+          "camera": { "zoom": 17.2, "pitch": 60, "bearing": 210 },
+          "theme": "Deniz Kapısı ve Ticaret Limanı",
+          "photo": "assets/routes/ortayli_eminonu.jpg",
+          "desc": "Rotanın başlangıcı. Cenevizlilerden Osmanlı'ya şehrin ana deniz limanı, Mısır Çarşısı ve Valide Turhan Sultan'ın Yeni Cami'siyle ticaretin kalbi.",
+          "advice": "Eminönü rıhtımından sur içine doğru yürüyüşe sabahın erken saatlerinde başlayın."
+        },
+        {
+          "order": 2,
+          "name": "Rıza Paşa Yokuşu & Mercan Hanları",
+          "coords": [28.9670, 41.0145],
+          "camera": { "zoom": 17.5, "pitch": 65, "bearing": 235 },
+          "theme": "Geleneksel Esnaf ve Lonca Aksı",
+          "photo": "assets/routes/ortayli_riza_pasa.jpg",
+          "desc": "Eminönü'nden Süleymaniye'ye tırmanan dar ve dik ticaret yokuşu. Büyük Valide Han ve yüzyıllık zanaatkar atölyeleri bu hatta yer alır.",
+          "advice": "Yokuşu tırmanırken han avlularına girin; kubbe siluetlerini ve taş işçiliğini inceleyin."
+        },
+        {
+          "order": 3,
+          "name": "Süleymaniye Camii ve Külliyesi",
+          "coords": [28.9639, 41.0163],
+          "camera": { "zoom": 17.8, "pitch": 70, "bearing": 330 },
+          "theme": "Klasik Osmanlı Mimarisinin Doruk Noktası",
+          "photo": "assets/routes/ortayli_suleymaniye.jpg",
+          "desc": "Mimar Sinan'ın Kanuni Sultan Süleyman için 1557'de inşa ettiği başyapıt. Kütüphanesi, medreseleri, tabhanesi ve Haliç terasıyla anıtsal bir merkez.",
+          "advice": "Külliyenin Haliç terasına çıkıp şehrin topoğrafyasını seyredin."
+        },
+        {
+          "order": 4,
+          "name": "Küçükpazar Tarihi Dokusu",
+          "coords": [28.9605, 41.0182],
+          "camera": { "zoom": 17.4, "pitch": 65, "bearing": 290 },
+          "theme": "Haliç Yamacı ve Mahalle Hafızası",
+          "photo": "assets/routes/ortayli_kucukpazar.jpg",
+          "desc": "Süleymaniye'nin hemen eteğinde, geleneksel ahşap evleri, bekar odaları ve kadim esnaf kültürüyle yaşayan tarihi bir İstanbul mahallesi.",
+          "advice": "Çukur sokaklardaki ahşap mimari kalıntılarını fotoğraflayın."
+        },
+        {
+          "order": 5,
+          "name": "Molla Zeyrek Camii (Pantokrator)",
+          "coords": [28.9575, 41.0195],
+          "camera": { "zoom": 17.6, "pitch": 65, "bearing": 270 },
+          "theme": "Doğu Roma İmparatorluk Manastırı (12. Yüzyıl)",
+          "photo": "assets/routes/ortayli_zeyrek.jpg",
+          "desc": "Bizans İmparatoriçesi İrini tarafından yaptırılan Pantokrator Manastırı Kilisesi. İstanbul'un Ayasofya'dan sonraki en büyük Bizans dini yapısıdır.",
+          "advice": "Üç kilisenin birleşimi olan tuğla cepheyi ve ahşap Zeyrek evlerini görün."
+        },
+        {
+          "order": 6,
+          "name": "Fatih Camii ve Külliyesi",
+          "coords": [28.9498, 41.0198],
+          "camera": { "zoom": 17.5, "pitch": 65, "bearing": 250 },
+          "theme": "İmparatorluk İlim ve Hukuk Merkezi",
+          "photo": "assets/routes/ortayli_fatih.jpg",
+          "desc": "Fatih Sultan Mehmed'in On İki Havariler Kilisesi alanında inşa ettirdiği Sahn-ı Seman medreseleriyle Osmanlı'nın ilk üniversite külliyesi.",
+          "advice": "Külliyenin geniş avlusunda Osmanlı vakıf şehir planlamasını hissedin."
+        },
+        {
+          "order": 7,
+          "name": "Balat & Fener (Demir Kilise)",
+          "coords": [28.9485, 41.0315],
+          "camera": { "zoom": 17.4, "pitch": 60, "bearing": 315 },
+          "theme": "Çok Kültürlü Haliç Hafızası",
+          "photo": "assets/routes/ortayli_balat.jpg",
+          "desc": "Yahudi, Rum ve Ermeni cemaatlerinin kadim yerleşimi. Kırmızı Mektep, Fener Rum Patrikhanesi ve prefabrik dökme demir Sveti Stefan Kilisesi.",
+          "advice": "Sokak aralarındaki cumbalı renkli evler arasında kaybolun."
+        },
+        {
+          "order": 8,
+          "name": "Ayvansaray & Tekfur Sarayı",
+          "coords": [28.9405, 41.0345],
+          "camera": { "zoom": 17.5, "pitch": 68, "bearing": 240 },
+          "theme": "Blachernae Saray Kompleksi ve Çini Fırınları",
+          "photo": "assets/routes/ortayli_ayvansaray.jpg",
+          "desc": "Bizans'ın son dönem imparatorluk sarayı olan Blachernae kompleksinden günümüze ulaşan Tekfur Sarayı ve Haliç surlarının kara surlarıyla birleştiği nokta.",
+          "advice": "Restorasyonla müzeleştirilen Tekfur Sarayı'nın çini ve cam koleksiyonunu gezin."
+        },
+        {
+          "order": 9,
+          "name": "Edirnekapı & Theodosius Kara Surları",
+          "coords": [28.9370, 41.0305],
+          "camera": { "zoom": 17.6, "pitch": 70, "bearing": 200 },
+          "theme": "Bin Yıllık Savunma Hattı ve Zafer Kapısı",
+          "photo": "assets/routes/ortayli_edirnekapi.jpg",
+          "desc": "5. yüzyılda İmparator II. Theodosius tarafından inşa edilen çift kademeli efsanevi kara surları. Mihrimah Sultan Camii ve Fatih'in şehre girdiği tarihi kapı.",
+          "advice": "Sur merdivenlerinden sur üstü yürüyüş yoluna çıkarak kentin silüetini izleyin."
+        },
+        {
+          "order": 10,
+          "name": "Kariye Camii (Chora Müzesi)",
+          "coords": [28.9392, 41.0312],
+          "camera": { "zoom": 17.8, "pitch": 65, "bearing": 180 },
+          "theme": "Bizans Rönesansı Mozaik ve Fresk Başyapıtı",
+          "photo": "assets/routes/ortayli_kariye.jpg",
+          "desc": "14. yüzyıl Paleologos Rönesansı'nın zirvesi olan Theodore Metochites mozaikleri ve mahşer freskleri. Dünya sanat tarihinin en nadide eserlerinden biri.",
+          "advice": "İncil ve Meryem döngüsünü tasvir eden tavan mozaiklerine mutlaka dikkatle bakın."
+        },
+        {
+          "order": 11,
+          "name": "Yedikule Hisarı & Altın Kapı (Porta Aurea)",
+          "coords": [28.9220, 40.9935],
+          "camera": { "zoom": 17.5, "pitch": 65, "bearing": 150 },
+          "theme": "İmparatorluk Zafer Takı ve Osmanlı Hisarı",
+          "photo": "assets/routes/ortayli_yedikule.jpg",
+          "desc": "Bizans imparatorlarının sefere çıkıp zaferle döndüğü Altın Kapı ve Fatih Sultan Mehmed'in kentin hazinesini korumak için beş köşeli inşa ettirdiği hisar.",
+          "advice": "Zindan kulelerinin duvarlarındaki tarihi mahkûm kitabelerini inceleyin."
+        },
+        {
+          "order": 12,
+          "name": "Cerrahpaşa & Haseki Külliyesi",
+          "coords": [28.9430, 41.0080],
+          "camera": { "zoom": 17.3, "pitch": 60, "bearing": 120 },
+          "theme": "Osmanlı Şifahanesi ve Sinan Yapıları",
+          "photo": "assets/routes/ortayli_cerrahpasa.jpg",
+          "desc": "Mimar Sinan'ın Haseki Hürrem Sultan adına inşa ettiği ilk külliye ve darüşşifa ile Cerrah Mehmet Paşa Camii'nin zarif detayları.",
+          "advice": "Sinan'ın sekizgen şemalı kubbe çözümlerine odaklanın."
+        },
+        {
+          "order": 13,
+          "name": "Beyazıt Meydanı & Sahaflar Çarşısı",
+          "coords": [28.9650, 41.0105],
+          "camera": { "zoom": 17.5, "pitch": 65, "bearing": 90 },
+          "theme": "Kültür, Kitap ve Akademi Hafızası",
+          "photo": "assets/routes/ortayli_beyazit.jpg",
+          "desc": "Forum Tauri üzerinde yükselen Beyazıt Camii, İstanbul Üniversitesi anıtsal kapısı ve Bizans'tan bugüne kitap ticaretinin kalbi Sahaflar Çarşısı.",
+          "advice": "Çınaraltı'nda kahve molası verip sahaflardaki eski gravürleri inceleyin."
+        },
+        {
+          "order": 14,
+          "name": "Sultanahmet Meydanı & Ayasofya",
+          "coords": [28.9770, 41.0075],
+          "camera": { "zoom": 17.5, "pitch": 65, "bearing": 45 },
+          "theme": "Dünyanın Merkezi: Augusteion & Hipodrom",
+          "photo": "assets/routes/ortayli_sultanahmet.jpg",
+          "desc": "Rotanın görkemli finali. Ayasofya, Sultanahmet Camii, Milyon Taşı, Dikilitaş ve Yerebatan Sarnıcı ile dünyanın sıfır noktası.",
+          "advice": "Gün batımında Ayasofya ve Sultanahmet kubbeleri arasındaki ışık oyununu izleyin."
+        }
+      ]
+    },
+    {
+      "id": "route_celebi",
+      "title": "Evliya Çelebi'nin İstanbul & Haliç Seyahat Hattı",
+      "subtitle": "“Seyahat Yâ Resûlallah” Rüyasından Dünyaya Açılan Kapı",
+      "curator": "ArcGIS StoryMaps & Evliya Çelebi Seyahatnâmesi",
+      "color": "#38bdf8",
+      "total_distance_km": 11.2,
+      "estimated_time": "1 Günlük Keşif",
+      "region": "İstanbul / Haliç & Boğaziçi",
+      "quote": "“Kostantiniyye cihâna benzer; ne görse güzel, ne bilse azâmetli.” — Evliya Çelebi",
+      "overview": "Evliya Çelebi'nin 1630'da gördüğü meşhur rüya ile başlayan seyahat tutkusunun izlerini Haliç kıyısı boyunca takip eden, Silahtarağa'ya ve Üsküdar'a uzanan tarihi rota.",
+      "stops": [
+        {
+          "order": 1,
+          "name": "Ahi Çelebi Camii (Zindankapı)",
+          "coords": [28.9675, 41.0185],
+          "camera": { "zoom": 17.5, "pitch": 65, "bearing": 210 },
+          "theme": "Seyahatnâme'nin Doğduğu Mukaddes Rüya Mekânı",
+          "photo": "assets/routes/celebi_ahi.jpg",
+          "desc": "Evliya Çelebi, 19 Ağustos 1630 Aşure gecesi bu camide rüyasında Peygamber Efendimiz'i görmüş; heyecandan 'Şefaat Yâ Resûlallah' yerine 'Seyahat Yâ Resûlallah' diyerek 51 yıllık dünya seyahatine adım atmıştır.",
+          "advice": "Haliç kıyısındaki bu küçük ama abidevi caminin rıhtımında Çelebi'nin rüyasını yad edin."
+        },
+        {
+          "order": 2,
+          "name": "Galata Kulesi & Pera",
+          "coords": [28.9741, 41.0256],
+          "camera": { "zoom": 17.8, "pitch": 70, "bearing": 30 },
+          "theme": "Hezarfen'in Uçuş Noktası ve Çelebi'nin Baba Evi",
+          "photo": "assets/routes/celebi_galata.jpg",
+          "desc": "Evliya Çelebi'nin çocukluğunun geçtiği Pera bölgesi ve dostu Hezarfen Ahmed Çelebi'nin kanat takıp Üsküdar Doğancılar'a uçtuğu gözetleme kulesi.",
+          "advice": "Galata yokuşundan inerken liman seslerini dinleyin."
+        },
+        {
+          "order": 3,
+          "name": "Kasımpaşa Mevlevihanesi",
+          "coords": [28.9680, 41.0330],
+          "camera": { "zoom": 17.3, "pitch": 60, "bearing": 280 },
+          "theme": "Tersane-i Âmire ve Tasavvuf Kültürü",
+          "photo": "assets/routes/celebi_mevlevi.jpg",
+          "desc": "Evliya Çelebi'nin mûsiki, ney ve hat meşk ettiği, Osmanlı donanmasının tersane kıyısında ruhani sığınağı olan dergâh.",
+          "advice": "Ahşap semahane yapısını ve derviş odalarını görün."
+        },
+        {
+          "order": 4,
+          "name": "Eyüp Sultan Külliyesi & Cülus Yolu",
+          "coords": [28.9340, 41.0480],
+          "camera": { "zoom": 17.5, "pitch": 65, "bearing": 320 },
+          "theme": "Kılıç Kuşanma Merasimleri ve Ziyaretgâh",
+          "photo": "assets/routes/celebi_eyup.jpg",
+          "desc": "Evliya Çelebi'nin her sefer ve seyahat öncesinde dua edip feyz aldığı, padişahların cülus kılıcını kuşandığı kentin manevi başkenti.",
+          "advice": "Asırlık çınarların altındaki türbe avlusunu ziyaret edin."
+        },
+        {
+          "order": 5,
+          "name": "Silahtarağa & Kağıthane Mesiresi",
+          "coords": [28.94635, 41.06672],
+          "camera": { "zoom": 17.8, "pitch": 70, "bearing": 310 },
+          "theme": "Lale Devri Sa'dabad ve 1914 Sanayi Hamlesi",
+          "photo": "assets/routes/celebi_silahtaraga.jpg",
+          "desc": "Evliya Çelebi'nin 'bağları ve çayırları cennet misali' diye tasvir ettiği Kağıthane vadisi ucundaki Silahtarağa. Cumhuriyet döneminde santralistanbul ve Enerji Müzesi'ne dönüşmüştür.",
+          "advice": "Zaman tüneli panelini açarak 1914-2026 dönüşümünü izleyin."
+        },
+        {
+          "order": 6,
+          "name": "Üsküdar Mihrimah Sultan & Hac Yolu",
+          "coords": [29.0150, 41.0265],
+          "camera": { "zoom": 17.4, "pitch": 65, "bearing": 90 },
+          "theme": "Asya Kapısı ve Kervanların Çıkış Noktası",
+          "photo": "assets/routes/celebi_uskudar.jpg",
+          "desc": "Evliya Çelebi'nin 1671 yılında Hac yolculuğuna ve Anadolu-Ortadoğu seyahatlerine çıkmak üzere bindiği kayığın yanaştığı Üsküdar İskelesi.",
+          "advice": "Mimar Sinan'ın deniz kıyısındaki kubbe mimarisini akşam ışığında izleyin."
+        }
+      ]
+    },
+    {
+      "id": "route_likya",
+      "title": "Kadim Likya Yolu Arkeolojik Parkuru",
+      "subtitle": "Akdeniz'in Işık Ülkesi & Dağ Patikaları (540 km)",
+      "curator": "Arkeofili & Kate Clow Kültür Rotaları",
+      "color": "#10b981",
+      "total_distance_km": 540,
+      "estimated_time": "29 Gün (Bölüm Bölüm Yürünebilir)",
+      "region": "Akdeniz / Fethiye - Antalya",
+      "quote": "“Işık Ülkesi Likya; dağları denizle buluşturan taşlı antik Roma yolları ve kayalara oyulmuş tapınak mezarlarıyla yaşayan bir açık hava efsanesidir.”",
+      "overview": "Türkiye'nin ilk uzun mesafeli yürüyüş rotası olan Likya Yolu; Fethiye'den başlayıp 25 antik kentin, dağ vadilerinin ve Akdeniz koylarının içinden geçerek Antalya'ya ulaşır.",
+      "stops": [
+        {
+          "order": 1,
+          "name": "Kayaköy (Karmylassos) & Ölüdeniz",
+          "coords": [29.0880, 36.5745],
+          "camera": { "zoom": 16.5, "pitch": 60, "bearing": 180 },
+          "theme": "Rotanın Başlangıcı & Taş Mimari",
+          "photo": "assets/routes/likya_kayakoy.jpg",
+          "desc": "Likya Yolu'nun başlangıç noktalarından biri olan tarihi taş evler, kiliseler ve çam ormanlarıyla kaplı hayalet köy.",
+          "advice": "Sabah serinliğinde Ölüdeniz manzaralı dağ patikasına tırmanın."
+        },
+        {
+          "order": 2,
+          "name": "Patara Antik Kenti & Meclis Binası",
+          "coords": [29.3175, 36.2610],
+          "camera": { "zoom": 16.8, "pitch": 65, "bearing": 220 },
+          "theme": "Likya Birliği'nin Başkenti ve Demokrasi Beşiği",
+          "photo": "assets/routes/likya_patara.jpg",
+          "desc": "Dünyanın ilk demokratik federasyonu sayılan Likya Birliği'nin meclis binası (Bouleuterion), deniz feneri ve kum tepeleri.",
+          "advice": "Restorasyonu tamamlanan antik meclis binasını ve tiyatroyu gezin."
+        },
+        {
+          "order": 3,
+          "name": "Kaş (Antiphellos) Antik Tiyatrosu",
+          "coords": [29.6385, 36.1990],
+          "camera": { "zoom": 17.2, "pitch": 65, "bearing": 190 },
+          "theme": "Denize Bakan Helenistik Tiyatro",
+          "photo": "assets/routes/likya_kas.jpg",
+          "desc": "Anadolu'da denize dönük tek tiyatro olan Antiphellos Tiyatrosu ve Kaş sokaklarındaki anıtsal Likya lahitleri.",
+          "advice": "Gün batımında tiyatronun taş basamaklarına oturup Meis Adası'nı seyredin."
+        },
+        {
+          "order": 4,
+          "name": "Kekova & Simena Kalesi (Kaleköy)",
+          "coords": [29.8605, 36.1905],
+          "camera": { "zoom": 16.8, "pitch": 65, "bearing": 160 },
+          "theme": "Batık Şehir ve Su İçindeki Lahitler",
+          "photo": "assets/routes/likya_kekova.jpg",
+          "desc": "Depremlerle sular altında kalan antik liman rıhtımları ve Simena Kalesi'nin surları altındaki masalsı deniz manzarası.",
+          "advice": "Sadece yürüyerek veya denizden ulaşılabilen Kaleköy patikasını takip edin."
+        },
+        {
+          "order": 5,
+          "name": "Myra Kaya Mezarları (Demre)",
+          "coords": [29.9850, 36.2590],
+          "camera": { "zoom": 17.2, "pitch": 68, "bearing": 340 },
+          "theme": "Ahşap Ev Taklidi Anıtsal Kaya Mezarları",
+          "photo": "assets/routes/likya_myra.jpg",
+          "desc": "Uçurumlara kabartma figürlerle oyulmuş nefes kesici kaya mezarları ve Aziz Nikolaos (Noel Baba) Kilisesi.",
+          "advice": "Tiyatro cephesindeki mitolojik mask kabartmalarını inceleyin."
+        },
+        {
+          "order": 6,
+          "name": "Olympos Antik Kenti & Yanartaş (Chimaera)",
+          "coords": [30.4740, 36.3965],
+          "camera": { "zoom": 16.5, "pitch": 60, "bearing": 120 },
+          "theme": "Korsan Kenti ve Bin Yıllık Sönmeyen Ateş",
+          "photo": "assets/routes/likya_olympos.jpg",
+          "desc": "Akçay deresinin iki yakasında gizlenmiş tapınak kalıntıları ve mitolojik canavar Chimaera'nın kayalardan çıkan alevleri.",
+          "advice": "Akşam karanlığında Yanartaş'a tırmanıp kayaların arasından çıkan doğal ateşi görün."
+        },
+        {
+          "order": 7,
+          "name": "Phaselis Antik Liman Kenti",
+          "coords": [30.5525, 36.5240],
+          "camera": { "zoom": 17.0, "pitch": 65, "bearing": 90 },
+          "theme": "Çam Ağaçları Altında Üç Limanlı Şehir",
+          "photo": "assets/routes/likya_phaselis.jpg",
+          "desc": "Büyük İskender'in kışladığı liman kenti. Su kemerleri, geniş caddesi, agorası ve üç doğal koyuyla Likya'nın doğu kapısı.",
+          "advice": "Antik su kemerinin altından geçerek kuzey limanına yürüyün."
+        }
+      ]
+    },
+    {
+      "id": "route_hitit_frig",
+      "title": "Hitit & Frig Krallık Rotaları",
+      "subtitle": "Kaya Anıtları, Sfenksli Kapılar ve Midas Efsaneleri",
+      "curator": "Arkeofili Yürüyüş Rotaları & Çorum-Eskişehir Valilikleri",
+      "color": "#f59e0b",
+      "total_distance_km": 320,
+      "estimated_time": "Tematik Keşif Parkuru",
+      "region": "İç Anadolu / Çorum & Frig Vadisi",
+      "quote": "“3500 yıl önce Tunç Çağı süper gücü Hititlerin başkenti Hattuşa'dan, eşek kulaklı Kral Midas'ın gizemli kaya vadilerine uzanan kadim Anadolu izleri.”",
+      "overview": "UNESCO Dünya Mirası Hattuşa, Yazılıkaya ve Alacahöyük üçgeni ile Eskişehir-Afyon Frig Vadisi'nin devasa kaya fasadlarını birbirine bağlayan medeniyet parkuru.",
+      "stops": [
+        {
+          "order": 1,
+          "name": "Hattuşa Aslanlı Kapı & Büyük Mabed",
+          "coords": [34.6150, 40.0195],
+          "camera": { "zoom": 16.5, "pitch": 65, "bearing": 160 },
+          "theme": "Hitit İmparatorluğu'nun Başkenti (MÖ 1600)",
+          "photo": "assets/routes/hitit_hattusa.jpg",
+          "desc": "UNESCO Dünya Mirası. 6 km'lik surlar, gizli yeraltı tüneli (Yerkapı), Yeşil Taş ve şehri koruyan Aslanlı Kapı.",
+          "advice": "Yerkapı poterninden (tünelinden) geçerek sur dışına çıkma deneyimini yaşayın."
+        },
+        {
+          "order": 2,
+          "name": "Yazılıkaya Hitit Açık Hava Tapınağı",
+          "coords": [34.6325, 40.0260],
+          "camera": { "zoom": 17.2, "pitch": 70, "bearing": 210 },
+          "theme": "Tanrılar Geçidi Kaya Kabartmaları",
+          "photo": "assets/routes/hitit_yazilikaya.jpg",
+          "desc": "Fırtına Tanrısı Teşup ve Güneş Tanrıçası Hepat önderliğinde kayalara kazınmış 71 Hitit tanrısının kutsal alayı.",
+          "advice": "Öğleden sonra güneş açısında kayalardaki kabartmaların gölgelerini inceleyin."
+        },
+        {
+          "order": 3,
+          "name": "Alacahöyük Sfenksli Kapı & Kral Mezarları",
+          "coords": [34.6970, 40.2340],
+          "camera": { "zoom": 17.0, "pitch": 60, "bearing": 180 },
+          "theme": "Güneş Kursları ve Hatti Kültürü",
+          "photo": "assets/routes/hitit_alacahoyuk.jpg",
+          "desc": "Anadolu Medeniyetleri Müzesi'ndeki ünlü bronz Güneş Kursları'nın bulunduğu Hatti prens mezarları ve devasa monolitik sfenksler.",
+          "advice": "Girişteki sfenkslerin taş bloklarındaki çift başlı kartal kabartmasını bulun."
+        },
+        {
+          "order": 4,
+          "name": "Yazılıkaya Midas Anıtı (Eskişehir)",
+          "coords": [30.7145, 39.2005],
+          "camera": { "zoom": 17.0, "pitch": 70, "bearing": 240 },
+          "theme": "Frig Krallığı'nın Dini Merkezi (MÖ 7. Yüzyıl)",
+          "photo": "assets/routes/frig_midas.jpg",
+          "desc": "17 metre yüksekliğinde tek parça tüf kayaya oyulmuş dev anıt. Tanrıça Kibele nişi ve Frig yazıtlarıyla süslü bir başyapıt.",
+          "advice": "Anıtın üzerindeki çözümlenmemiş Frig harfli kitabelere yakından bakın."
+        },
+        {
+          "order": 5,
+          "name": "Ayazini Kaya Yerleşimi & Kilisesi (Afyon)",
+          "coords": [30.5630, 39.0220],
+          "camera": { "zoom": 16.8, "pitch": 65, "bearing": 270 },
+          "theme": "Tüf Kayalara Oyulmuş Çok Katlı Manastırlar",
+          "photo": "assets/routes/frig_ayazini.jpg",
+          "desc": "Frig, Roma ve Bizans dönemlerinde kesintisiz kullanılan kaya oyma kiliseler, sarnıçlar ve aslan kabartmalı mezar odaları.",
+          "advice": "Kaya kilisesinin kubbe tonozunu ve apsis detaylarını inceleyin."
+        }
+      ]
+    }
+  ]
+}

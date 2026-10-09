@@ -1045,6 +1045,379 @@
       justify-content: center;
     }
 
+    /* Kadim Rotalar Listesi (Sol Panel) */
+    .route-selector-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+    .btn-route-card {
+      background: rgba(26, 19, 13, 0.88);
+      border: 1px solid rgba(212, 175, 55, 0.28);
+      border-radius: 7px;
+      padding: 7px 9px;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .btn-route-card:hover {
+      background: rgba(184, 134, 11, 0.25);
+      border-color: #ffd700;
+      transform: translateY(-1px);
+    }
+    .btn-route-card.active {
+      background: rgba(184, 134, 11, 0.35);
+      border-color: #ffd700;
+      box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+    }
+    .route-badge-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1px;
+    }
+    .route-badge {
+      font-size: 8.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 2px 5px;
+      border-radius: 4px;
+      border: 1px solid;
+      letter-spacing: 0.3px;
+    }
+    .route-time-text {
+      font-size: 8.5px;
+      color: #c4b59d;
+    }
+    .route-card-heading {
+      font-family: 'Cinzel', serif;
+      font-size: 11px;
+      font-weight: 700;
+      color: #ffd700;
+      line-height: 1.2;
+    }
+    .route-card-desc {
+      font-size: 9px;
+      color: #a89a85;
+      line-height: 1.25;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    /* Rota Gezinti Paneli (Alt Kayan HUD) */
+    #route-tour-hud {
+      position: absolute;
+      bottom: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 900px;
+      max-width: 92vw;
+      background: rgba(15, 11, 8, 0.95);
+      border: 1px solid #d4af37;
+      border-radius: 12px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.9), inset 0 0 15px rgba(212, 175, 55, 0.15);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 1200;
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      padding: 10px 16px;
+      gap: 8px;
+      animation: slideUpFade 0.3s ease;
+    }
+    @keyframes slideUpFade {
+      from { opacity: 0; transform: translate(-50%, 20px); }
+      to { opacity: 1; transform: translate(-50%, 0); }
+    }
+    .rh-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+      padding-bottom: 6px;
+      gap: 12px;
+    }
+    .rh-title-box {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+    .rh-tag-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .rh-route-pill {
+      font-size: 9px;
+      font-weight: 700;
+      color: #ffd700;
+      background: rgba(184, 134, 11, 0.25);
+      border: 1px solid rgba(212, 175, 55, 0.5);
+      padding: 2px 6px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+    .rh-meta-info {
+      font-size: 10px;
+      color: #a89a85;
+    }
+    .rh-header h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 13.5px;
+      color: #f5eedf;
+      margin: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .rh-action-btns {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+    .btn-rh-special {
+      background: linear-gradient(135deg, rgba(184, 134, 11, 0.35), rgba(139, 26, 26, 0.35));
+      border: 1px solid #ffd700;
+      color: #ffd700;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 5px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.2s ease;
+    }
+    .btn-rh-special:hover {
+      background: #ffd700;
+      color: #000;
+    }
+    .btn-rh-play {
+      background: rgba(30, 22, 14, 0.9);
+      border: 1px solid #10b981;
+      color: #34d399;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 5px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-rh-play:hover {
+      background: #10b981;
+      color: #000;
+    }
+    .rh-close-btn {
+      background: rgba(139, 26, 26, 0.8);
+      border: 1px solid #ff4d4d;
+      color: #fff;
+      font-size: 11px;
+      font-weight: bold;
+      padding: 5px 9px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .rh-close-btn:hover { background: #ff4d4d; }
+
+    .rh-body {
+      display: flex;
+      align-items: stretch;
+      gap: 12px;
+      min-height: 105px;
+    }
+    .rh-photo-wrapper {
+      width: 140px;
+      height: 105px;
+      border-radius: 7px;
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      overflow: hidden;
+      position: relative;
+      background: #0a0806;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .rh-photo-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    .rh-photo-wrapper:hover img {
+      transform: scale(1.08);
+    }
+    .rh-photo-badge {
+      position: absolute;
+      bottom: 4px;
+      left: 4px;
+      background: rgba(0,0,0,0.75);
+      border: 1px solid rgba(255,215,0,0.4);
+      color: #ffd700;
+      font-size: 8px;
+      padding: 2px 5px;
+      border-radius: 3px;
+    }
+    .rh-info-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 3px;
+      min-width: 0;
+    }
+    .rh-stop-title-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .rh-step-number {
+      font-size: 10px;
+      font-weight: 700;
+      color: #ffd700;
+      background: rgba(212, 175, 55, 0.2);
+      border: 1px solid #ffd700;
+      padding: 1px 6px;
+      border-radius: 4px;
+    }
+    .rh-stop-title-row h4 {
+      font-family: 'Cinzel', serif;
+      font-size: 13.5px;
+      color: #fff;
+      margin: 0;
+    }
+    .rh-theme-tag {
+      font-size: 9px;
+      color: #a89a85;
+      background: #20170f;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      padding: 1px 5px;
+      border-radius: 3px;
+    }
+    .rh-stop-desc {
+      font-size: 10.5px;
+      line-height: 1.35;
+      color: #e6dfd5;
+      margin: 2px 0;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .rh-advice-box {
+      background: rgba(30, 22, 14, 0.75);
+      border-left: 2.5px solid #ffd700;
+      padding: 3px 8px;
+      border-radius: 0 4px 4px 0;
+      font-size: 9.5px;
+      color: #ffd700;
+      line-height: 1.25;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .rh-advice-icon { font-weight: bold; color: #fff; margin-right: 4px; }
+    .rh-nav-col {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      justify-content: center;
+      flex-shrink: 0;
+      min-width: 125px;
+    }
+    .rh-nav-btn-group {
+      display: flex;
+      gap: 4px;
+    }
+    .rh-nav-btn {
+      flex: 1;
+      background: rgba(35, 26, 17, 0.9);
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      color: #f5eedf;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 6px 4px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .rh-nav-btn:hover { background: #ffd700; color: #000; }
+    .rh-nav-next { border-color: #ffd700; color: #ffd700; }
+    .rh-sub-btn {
+      background: rgba(20, 16, 12, 0.85);
+      border: 1px solid rgba(212, 175, 55, 0.25);
+      color: #c4b59d;
+      font-size: 9px;
+      padding: 4px 6px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+    .rh-sub-btn:hover {
+      border-color: #ffd700;
+      color: #ffd700;
+      background: rgba(184, 134, 11, 0.2);
+    }
+
+    /* Video Modalı */
+    .video-modal-backdrop {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(6, 4, 3, 0.9);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 3000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .video-modal-card {
+      background: #14100c;
+      border: 1px solid #ffd700;
+      border-radius: 12px;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.95);
+      width: 760px;
+      max-width: 95vw;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .video-modal-header {
+      padding: 12px 18px;
+      background: #0d0a08;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .video-modal-close {
+      background: #8b1a1a;
+      border: 1px solid #ff4d4d;
+      color: #fff;
+      padding: 5px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .video-player-container {
+      padding: 16px;
+      background: #000;
+    }
+
     @media (max-width: 768px) {
       .mobile-hud-btn {
         display: flex;
@@ -1093,6 +1466,32 @@
       }
       .st-media-col {
         max-width: 100%;
+      }
+      #route-tour-hud {
+        bottom: 10px;
+        width: 96vw;
+        max-width: 96vw;
+        padding: 8px 10px;
+      }
+      .rh-header {
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+      .rh-body {
+        flex-direction: column;
+        gap: 8px;
+        min-height: auto;
+      }
+      .rh-photo-wrapper {
+        width: 100%;
+        height: 120px;
+      }
+      .rh-nav-col {
+        flex-direction: row;
+        width: 100%;
+      }
+      .rh-nav-btn-group {
+        flex: 1;
       }
     }
   </style>
@@ -1182,6 +1581,49 @@
       <button class="btn-preset" onclick="flyToPreset('GOBEKLITEPE')">☀️ Göbekli Tepe</button>
     </div>
 
+    <!-- Kadim Yürüyüş ve Keşif Rotaları (İlber Ortaylı, Evliya Çelebi, Likya, Hitit) -->
+    <div class="preset-title" style="display:flex; justify-content:space-between; align-items:center;">
+      <span>🧭 Kadim Yürüyüş Rotaları</span>
+      <span style="font-size:8.5px; color:#ffd700; text-transform:none;">Canlı Rehber Modu</span>
+    </div>
+    <div class="route-selector-list">
+      <button class="btn-route-card" id="btn-route-ortayli" onclick="selectHeritageRoute('route_ortayli')">
+        <div class="route-badge-row">
+          <span class="route-badge" style="background:rgba(255,215,0,0.2); color:#ffd700; border-color:#ffd700;">🏛️ Sur İçi • 14 Durak</span>
+          <span class="route-time-text">📹 Video Rehber</span>
+        </div>
+        <div class="route-card-heading">İlber Ortaylı'nın İstanbul Rotası</div>
+        <div class="route-card-desc">Eminönü ➔ Süleymaniye ➔ Zeyrek ➔ Kariye ➔ Yedikule ➔ Sultanahmet</div>
+      </button>
+
+      <button class="btn-route-card" id="btn-route-celebi" onclick="selectHeritageRoute('route_celebi')">
+        <div class="route-badge-row">
+          <span class="route-badge" style="background:rgba(56,189,248,0.2); color:#38bdf8; border-color:#38bdf8;">📜 Haliç & Boğaz • 6 Durak</span>
+          <span class="route-time-text">Seyahatnâme</span>
+        </div>
+        <div class="route-card-heading">Evliya Çelebi'nin İstanbul Hattı</div>
+        <div class="route-card-desc">Ahi Çelebi ➔ Galata ➔ Eyüp ➔ Silahtarağa ➔ Üsküdar</div>
+      </button>
+
+      <button class="btn-route-card" id="btn-route-likya" onclick="selectHeritageRoute('route_likya')">
+        <div class="route-badge-row">
+          <span class="route-badge" style="background:rgba(16,185,129,0.2); color:#10b981; border-color:#10b981;">🌊 Akdeniz • 7 Durak</span>
+          <span class="route-time-text">540 km</span>
+        </div>
+        <div class="route-card-heading">Likya Yolu Arkeolojik Parkuru</div>
+        <div class="route-card-desc">Kayaköy ➔ Patara ➔ Kaş ➔ Kekova ➔ Myra ➔ Olympos ➔ Phaselis</div>
+      </button>
+
+      <button class="btn-route-card" id="btn-route-hitit_frig" onclick="selectHeritageRoute('route_hitit_frig')">
+        <div class="route-badge-row">
+          <span class="route-badge" style="background:rgba(245,158,11,0.2); color:#f59e0b; border-color:#f59e0b;">☀️ Krallıklar • 5 Durak</span>
+          <span class="route-time-text">320 km</span>
+        </div>
+        <div class="route-card-heading">Hitit & Frig Kültür Yolu</div>
+        <div class="route-card-desc">Hattuşa ➔ Yazılıkaya ➔ Alacahöyük ➔ Midas Anıtı ➔ Ayazini</div>
+      </button>
+    </div>
+
     <!-- 3D Arazi ve Kamera Kontrolü -->
     <div class="terrain-control-bar">
       <button class="btn-toggle-3d" id="btn-pitch-toggle" onclick="toggle3DPerspective()">3B Eğim Modu [Açık]</button>
@@ -1265,6 +1707,9 @@
           <button class="st-btn-compare-compact" onclick="openSilahtaragaCompareModal()">
             ⚖️ 1914 vs Günümüz (Karşılaştır)
           </button>
+          <a href="https://earth.google.com/web/@41.06644081,28.94518211,-0.51668135a,1016.24576321d,35y,0h,0t,0r/data=CgRCAggBOgMKATBCAggASg0I____________ARAA" target="_blank" rel="noopener noreferrer" class="st-btn-compare-compact" style="text-decoration:none; display:inline-flex; align-items:center; gap:4px; border-color:#38bdf8; color:#38bdf8;">
+            🌍 Google Earth 3B
+          </a>
         </div>
         <p class="st-summary-text" id="st-stage-summary">
           11 Şubat 1914'te faaliyete geçen Silahtarağa, Osmanlı İmparatorluğu'nun ilk kentsel ölçekli elektrik santralidir.
@@ -1280,6 +1725,82 @@
       <div class="st-media-col">
         <div class="st-buildings-title">📷 Dönem Fotoğrafları (Salt Araştırma, Arkitekt, İBB, santralistanbul):</div>
         <div class="st-photos-grid" id="st-photos-grid"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KADİM ROTA GEZİ VE CANLI REHBERLİK PANELİ (FLOATING HUD) -->
+  <div id="route-tour-hud">
+    <div class="rh-header">
+      <div class="rh-title-box">
+        <div class="rh-tag-row">
+          <span class="rh-route-pill" id="rh-route-pill">🏛️ İLBER ORTAYLI ROTASI</span>
+          <span class="rh-meta-info" id="rh-meta-info">9.4 km • 14 Durak</span>
+        </div>
+        <h3 id="rh-route-title">İlber Ortaylı'nın Tavsiye Ettiği Sur İçi İstanbul Rotası</h3>
+      </div>
+      <div class="rh-action-btns">
+        <button id="btn-route-video" class="btn-rh-special" onclick="openIlberVideoModal()">
+          📹 İlber Ortaylı'dan Dinle (Video)
+        </button>
+        <button id="btn-route-tour-play" class="btn-rh-play" onclick="toggleRouteAutoTour()">
+          ▶ Sinematik Tura Başla
+        </button>
+        <button class="rh-close-btn" onclick="closeRouteTour()">✕ Kapat</button>
+      </div>
+    </div>
+
+    <!-- Durak Gezinti ve Bilgi Kartı -->
+    <div class="rh-body">
+      <!-- Durak Fotoğrafı -->
+      <div class="rh-photo-wrapper" onclick="previewCurrentStopPhoto()" title="Büyük Boyutlu Görseli Aç">
+        <img id="rh-stop-img" src="" alt="Durak Fotoğrafı">
+        <div class="rh-photo-badge">📷 Doğrulanmış Görsel</div>
+      </div>
+
+      <!-- Durak Metinleri -->
+      <div class="rh-info-col">
+        <div class="rh-stop-title-row">
+          <span class="rh-step-number" id="rh-step-number">Durak 1 / 14</span>
+          <h4 id="rh-stop-name">Eminönü Meydanı & Yeni Cami</h4>
+          <span class="rh-theme-tag" id="rh-stop-theme">Deniz Kapısı</span>
+        </div>
+
+        <p class="rh-stop-desc" id="rh-stop-desc">Açıklama</p>
+        
+        <div class="rh-advice-box" id="rh-advice-box">
+          <span class="rh-advice-icon">💡 Rehber Tavsiyesi:</span>
+          <span id="rh-stop-advice">Rehber Tavsiyesi Metni</span>
+        </div>
+      </div>
+
+      <!-- Durak Navigasyon ve Ek Butonlar -->
+      <div class="rh-nav-col">
+        <div class="rh-nav-btn-group">
+          <button class="rh-nav-btn" onclick="prevRouteStop()">❮ Önceki</button>
+          <button class="rh-nav-btn rh-nav-next" onclick="nextRouteStop()">Sonraki ❯</button>
+        </div>
+        <button class="rh-sub-btn" onclick="groundViewCurrentStop()">👁️ Zemin Göz Hizası</button>
+        <button class="rh-sub-btn" onclick="openCurrentStopEarth()">🌍 Google Earth 3B</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- İLBER ORTAYLI VİDEO MODALI -->
+  <div id="ilber-video-modal" class="video-modal-backdrop">
+    <div class="video-modal-card">
+      <div class="video-modal-header">
+        <div>
+          <h3 style="font-family:'Cinzel', serif; color:#ffd700; font-size:15px; margin:0;">Prof. Dr. İlber Ortaylı — İstanbul Gezi Tavsiyeleri</h3>
+          <span style="font-size:11px; color:#a89a85;">Tarihi Yarımada Sur İçi Yürüyüş Hattı Anlatımı</span>
+        </div>
+        <button class="video-modal-close" onclick="closeIlberVideoModal()">✕ Kapat</button>
+      </div>
+      <div class="video-player-container">
+        <video id="ilber-video-el" controls style="width:100%; max-height:460px; background:#000; border-radius:8px;">
+          <source src="assets/video/ilber_ortayli.mp4" type="video/mp4">
+          Tarayıcınız video oynatmayı desteklemiyor.
+        </video>
       </div>
     </div>
   </div>
@@ -1485,6 +2006,30 @@
       if (lower.includes("göbekli") || lower.includes("gobekli")) return PILOT_HERITAGE_ARCHIVES["gobeklitepe"];
       if (lower.includes("yerebatan") || lower.includes("sarnıç")) return PILOT_HERITAGE_ARCHIVES["yerebatan"];
       if (lower.includes("troya") || lower.includes("troia") || lower.includes("hisarlık")) return PILOT_HERITAGE_ARCHIVES["troya"];
+
+      // Kadim Rotalar içindeki durakları kontrol et (Gerçek fotoğraflar)
+      if (heritageRoutesData && heritageRoutesData.routes) {
+        for (const r of heritageRoutesData.routes) {
+          const match = r.stops.find(s => lower.includes(s.name.toLowerCase()) || s.name.toLowerCase().includes(lower));
+          if (match) {
+            return {
+              name: match.name,
+              period: match.theme || r.title,
+              panorama_url: "assets/pilot/ayasofya_360.jpg",
+              compare_historic: match.photo,
+              compare_modern: match.photo,
+              archives: [
+                {
+                  title: `${match.name} — Saha Belgesi`,
+                  year: "Doğrulanmış Arşiv",
+                  author: r.curator || "Kültür Mirası Arşivi",
+                  img: match.photo
+                }
+              ]
+            };
+          }
+        }
+      }
 
       return {
         name: siteName,
@@ -2493,6 +3038,696 @@
       map.flyTo({ center: [35.2, 39.0], zoom: 6.2, pitch: 55, bearing: -10, duration: 2000 });
       is3DActive = true;
       document.getElementById('btn-pitch-toggle').innerText = "3B Eğim Modu [Açık]";
+    };
+
+    // =========================================================================
+    // 9. KADİM YÜRÜYÜŞ VE KEŞİF ROTALARI (İlber Ortaylı, Evliya Çelebi, Likya, Hitit)
+    // =========================================================================
+    let heritageRoutesData = {
+  "routes": [
+    {
+      "id": "route_ortayli",
+      "title": "İlber Ortaylı'nın Sur İçi İstanbul Rotası",
+      "subtitle": "Bizans ve Osmanlı Medeniyet Katmanları Yürüyüş Hattı",
+      "curator": "Prof. Dr. İlber Ortaylı (Litros Sanat & Seyahat Notları)",
+      "video_url": "assets/video/ilber_ortayli.mp4",
+      "has_video": true,
+      "color": "#ffd700",
+      "total_distance_km": 9.4,
+      "estimated_time": "5 - 6 Saat (Yürüyerek)",
+      "region": "İstanbul / Tarihi Yarımada",
+      "quote": "“Surun içine girin! İstanbul’un gerçek ruhunu anlamak istiyorsanız sokak sokak yürüyün, not tutun ve taşların dilini dinleyin.” — İlber Ortaylı",
+      "overview": "Eminönü ticaret aksından başlayıp Süleymaniye, Zeyrek ve Fatih üzerinden surlara; Kariye ve Yedikule'den tekrar merkeze uzanan, şehrin 2000 yıllık hafızasını birleştiren en kapsamlı yürüyüş güzergahı.",
+      "stops": [
+        {
+          "order": 1,
+          "name": "Eminönü Meydanı & Yeni Cami",
+          "coords": [28.9705, 41.0175],
+          "camera": { "zoom": 17.2, "pitch": 60, "bearing": 210 },
+          "theme": "Deniz Kapısı ve Ticaret Limanı",
+          "photo": "assets/routes/ortayli_eminonu.jpg",
+          "desc": "Rotanın başlangıcı. Cenevizlilerden Osmanlı'ya şehrin ana deniz limanı, Mısır Çarşısı ve Valide Turhan Sultan'ın Yeni Cami'siyle ticaretin kalbi.",
+          "advice": "Eminönü rıhtımından sur içine doğru yürüyüşe sabahın erken saatlerinde başlayın."
+        },
+        {
+          "order": 2,
+          "name": "Rıza Paşa Yokuşu & Mercan Hanları",
+          "coords": [28.9670, 41.0145],
+          "camera": { "zoom": 17.5, "pitch": 65, "bearing": 235 },
+          "theme": "Geleneksel Esnaf ve Lonca Aksı",
+          "photo": "assets/routes/ortayli_riza_pasa.jpg",
+          "desc": "Eminönü'nden Süleymaniye'ye tırmanan dar ve dik ticaret yokuşu. Büyük Valide Han ve yüzyıllık zanaatkar atölyeleri bu hatta yer alır.",
+          "advice": "Yokuşu tırmanırken han avlularına girin; kubbe siluetlerini ve taş işçiliğini inceleyin."
+        },
+        {
+          "order": 3,
+          "name": "Süleymaniye Camii ve Külliyesi",
+          "coords": [28.9639, 41.0163],
+          "camera": { "zoom": 17.8, "pitch": 70, "bearing": 330 },
+          "theme": "Klasik Osmanlı Mimarisinin Doruk Noktası",
+          "photo": "assets/routes/ortayli_suleymaniye.jpg",
+          "desc": "Mimar Sinan'ın Kanuni Sultan Süleyman için 1557'de inşa ettiği başyapıt. Kütüphanesi, medreseleri, tabhanesi ve Haliç terasıyla anıtsal bir merkez.",
+          "advice": "Külliyenin Haliç terasına çıkıp şehrin topoğrafyasını seyredin."
+        },
+        {
+          "order": 4,
+          "name": "Küçükpazar Tarihi Dokusu",
+          "coords": [28.9605, 41.0182],
+          "camera": { "zoom": 17.4, "pitch": 65, "bearing": 290 },
+          "theme": "Haliç Yamacı ve Mahalle Hafızası",
+          "photo": "assets/routes/ortayli_kucukpazar.jpg",
+          "desc": "Süleymaniye'nin hemen eteğinde, geleneksel ahşap evleri, bekar odaları ve kadim esnaf kültürüyle yaşayan tarihi bir İstanbul mahallesi.",
+          "advice": "Çukur sokaklardaki ahşap mimari kalıntılarını fotoğraflayın."
+        },
+        {
+          "order": 5,
+          "name": "Molla Zeyrek Camii (Pantokrator)",
+          "coords": [28.9575, 41.0195],
+          "camera": { "zoom": 17.6, "pitch": 65, "bearing": 270 },
+          "theme": "Doğu Roma İmparatorluk Manastırı (12. Yüzyıl)",
+          "photo": "assets/routes/ortayli_zeyrek.jpg",
+          "desc": "Bizans İmparatoriçesi İrini tarafından yaptırılan Pantokrator Manastırı Kilisesi. İstanbul'un Ayasofya'dan sonraki en büyük Bizans dini yapısıdır.",
+          "advice": "Üç kilisenin birleşimi olan tuğla cepheyi ve ahşap Zeyrek evlerini görün."
+        },
+        {
+          "order": 6,
+          "name": "Fatih Camii ve Külliyesi",
+          "coords": [28.9498, 41.0198],
+          "camera": { "zoom": 17.5, "pitch": 65, "bearing": 250 },
+          "theme": "İmparatorluk İlim ve Hukuk Merkezi",
+          "photo": "assets/routes/ortayli_fatih.jpg",
+          "desc": "Fatih Sultan Mehmed'in On İki Havariler Kilisesi alanında inşa ettirdiği Sahn-ı Seman medreseleriyle Osmanlı'nın ilk üniversite külliyesi.",
+          "advice": "Külliyenin geniş avlusunda Osmanlı vakıf şehir planlamasını hissedin."
+        },
+        {
+          "order": 7,
+          "name": "Balat & Fener (Demir Kilise)",
+          "coords": [28.9485, 41.0315],
+          "camera": { "zoom": 17.4, "pitch": 60, "bearing": 315 },
+          "theme": "Çok Kültürlü Haliç Hafızası",
+          "photo": "assets/routes/ortayli_balat.jpg",
+          "desc": "Yahudi, Rum ve Ermeni cemaatlerinin kadim yerleşimi. Kırmızı Mektep, Fener Rum Patrikhanesi ve prefabrik dökme demir Sveti Stefan Kilisesi.",
+          "advice": "Sokak aralarındaki cumbalı renkli evler arasında kaybolun."
+        },
+        {
+          "order": 8,
+          "name": "Ayvansaray & Tekfur Sarayı",
+          "coords": [28.9405, 41.0345],
+          "camera": { "zoom": 17.5, "pitch": 68, "bearing": 240 },
+          "theme": "Blachernae Saray Kompleksi ve Çini Fırınları",
+          "photo": "assets/routes/ortayli_ayvansaray.jpg",
+          "desc": "Bizans'ın son dönem imparatorluk sarayı olan Blachernae kompleksinden günümüze ulaşan Tekfur Sarayı ve Haliç surlarının kara surlarıyla birleştiği nokta.",
+          "advice": "Restorasyonla müzeleştirilen Tekfur Sarayı'nın çini ve cam koleksiyonunu gezin."
+        },
+        {
+          "order": 9,
+          "name": "Edirnekapı & Theodosius Kara Surları",
+          "coords": [28.9370, 41.0305],
+          "camera": { "zoom": 17.6, "pitch": 70, "bearing": 200 },
+          "theme": "Bin Yıllık Savunma Hattı ve Zafer Kapısı",
+          "photo": "assets/routes/ortayli_edirnekapi.jpg",
+          "desc": "5. yüzyılda İmparator II. Theodosius tarafından inşa edilen çift kademeli efsanevi kara surları. Mihrimah Sultan Camii ve Fatih'in şehre girdiği tarihi kapı.",
+          "advice": "Sur merdivenlerinden sur üstü yürüyüş yoluna çıkarak kentin silüetini izleyin."
+        },
+        {
+          "order": 10,
+          "name": "Kariye Camii (Chora Müzesi)",
+          "coords": [28.9392, 41.0312],
+          "camera": { "zoom": 17.8, "pitch": 65, "bearing": 180 },
+          "theme": "Bizans Rönesansı Mozaik ve Fresk Başyapıtı",
+          "photo": "assets/routes/ortayli_kariye.jpg",
+          "desc": "14. yüzyıl Paleologos Rönesansı'nın zirvesi olan Theodore Metochites mozaikleri ve mahşer freskleri. Dünya sanat tarihinin en nadide eserlerinden biri.",
+          "advice": "İncil ve Meryem döngüsünü tasvir eden tavan mozaiklerine mutlaka dikkatle bakın."
+        },
+        {
+          "order": 11,
+          "name": "Yedikule Hisarı & Altın Kapı (Porta Aurea)",
+          "coords": [28.9220, 40.9935],
+          "camera": { "zoom": 17.5, "pitch": 65, "bearing": 150 },
+          "theme": "İmparatorluk Zafer Takı ve Osmanlı Hisarı",
+          "photo": "assets/routes/ortayli_yedikule.jpg",
+          "desc": "Bizans imparatorlarının sefere çıkıp zaferle döndüğü Altın Kapı ve Fatih Sultan Mehmed'in kentin hazinesini korumak için beş köşeli inşa ettirdiği hisar.",
+          "advice": "Zindan kulelerinin duvarlarındaki tarihi mahkûm kitabelerini inceleyin."
+        },
+        {
+          "order": 12,
+          "name": "Cerrahpaşa & Haseki Külliyesi",
+          "coords": [28.9430, 41.0080],
+          "camera": { "zoom": 17.3, "pitch": 60, "bearing": 120 },
+          "theme": "Osmanlı Şifahanesi ve Sinan Yapıları",
+          "photo": "assets/routes/ortayli_cerrahpasa.jpg",
+          "desc": "Mimar Sinan'ın Haseki Hürrem Sultan adına inşa ettiği ilk külliye ve darüşşifa ile Cerrah Mehmet Paşa Camii'nin zarif detayları.",
+          "advice": "Sinan'ın sekizgen şemalı kubbe çözümlerine odaklanın."
+        },
+        {
+          "order": 13,
+          "name": "Beyazıt Meydanı & Sahaflar Çarşısı",
+          "coords": [28.9650, 41.0105],
+          "camera": { "zoom": 17.5, "pitch": 65, "bearing": 90 },
+          "theme": "Kültür, Kitap ve Akademi Hafızası",
+          "photo": "assets/routes/ortayli_beyazit.jpg",
+          "desc": "Forum Tauri üzerinde yükselen Beyazıt Camii, İstanbul Üniversitesi anıtsal kapısı ve Bizans'tan bugüne kitap ticaretinin kalbi Sahaflar Çarşısı.",
+          "advice": "Çınaraltı'nda kahve molası verip sahaflardaki eski gravürleri inceleyin."
+        },
+        {
+          "order": 14,
+          "name": "Sultanahmet Meydanı & Ayasofya",
+          "coords": [28.9770, 41.0075],
+          "camera": { "zoom": 17.5, "pitch": 65, "bearing": 45 },
+          "theme": "Dünyanın Merkezi: Augusteion & Hipodrom",
+          "photo": "assets/routes/ortayli_sultanahmet.jpg",
+          "desc": "Rotanın görkemli finali. Ayasofya, Sultanahmet Camii, Milyon Taşı, Dikilitaş ve Yerebatan Sarnıcı ile dünyanın sıfır noktası.",
+          "advice": "Gün batımında Ayasofya ve Sultanahmet kubbeleri arasındaki ışık oyununu izleyin."
+        }
+      ]
+    },
+    {
+      "id": "route_celebi",
+      "title": "Evliya Çelebi'nin İstanbul & Haliç Seyahat Hattı",
+      "subtitle": "“Seyahat Yâ Resûlallah” Rüyasından Dünyaya Açılan Kapı",
+      "curator": "ArcGIS StoryMaps & Evliya Çelebi Seyahatnâmesi",
+      "color": "#38bdf8",
+      "total_distance_km": 11.2,
+      "estimated_time": "1 Günlük Keşif",
+      "region": "İstanbul / Haliç & Boğaziçi",
+      "quote": "“Kostantiniyye cihâna benzer; ne görse güzel, ne bilse azâmetli.” — Evliya Çelebi",
+      "overview": "Evliya Çelebi'nin 1630'da gördüğü meşhur rüya ile başlayan seyahat tutkusunun izlerini Haliç kıyısı boyunca takip eden, Silahtarağa'ya ve Üsküdar'a uzanan tarihi rota.",
+      "stops": [
+        {
+          "order": 1,
+          "name": "Ahi Çelebi Camii (Zindankapı)",
+          "coords": [28.9675, 41.0185],
+          "camera": { "zoom": 17.5, "pitch": 65, "bearing": 210 },
+          "theme": "Seyahatnâme'nin Doğduğu Mukaddes Rüya Mekânı",
+          "photo": "assets/routes/celebi_ahi.jpg",
+          "desc": "Evliya Çelebi, 19 Ağustos 1630 Aşure gecesi bu camide rüyasında Peygamber Efendimiz'i görmüş; heyecandan 'Şefaat Yâ Resûlallah' yerine 'Seyahat Yâ Resûlallah' diyerek 51 yıllık dünya seyahatine adım atmıştır.",
+          "advice": "Haliç kıyısındaki bu küçük ama abidevi caminin rıhtımında Çelebi'nin rüyasını yad edin."
+        },
+        {
+          "order": 2,
+          "name": "Galata Kulesi & Pera",
+          "coords": [28.9741, 41.0256],
+          "camera": { "zoom": 17.8, "pitch": 70, "bearing": 30 },
+          "theme": "Hezarfen'in Uçuş Noktası ve Çelebi'nin Baba Evi",
+          "photo": "assets/routes/celebi_galata.jpg",
+          "desc": "Evliya Çelebi'nin çocukluğunun geçtiği Pera bölgesi ve dostu Hezarfen Ahmed Çelebi'nin kanat takıp Üsküdar Doğancılar'a uçtuğu gözetleme kulesi.",
+          "advice": "Galata yokuşundan inerken liman seslerini dinleyin."
+        },
+        {
+          "order": 3,
+          "name": "Kasımpaşa Mevlevihanesi",
+          "coords": [28.9680, 41.0330],
+          "camera": { "zoom": 17.3, "pitch": 60, "bearing": 280 },
+          "theme": "Tersane-i Âmire ve Tasavvuf Kültürü",
+          "photo": "assets/routes/celebi_mevlevi.jpg",
+          "desc": "Evliya Çelebi'nin mûsiki, ney ve hat meşk ettiği, Osmanlı donanmasının tersane kıyısında ruhani sığınağı olan dergâh.",
+          "advice": "Ahşap semahane yapısını ve derviş odalarını görün."
+        },
+        {
+          "order": 4,
+          "name": "Eyüp Sultan Külliyesi & Cülus Yolu",
+          "coords": [28.9340, 41.0480],
+          "camera": { "zoom": 17.5, "pitch": 65, "bearing": 320 },
+          "theme": "Kılıç Kuşanma Merasimleri ve Ziyaretgâh",
+          "photo": "assets/routes/celebi_eyup.jpg",
+          "desc": "Evliya Çelebi'nin her sefer ve seyahat öncesinde dua edip feyz aldığı, padişahların cülus kılıcını kuşandığı kentin manevi başkenti.",
+          "advice": "Asırlık çınarların altındaki türbe avlusunu ziyaret edin."
+        },
+        {
+          "order": 5,
+          "name": "Silahtarağa & Kağıthane Mesiresi",
+          "coords": [28.94635, 41.06672],
+          "camera": { "zoom": 17.8, "pitch": 70, "bearing": 310 },
+          "theme": "Lale Devri Sa'dabad ve 1914 Sanayi Hamlesi",
+          "photo": "assets/routes/celebi_silahtaraga.jpg",
+          "desc": "Evliya Çelebi'nin 'bağları ve çayırları cennet misali' diye tasvir ettiği Kağıthane vadisi ucundaki Silahtarağa. Cumhuriyet döneminde santralistanbul ve Enerji Müzesi'ne dönüşmüştür.",
+          "advice": "Zaman tüneli panelini açarak 1914-2026 dönüşümünü izleyin."
+        },
+        {
+          "order": 6,
+          "name": "Üsküdar Mihrimah Sultan & Hac Yolu",
+          "coords": [29.0150, 41.0265],
+          "camera": { "zoom": 17.4, "pitch": 65, "bearing": 90 },
+          "theme": "Asya Kapısı ve Kervanların Çıkış Noktası",
+          "photo": "assets/routes/celebi_uskudar.jpg",
+          "desc": "Evliya Çelebi'nin 1671 yılında Hac yolculuğuna ve Anadolu-Ortadoğu seyahatlerine çıkmak üzere bindiği kayığın yanaştığı Üsküdar İskelesi.",
+          "advice": "Mimar Sinan'ın deniz kıyısındaki kubbe mimarisini akşam ışığında izleyin."
+        }
+      ]
+    },
+    {
+      "id": "route_likya",
+      "title": "Kadim Likya Yolu Arkeolojik Parkuru",
+      "subtitle": "Akdeniz'in Işık Ülkesi & Dağ Patikaları (540 km)",
+      "curator": "Arkeofili & Kate Clow Kültür Rotaları",
+      "color": "#10b981",
+      "total_distance_km": 540,
+      "estimated_time": "29 Gün (Bölüm Bölüm Yürünebilir)",
+      "region": "Akdeniz / Fethiye - Antalya",
+      "quote": "“Işık Ülkesi Likya; dağları denizle buluşturan taşlı antik Roma yolları ve kayalara oyulmuş tapınak mezarlarıyla yaşayan bir açık hava efsanesidir.”",
+      "overview": "Türkiye'nin ilk uzun mesafeli yürüyüş rotası olan Likya Yolu; Fethiye'den başlayıp 25 antik kentin, dağ vadilerinin ve Akdeniz koylarının içinden geçerek Antalya'ya ulaşır.",
+      "stops": [
+        {
+          "order": 1,
+          "name": "Kayaköy (Karmylassos) & Ölüdeniz",
+          "coords": [29.0880, 36.5745],
+          "camera": { "zoom": 16.5, "pitch": 60, "bearing": 180 },
+          "theme": "Rotanın Başlangıcı & Taş Mimari",
+          "photo": "assets/routes/likya_kayakoy.jpg",
+          "desc": "Likya Yolu'nun başlangıç noktalarından biri olan tarihi taş evler, kiliseler ve çam ormanlarıyla kaplı hayalet köy.",
+          "advice": "Sabah serinliğinde Ölüdeniz manzaralı dağ patikasına tırmanın."
+        },
+        {
+          "order": 2,
+          "name": "Patara Antik Kenti & Meclis Binası",
+          "coords": [29.3175, 36.2610],
+          "camera": { "zoom": 16.8, "pitch": 65, "bearing": 220 },
+          "theme": "Likya Birliği'nin Başkenti ve Demokrasi Beşiği",
+          "photo": "assets/routes/likya_patara.jpg",
+          "desc": "Dünyanın ilk demokratik federasyonu sayılan Likya Birliği'nin meclis binası (Bouleuterion), deniz feneri ve kum tepeleri.",
+          "advice": "Restorasyonu tamamlanan antik meclis binasını ve tiyatroyu gezin."
+        },
+        {
+          "order": 3,
+          "name": "Kaş (Antiphellos) Antik Tiyatrosu",
+          "coords": [29.6385, 36.1990],
+          "camera": { "zoom": 17.2, "pitch": 65, "bearing": 190 },
+          "theme": "Denize Bakan Helenistik Tiyatro",
+          "photo": "assets/routes/likya_kas.jpg",
+          "desc": "Anadolu'da denize dönük tek tiyatro olan Antiphellos Tiyatrosu ve Kaş sokaklarındaki anıtsal Likya lahitleri.",
+          "advice": "Gün batımında tiyatronun taş basamaklarına oturup Meis Adası'nı seyredin."
+        },
+        {
+          "order": 4,
+          "name": "Kekova & Simena Kalesi (Kaleköy)",
+          "coords": [29.8605, 36.1905],
+          "camera": { "zoom": 16.8, "pitch": 65, "bearing": 160 },
+          "theme": "Batık Şehir ve Su İçindeki Lahitler",
+          "photo": "assets/routes/likya_kekova.jpg",
+          "desc": "Depremlerle sular altında kalan antik liman rıhtımları ve Simena Kalesi'nin surları altındaki masalsı deniz manzarası.",
+          "advice": "Sadece yürüyerek veya denizden ulaşılabilen Kaleköy patikasını takip edin."
+        },
+        {
+          "order": 5,
+          "name": "Myra Kaya Mezarları (Demre)",
+          "coords": [29.9850, 36.2590],
+          "camera": { "zoom": 17.2, "pitch": 68, "bearing": 340 },
+          "theme": "Ahşap Ev Taklidi Anıtsal Kaya Mezarları",
+          "photo": "assets/routes/likya_myra.jpg",
+          "desc": "Uçurumlara kabartma figürlerle oyulmuş nefes kesici kaya mezarları ve Aziz Nikolaos (Noel Baba) Kilisesi.",
+          "advice": "Tiyatro cephesindeki mitolojik mask kabartmalarını inceleyin."
+        },
+        {
+          "order": 6,
+          "name": "Olympos Antik Kenti & Yanartaş (Chimaera)",
+          "coords": [30.4740, 36.3965],
+          "camera": { "zoom": 16.5, "pitch": 60, "bearing": 120 },
+          "theme": "Korsan Kenti ve Bin Yıllık Sönmeyen Ateş",
+          "photo": "assets/routes/likya_olympos.jpg",
+          "desc": "Akçay deresinin iki yakasında gizlenmiş tapınak kalıntıları ve mitolojik canavar Chimaera'nın kayalardan çıkan alevleri.",
+          "advice": "Akşam karanlığında Yanartaş'a tırmanıp kayaların arasından çıkan doğal ateşi görün."
+        },
+        {
+          "order": 7,
+          "name": "Phaselis Antik Liman Kenti",
+          "coords": [30.5525, 36.5240],
+          "camera": { "zoom": 17.0, "pitch": 65, "bearing": 90 },
+          "theme": "Çam Ağaçları Altında Üç Limanlı Şehir",
+          "photo": "assets/routes/likya_phaselis.jpg",
+          "desc": "Büyük İskender'in kışladığı liman kenti. Su kemerleri, geniş caddesi, agorası ve üç doğal koyuyla Likya'nın doğu kapısı.",
+          "advice": "Antik su kemerinin altından geçerek kuzey limanına yürüyün."
+        }
+      ]
+    },
+    {
+      "id": "route_hitit_frig",
+      "title": "Hitit & Frig Krallık Rotaları",
+      "subtitle": "Kaya Anıtları, Sfenksli Kapılar ve Midas Efsaneleri",
+      "curator": "Arkeofili Yürüyüş Rotaları & Çorum-Eskişehir Valilikleri",
+      "color": "#f59e0b",
+      "total_distance_km": 320,
+      "estimated_time": "Tematik Keşif Parkuru",
+      "region": "İç Anadolu / Çorum & Frig Vadisi",
+      "quote": "“3500 yıl önce Tunç Çağı süper gücü Hititlerin başkenti Hattuşa'dan, eşek kulaklı Kral Midas'ın gizemli kaya vadilerine uzanan kadim Anadolu izleri.”",
+      "overview": "UNESCO Dünya Mirası Hattuşa, Yazılıkaya ve Alacahöyük üçgeni ile Eskişehir-Afyon Frig Vadisi'nin devasa kaya fasadlarını birbirine bağlayan medeniyet parkuru.",
+      "stops": [
+        {
+          "order": 1,
+          "name": "Hattuşa Aslanlı Kapı & Büyük Mabed",
+          "coords": [34.6150, 40.0195],
+          "camera": { "zoom": 16.5, "pitch": 65, "bearing": 160 },
+          "theme": "Hitit İmparatorluğu'nun Başkenti (MÖ 1600)",
+          "photo": "assets/routes/hitit_hattusa.jpg",
+          "desc": "UNESCO Dünya Mirası. 6 km'lik surlar, gizli yeraltı tüneli (Yerkapı), Yeşil Taş ve şehri koruyan Aslanlı Kapı.",
+          "advice": "Yerkapı poterninden (tünelinden) geçerek sur dışına çıkma deneyimini yaşayın."
+        },
+        {
+          "order": 2,
+          "name": "Yazılıkaya Hitit Açık Hava Tapınağı",
+          "coords": [34.6325, 40.0260],
+          "camera": { "zoom": 17.2, "pitch": 70, "bearing": 210 },
+          "theme": "Tanrılar Geçidi Kaya Kabartmaları",
+          "photo": "assets/routes/hitit_yazilikaya.jpg",
+          "desc": "Fırtına Tanrısı Teşup ve Güneş Tanrıçası Hepat önderliğinde kayalara kazınmış 71 Hitit tanrısının kutsal alayı.",
+          "advice": "Öğleden sonra güneş açısında kayalardaki kabartmaların gölgelerini inceleyin."
+        },
+        {
+          "order": 3,
+          "name": "Alacahöyük Sfenksli Kapı & Kral Mezarları",
+          "coords": [34.6970, 40.2340],
+          "camera": { "zoom": 17.0, "pitch": 60, "bearing": 180 },
+          "theme": "Güneş Kursları ve Hatti Kültürü",
+          "photo": "assets/routes/hitit_alacahoyuk.jpg",
+          "desc": "Anadolu Medeniyetleri Müzesi'ndeki ünlü bronz Güneş Kursları'nın bulunduğu Hatti prens mezarları ve devasa monolitik sfenksler.",
+          "advice": "Girişteki sfenkslerin taş bloklarındaki çift başlı kartal kabartmasını bulun."
+        },
+        {
+          "order": 4,
+          "name": "Yazılıkaya Midas Anıtı (Eskişehir)",
+          "coords": [30.7145, 39.2005],
+          "camera": { "zoom": 17.0, "pitch": 70, "bearing": 240 },
+          "theme": "Frig Krallığı'nın Dini Merkezi (MÖ 7. Yüzyıl)",
+          "photo": "assets/routes/frig_midas.jpg",
+          "desc": "17 metre yüksekliğinde tek parça tüf kayaya oyulmuş dev anıt. Tanrıça Kibele nişi ve Frig yazıtlarıyla süslü bir başyapıt.",
+          "advice": "Anıtın üzerindeki çözümlenmemiş Frig harfli kitabelere yakından bakın."
+        },
+        {
+          "order": 5,
+          "name": "Ayazini Kaya Yerleşimi & Kilisesi (Afyon)",
+          "coords": [30.5630, 39.0220],
+          "camera": { "zoom": 16.8, "pitch": 65, "bearing": 270 },
+          "theme": "Tüf Kayalara Oyulmuş Çok Katlı Manastırlar",
+          "photo": "assets/routes/frig_ayazini.jpg",
+          "desc": "Frig, Roma ve Bizans dönemlerinde kesintisiz kullanılan kaya oyma kiliseler, sarnıçlar ve aslan kabartmalı mezar odaları.",
+          "advice": "Kaya kilisesinin kubbe tonozunu ve apsis detaylarını inceleyin."
+        }
+      ]
+    }
+  ]
+}
+;
+    let activeRoute = null;
+    let currentStopIndex = 0;
+    let isAutoTourRunning = false;
+    let autoTourTimer = null;
+
+    async function loadHeritageRoutes() {
+      try {
+        const resp = await fetch('kadim_rotalar.json');
+        heritageRoutesData = await resp.json();
+      } catch (e) {
+        console.warn("kadim_rotalar.json yükleme hatası:", e);
+      }
+    }
+    map.on('load', loadHeritageRoutes);
+
+    window.selectHeritageRoute = async function(routeId) {
+      if (!heritageRoutesData) {
+        await loadHeritageRoutes();
+      }
+      if (!heritageRoutesData || !heritageRoutesData.routes) return;
+
+      activeRoute = heritageRoutesData.routes.find(r => r.id === routeId);
+      if (!activeRoute) return;
+
+      // Mobilde çekmeceyi kapat
+      if (window.innerWidth <= 768) {
+        const hud = document.querySelector('.antique-hud');
+        if (hud) hud.classList.remove('open');
+      }
+
+      // Sol panel butonlarının durumunu güncelle
+      document.querySelectorAll('.btn-route-card').forEach(b => b.classList.remove('active'));
+      const activeBtn = document.getElementById(`btn-${routeId}`);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      // Haritada rotayı ve durakları çiz
+      renderRouteOnMap(activeRoute);
+
+      // HUD Paneli görünür yap
+      const routeHud = document.getElementById('route-tour-hud');
+      routeHud.style.display = 'flex';
+
+      // Header bilgilerini doldur
+      const pill = document.getElementById('rh-route-pill');
+      pill.innerText = activeRoute.region || "KADİM ROTA";
+      pill.style.color = activeRoute.color || "#ffd700";
+      pill.style.borderColor = activeRoute.color || "#ffd700";
+
+      document.getElementById('rh-meta-info').innerText = `${activeRoute.total_distance_km} km • ${activeRoute.stops.length} Durak • ${activeRoute.estimated_time}`;
+      document.getElementById('rh-route-title').innerText = activeRoute.title;
+
+      // Video butonu görünürlüğü
+      const btnVideo = document.getElementById('btn-route-video');
+      btnVideo.style.display = activeRoute.has_video ? 'flex' : 'none';
+
+      // 1. Durağa yumuşak uçuş yap
+      currentStopIndex = 0;
+      showRouteStop(currentStopIndex, true);
+    };
+
+    function renderRouteOnMap(route) {
+      const lineCoords = route.stops.map(s => s.coords);
+      const stopFeatures = route.stops.map((s, idx) => ({
+        type: 'Feature',
+        geometry: { type: 'Point', coordinates: s.coords },
+        properties: {
+          order: s.order || (idx + 1),
+          name: s.name,
+          theme: s.theme,
+          routeColor: route.color || '#ffd700'
+        }
+      }));
+
+      const routeGeoJSON = {
+        type: 'FeatureCollection',
+        features: [
+          {
+            type: 'Feature',
+            geometry: { type: 'LineString', coordinates: lineCoords },
+            properties: { color: route.color || '#ffd700' }
+          },
+          ...stopFeatures
+        ]
+      };
+
+      if (!map.getSource('active-route-source')) {
+        map.addSource('active-route-source', {
+          type: 'geojson',
+          data: routeGeoJSON
+        });
+
+        // 1. Işıldayan geniş çizgi (Glow)
+        map.addLayer({
+          id: 'route-line-glow',
+          type: 'line',
+          source: 'active-route-source',
+          filter: ['==', '$type', 'LineString'],
+          layout: { 'line-join': 'round', 'line-cap': 'round' },
+          paint: {
+            'line-color': ['get', 'color'],
+            'line-width': 10,
+            'line-blur': 4,
+            'line-opacity': 0.65
+          }
+        });
+
+        // 2. Ana altın çizgi
+        map.addLayer({
+          id: 'route-line-main',
+          type: 'line',
+          source: 'active-route-source',
+          filter: ['==', '$type', 'LineString'],
+          layout: { 'line-join': 'round', 'line-cap': 'round' },
+          paint: {
+            'line-color': '#fff3b0',
+            'line-width': 4.5,
+            'line-opacity': 0.95
+          }
+        });
+
+        // 3. Durak dış aura
+        map.addLayer({
+          id: 'route-stops-glow',
+          type: 'circle',
+          source: 'active-route-source',
+          filter: ['==', '$type', 'Point'],
+          paint: {
+            'circle-color': ['get', 'routeColor'],
+            'circle-radius': 17,
+            'circle-opacity': 0.4,
+            'circle-blur': 0.35
+          }
+        });
+
+        // 4. Durak daire rozeti
+        map.addLayer({
+          id: 'route-stops-badge',
+          type: 'circle',
+          source: 'active-route-source',
+          filter: ['==', '$type', 'Point'],
+          paint: {
+            'circle-color': '#16110b',
+            'circle-radius': 12,
+            'circle-stroke-width': 2.5,
+            'circle-stroke-color': ['get', 'routeColor']
+          }
+        });
+
+        // 5. Durak sıra numarası
+        map.addLayer({
+          id: 'route-stops-number',
+          type: 'symbol',
+          source: 'active-route-source',
+          filter: ['==', '$type', 'Point'],
+          layout: {
+            'text-field': '{order}',
+            'text-font': ['Open Sans Bold'],
+            'text-size': 11.5,
+            'text-allow-overlap': true
+          },
+          paint: {
+            'text-color': '#ffffff'
+          }
+        });
+
+        // Tıklama etkileşimi
+        map.on('click', 'route-stops-badge', (e) => {
+          const props = e.features[0].properties;
+          const order = parseInt(props.order, 10);
+          if (!isNaN(order) && activeRoute) {
+            showRouteStop(order - 1, true);
+          }
+        });
+        map.on('mouseenter', 'route-stops-badge', () => { map.getCanvas().style.cursor = 'pointer'; });
+        map.on('mouseleave', 'route-stops-badge', () => { map.getCanvas().style.cursor = ''; });
+
+      } else {
+        map.getSource('active-route-source').setData(routeGeoJSON);
+      }
+    }
+
+    function showRouteStop(idx, shouldFly) {
+      if (!activeRoute || !activeRoute.stops || activeRoute.stops.length === 0) return;
+      currentStopIndex = Math.max(0, Math.min(idx, activeRoute.stops.length - 1));
+      const stop = activeRoute.stops[currentStopIndex];
+
+      document.getElementById('rh-step-number').innerText = `Durak ${currentStopIndex + 1} / ${activeRoute.stops.length}`;
+      document.getElementById('rh-stop-name').innerText = stop.name;
+      document.getElementById('rh-stop-theme').innerText = stop.theme || "Tarihi Durak";
+      document.getElementById('rh-stop-desc').innerText = stop.desc || "";
+      document.getElementById('rh-stop-advice').innerText = stop.advice || activeRoute.quote || "Tarihi yapıyı yerinde keşfedin.";
+
+      const imgEl = document.getElementById('rh-stop-img');
+      imgEl.src = stop.photo;
+      imgEl.onerror = () => { imgEl.src = "assets/pilot/ayasofya_modern.jpg"; };
+
+      if (shouldFly) {
+        const cam = stop.camera || { zoom: 17.2, pitch: 65, bearing: 30 };
+        map.flyTo({
+          center: stop.coords,
+          zoom: cam.zoom,
+          pitch: cam.pitch,
+          bearing: cam.bearing,
+          duration: 2500,
+          essential: true
+        });
+      }
+    }
+
+    window.nextRouteStop = function() {
+      if (!activeRoute) return;
+      if (currentStopIndex < activeRoute.stops.length - 1) {
+        showRouteStop(currentStopIndex + 1, true);
+      } else {
+        showRouteStop(0, true);
+      }
+    };
+
+    window.prevRouteStop = function() {
+      if (!activeRoute) return;
+      if (currentStopIndex > 0) {
+        showRouteStop(currentStopIndex - 1, true);
+      } else {
+        showRouteStop(activeRoute.stops.length - 1, true);
+      }
+    };
+
+    window.toggleRouteAutoTour = function() {
+      const btn = document.getElementById('btn-route-tour-play');
+      if (isAutoTourRunning) {
+        clearInterval(autoTourTimer);
+        isAutoTourRunning = false;
+        btn.innerHTML = "▶ Sinematik Tura Başla";
+        btn.style.background = "rgba(30, 22, 14, 0.9)";
+        btn.style.color = "#34d399";
+      } else {
+        isAutoTourRunning = true;
+        btn.innerHTML = "⏹ Turu Duraklat";
+        btn.style.background = "#8b6508";
+        btn.style.color = "#fff";
+
+        autoTourTimer = setInterval(() => {
+          if (!activeRoute) return;
+          if (currentStopIndex < activeRoute.stops.length - 1) {
+            showRouteStop(currentStopIndex + 1, true);
+          } else {
+            showRouteStop(0, true);
+          }
+        }, 8500);
+      }
+    };
+
+    window.closeRouteTour = function() {
+      if (isAutoTourRunning) toggleRouteAutoTour();
+      const routeHud = document.getElementById('route-tour-hud');
+      if (routeHud) routeHud.style.display = 'none';
+
+      document.querySelectorAll('.btn-route-card').forEach(b => b.classList.remove('active'));
+
+      if (map.getSource('active-route-source')) {
+        map.getSource('active-route-source').setData({
+          type: 'FeatureCollection',
+          features: []
+        });
+      }
+      activeRoute = null;
+    };
+
+    window.openIlberVideoModal = function() {
+      const modal = document.getElementById('ilber-video-modal');
+      modal.style.display = 'flex';
+      const video = document.getElementById('ilber-video-el');
+      if (video) video.play();
+    };
+
+    window.closeIlberVideoModal = function() {
+      const modal = document.getElementById('ilber-video-modal');
+      modal.style.display = 'none';
+      const video = document.getElementById('ilber-video-el');
+      if (video) {
+        video.pause();
+        video.currentTime = 0;
+      }
+    };
+
+    window.previewCurrentStopPhoto = function() {
+      if (!activeRoute) return;
+      const stop = activeRoute.stops[currentStopIndex];
+      openTimePortal(stop.name);
+    };
+
+    window.groundViewCurrentStop = function() {
+      if (!activeRoute) return;
+      const stop = activeRoute.stops[currentStopIndex];
+      enterGroundView(stop.coords[0], stop.coords[1], stop.name);
+    };
+
+    window.openCurrentStopEarth = function() {
+      if (!activeRoute) return;
+      const stop = activeRoute.stops[currentStopIndex];
+      const earthUrl = `https://earth.google.com/web/@${stop.coords[1]},${stop.coords[0]},50a,800d,35y,0h,60t,0r`;
+      window.open(earthUrl, '_blank');
     };
   </script>
 </body>
