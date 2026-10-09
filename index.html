@@ -3,253 +3,768 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Anadolu & İstanbul Kadim Miras Atlası</title>
-  
+  <title>Türkiye Arkeolojik Miras ve Kadim Kültür Atlası (3D WebGL)</title>
+
+  <!-- MapLibre GL JS v4 & CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
+  <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+
+  <!-- Google Fonts: Cinzel & Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@600;700&family=MedievalSharp&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
-  
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body, html { 
-      height: 100%; width: 100%; 
-      font-family: 'Cinzel', serif; 
-      background: #0f0a06; 
-      overflow: hidden; 
+    body, html {
+      width: 100%; height: 100%;
+      overflow: hidden;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #0f0c08;
+      color: #e6dfd5;
     }
-    #map { height: 100%; width: 100%; z-index: 1; background: #1a1109; }
+    #map { width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: 1; }
 
-    /* Netlik & Sinematik Ton: Siliklik yok, keskin hatlar */
-    .leaflet-tile-pane {
-      filter: contrast(1.15) brightness(0.95);
+    /* Antik Parşömen & Bronz HUD Kontrol Paneli */
+    .antique-hud {
+      position: absolute;
+      top: 18px;
+      left: 18px;
+      z-index: 10;
+      width: 360px;
+      max-height: calc(100vh - 36px);
+      overflow-y: auto;
+      background: rgba(22, 17, 12, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      border-radius: 12px;
+      padding: 18px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(184, 134, 11, 0.15);
+      scrollbar-width: thin;
+      scrollbar-color: #8b6508 #16110c;
     }
 
-    .magic-vignette {
-      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      pointer-events: none; z-index: 500;
-      box-shadow: inset 0 0 90px rgba(10, 5, 2, 0.8), inset 0 0 180px rgba(5, 2, 1, 0.7);
+    .brand-header {
+      border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+      padding-bottom: 12px;
+      margin-bottom: 14px;
+    }
+    .brand-title {
+      font-family: 'Cinzel', serif;
+      font-size: 17px;
+      font-weight: 900;
+      letter-spacing: 1.2px;
+      background: linear-gradient(135deg, #ffd700, #d4af37, #cd7f32);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .brand-subtitle {
+      font-size: 11px;
+      color: #a89a85;
+      margin-top: 4px;
+      letter-spacing: 0.5px;
     }
 
-    .magic-panel {
-      position: absolute; top: 16px; left: 16px; z-index: 1000;
-      background: rgba(26, 17, 10, 0.94);
-      backdrop-filter: blur(8px);
-      border: 2px solid #c99b42;
+    .stat-ribbon {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(139, 101, 8, 0.18);
+      border: 1px solid rgba(212, 175, 55, 0.25);
+      border-radius: 8px;
+      padding: 8px 12px;
+      margin-bottom: 14px;
+    }
+    .stat-label { font-size: 11px; text-transform: uppercase; color: #a89a85; font-weight: 600; letter-spacing: 0.5px; }
+    .stat-value { font-family: 'Cinzel', serif; font-size: 15px; font-weight: 700; color: #ffd700; }
+
+    /* Arama Çubuğu */
+    .search-box {
+      position: relative;
+      margin-bottom: 12px;
+    }
+    .search-input {
+      width: 100%;
+      background: rgba(10, 8, 5, 0.85);
+      border: 1px solid rgba(212, 175, 55, 0.3);
       border-radius: 6px;
-      padding: 12px 16px; width: 290px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.85), 0 0 15px rgba(201, 155, 66, 0.25);
+      padding: 9px 12px 9px 34px;
+      color: #f5eedf;
+      font-size: 12px;
+      outline: none;
+      transition: all 0.2s ease;
     }
-    .panel-header h1 {
-      font-family: 'Cinzel Decorative', serif;
-      font-size: 13.5px; font-weight: 900;
-      color: #e8c374; letter-spacing: 1px;
+    .search-input:focus {
+      border-color: #ffd700;
+      box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
     }
-    .panel-header .subtitle {
-      font-size: 11px; color: #a88456; margin-top: 2px;
-      font-style: italic; font-family: 'MedievalSharp', cursive;
-    }
-    .count-box {
-      font-size: 12px; color: #dfcaa7; margin-top: 6px;
-      padding-top: 4px; border-top: 1px solid rgba(201, 155, 66, 0.3);
-    }
-    .count-box b { color: #f7d080; }
-
-    select {
-      width: 100%; background: #1a1109; color: #f2e2c4;
-      border: 1px solid #8f6a2b; padding: 6px 8px; border-radius: 4px;
-      font-family: 'Cinzel', serif; font-size: 11px; margin-top: 6px;
-      outline: none; cursor: pointer;
+    .search-icon {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 13px;
+      color: #d4af37;
+      pointer-events: none;
     }
 
-    /* Antik Yakut Mühürler */
-    .cluster-seal {
-      width: 42px; height: 42px; border-radius: 50%;
-      background: radial-gradient(circle, #b81414 0%, #6e0808 70%, #290202 100%);
-      border: 2px solid #f7d080; color: #fff5db;
-      font-family: 'Cinzel Decorative', serif; font-weight: 700; font-size: 12px;
-      display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 0 15px rgba(232, 38, 38, 0.6), inset 0 0 6px rgba(0,0,0,0.8);
+    /* Filtre Grupları */
+    .filter-group { margin-bottom: 10px; }
+    .filter-label {
+      display: block;
+      font-size: 10px;
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.6px;
+      color: #c4b59d;
+      margin-bottom: 4px;
     }
-    .cluster-seal-medium {
-      width: 48px; height: 48px; font-size: 13px;
-      background: radial-gradient(circle, #d97706 0%, #8c4404 70%, #3d1c01 100%);
-      border-color: #ffd88a;
+    .antique-select {
+      width: 100%;
+      background: rgba(10, 8, 5, 0.85);
+      border: 1px solid rgba(212, 175, 55, 0.25);
+      border-radius: 6px;
+      padding: 8px 10px;
+      color: #e6dfd5;
+      font-size: 12px;
+      outline: none;
+      cursor: pointer;
     }
-    .cluster-seal-large {
-      width: 56px; height: 56px; font-size: 14px;
-      background: radial-gradient(circle, #4a1d96 0%, #290d59 70%, #100326 100%);
-      border-color: #d8b4fe;
+    .antique-select:focus { border-color: #ffd700; }
+
+    /* 3B Uçuş Lokasyonları (Fly-To Presets) */
+    .preset-title {
+      font-size: 10px;
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.6px;
+      color: #c4b59d;
+      margin-top: 14px;
+      margin-bottom: 6px;
+    }
+    .preset-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+    .btn-preset {
+      background: rgba(30, 22, 14, 0.8);
+      border: 1px solid rgba(212, 175, 55, 0.25);
+      border-radius: 6px;
+      padding: 7px 6px;
+      color: #f5eedf;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+    .btn-preset:hover {
+      background: rgba(184, 134, 11, 0.35);
+      border-color: #ffd700;
+      transform: translateY(-1px);
     }
 
-    .leaflet-popup-content-wrapper {
-      background: #1c130b linear-gradient(145deg, #24190e, #140d07) !important;
-      border: 2px solid #c99b42 !important;
-      border-radius: 6px !important;
-      color: #ebd7b5 !important;
+    /* 3B Arazi ve Katman Kontrolleri */
+    .terrain-control-bar {
+      display: flex;
+      gap: 6px;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(212, 175, 55, 0.2);
     }
-    .leaflet-popup-tip { background: #1c130b !important; border: 1px solid #c99b42 !important; }
+    .btn-toggle-3d {
+      flex: 1;
+      padding: 8px;
+      background: linear-gradient(135deg, #8b6508, #5c4305);
+      border: 1px solid #ffd700;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      border-radius: 6px;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: all 0.2s ease;
+    }
+    .btn-toggle-3d:hover {
+      background: linear-gradient(135deg, #b8860b, #7a5806);
+      box-shadow: 0 0 12px rgba(255, 215, 0, 0.4);
+    }
+
+    /* Lejant */
+    .legend-box {
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(212, 175, 55, 0.2);
+      font-size: 11px;
+    }
+    .legend-item { display: flex; align-items: center; margin-bottom: 5px; }
+    .legend-dot { width: 10px; height: 10px; border-radius: 50%; margin-right: 8px; border: 1px solid #fff; }
+
+    /* MapLibre Pop-up Özel Tasarım (Antik Parşömen Kartı) */
+    .maplibregl-popup-content {
+      background: rgba(18, 14, 10, 0.95) !important;
+      border: 1px solid #d4af37 !important;
+      border-radius: 10px !important;
+      color: #f5eedf !important;
+      padding: 16px !important;
+      max-width: 330px !important;
+      box-shadow: 0 12px 35px rgba(0,0,0,0.8), inset 0 0 15px rgba(184, 134, 11, 0.15) !important;
+    }
+    .maplibregl-popup-tip { border-top-color: #d4af37 !important; }
+    .maplibregl-popup-close-button {
+      color: #d4af37 !important;
+      font-size: 16px !important;
+      padding: 4px 8px !important;
+    }
+    .maplibregl-popup-close-button:hover { color: #fff !important; }
+
+    .popup-badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 3px 7px;
+      border-radius: 4px;
+      background: rgba(212, 175, 55, 0.2);
+      border: 1px solid rgba(212, 175, 55, 0.5);
+      color: #ffd700;
+      margin-bottom: 8px;
+    }
     .popup-title {
-      font-family: 'Cinzel Decorative', serif;
-      font-size: 14px; font-weight: 700; color: #f5c76c;
-      border-bottom: 1px solid rgba(201, 155, 66, 0.4);
-      padding-bottom: 3px; margin-bottom: 5px;
+      font-family: 'Cinzel', serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+      line-height: 1.3;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+      padding-bottom: 6px;
     }
-    .popup-tag {
-      display: inline-block; font-size: 10px; color: #d4a757;
-      background: rgba(201, 155, 66, 0.15); padding: 2px 6px;
-      border: 1px solid #8f6a2b; border-radius: 3px; margin-bottom: 6px;
+    .popup-row {
+      display: flex;
+      font-size: 11px;
+      line-height: 1.5;
+      margin-bottom: 4px;
     }
-    .archive-btn {
-      display: inline-block; width: 100%; margin-top: 8px; padding: 6px;
-      background: #8b1e28; color: #fff; text-align: center; text-decoration: none;
-      font-size: 11px; font-weight: bold; border-radius: 4px; border: 1px solid #c99b42;
+    .popup-row b {
+      color: #d4af37;
+      width: 85px;
+      flex-shrink: 0;
     }
-    .archive-btn:hover { background: #b02534; }
+    .popup-row span { color: #e6dfd5; word-break: break-word; }
+
+    /* Yükleme Ekranı Spinner */
+    #loading-screen {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: #0f0c08;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.5s ease;
+    }
+    .antique-spinner {
+      width: 52px; height: 52px;
+      border: 3px solid rgba(212, 175, 55, 0.2);
+      border-top: 3px solid #ffd700;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin-bottom: 16px;
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+    }
+    .loading-text {
+      font-family: 'Cinzel', serif;
+      color: #ffd700;
+      font-size: 14px;
+      letter-spacing: 1.5px;
+    }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
   </style>
 </head>
 <body>
 
-  <div class="magic-vignette"></div>
+  <!-- Yükleme Ekranı -->
+  <div id="loading-screen">
+    <div class="antique-spinner"></div>
+    <div class="loading-text" id="loading-status">ANADOLU 3D ARKEOLOJİK ATLASI YÜKLENİYOR...</div>
+  </div>
 
-  <div class="magic-panel">
-    <div class="panel-header">
-      <h1>Kadim Miras Atlası</h1>
-      <div class="subtitle">"Anadolu & İstanbul Envanteri"</div>
-      <div class="count-box">Kayıtlı Yapı: <b id="total-count">0</b></div>
+  <!-- HUD Kontrol Paneli -->
+  <div class="antique-hud">
+    <div class="brand-header">
+      <div class="brand-title">🏛️ Antik Atlas 3D</div>
+      <div class="brand-subtitle">Türkiye & İstanbul Arkeolojik Miras Coğrafyası</div>
     </div>
 
-    <select id="category-select">
-      <option value="ALL">Bütün Kadim Yapılar</option>
-      <option value="Antik Kent / Ören Yeri">Antik Kentler & Ören Yerleri</option>
-      <option value="Kale / Hisar / Tahkimat">Kaleler, Hisarlar & Surlar</option>
-      <option value="Tarihi Kilise / Manastır">Kiliseler & Manastırlar</option>
-      <option value="Tarihi Cami / Külliye / Mescit">Camiler & Külliyeler</option>
-      <option value="Tarihi Sarnıç">Sarnıçlar & Su Mimarisi</option>
-      <option value="Höyük / Tümülüs">Höyükler & Tümülüsler</option>
-    </select>
+    <div class="stat-ribbon">
+      <span class="stat-label">Tescilli Kültür Mirası</span>
+      <span class="stat-value" id="total-heritage-count">12.046</span>
+    </div>
+
+    <!-- Arama -->
+    <div class="search-box">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="site-search" class="search-input" placeholder="Antik kent, höyük, kale veya ilçe ara..." autocomplete="off">
+    </div>
+
+    <!-- Dönem Filtresi -->
+    <div class="filter-group">
+      <label class="filter-label">Kronolojik Dönem</label>
+      <select id="period-filter" class="antique-select">
+        <option value="ALL">Tüm Çağlar ve Dönemler</option>
+        <option value="NEOLITHIC">Neolitik / Kalkolitik (MÖ 10.000 - MÖ 3000)</option>
+        <option value="BRONZE_HITTITE">Tunç Çağı / Hitit / Asur (MÖ 3000 - MÖ 1200)</option>
+        <option value="IRON_CLASSIC">Demir Çağı / Frig / Lidya / Urartu</option>
+        <option value="HELLENISTIC_ROMAN">Klasik / Helenistik / Roma İmparatorluğu</option>
+        <option value="BYZANTINE">Doğu Roma (Bizans Dönemi)</option>
+        <option value="SELJUK">Selçuklu & Anadolu Beylikleri</option>
+        <option value="OTTOMAN">Osmanlı İmparatorluğu</option>
+      </select>
+    </div>
+
+    <!-- Kategori Filtresi -->
+    <div class="filter-group">
+      <label class="filter-label">Tipolojik Sınıflandırma</label>
+      <select id="category-filter" class="antique-select">
+        <option value="ALL">Tüm Tipolojiler</option>
+        <option value="Antik Kent / Ören Yeri">Antik Kentler & Ören Yerleri</option>
+        <option value="Höyük / Tümülüs">Höyükler & Tümülüsler</option>
+        <option value="Kale / Hisar / Tahkimat">Kaleler, Hisarlar & Tabyalar</option>
+        <option value="Kaya Mezarı / Lahit / Tümülüs">Kaya Mezarları & Lahitler</option>
+        <option value="Antik Sarnıç">Antik Sarnıçlar & Su Yapıları</option>
+        <option value="Tarihi Su Kemeri">Tarihi Su Kemerleri (Aqueducts)</option>
+        <option value="Harabe / Antik Kalıntı">Tarihi Harabeler & Kalıntılar</option>
+      </select>
+    </div>
+
+    <!-- 3B Sinematik Uçuş Konumları -->
+    <div class="preset-title">3 Boyutlu Sinematik Keşif</div>
+    <div class="preset-grid">
+      <button class="btn-preset" onclick="flyToPreset('NEMRUT')">🏔️ Nemrut Dağı</button>
+      <button class="btn-preset" onclick="flyToPreset('KAPADOKYA')">🌄 Kapadokya</button>
+      <button class="btn-preset" onclick="flyToPreset('ISTANBUL')">🏰 Boğaziçi & Haliç</button>
+      <button class="btn-preset" onclick="flyToPreset('EFES')">🏛️ Efes & İyonya</button>
+      <button class="btn-preset" onclick="flyToPreset('LİKYA')">🌊 Likya Kanyonu</button>
+      <button class="btn-preset" onclick="flyToPreset('GOBEKLITEPE')">☀️ Göbekli Tepe</button>
+    </div>
+
+    <!-- 3D Arazi ve Kamera Kontrolü -->
+    <div class="terrain-control-bar">
+      <button class="btn-toggle-3d" id="btn-pitch-toggle" onclick="toggle3DPerspective()">3B Eğim Modu [Açık]</button>
+      <button class="btn-toggle-3d" style="background:#2b1f13;" onclick="resetCamera()">Genel Bakış</button>
+    </div>
+
+    <!-- Renk Lejandı -->
+    <div class="legend-box">
+      <div class="legend-item"><span class="legend-dot" style="background: #2ecc71;"></span> Neolitik & Kalkolitik</div>
+      <div class="legend-item"><span class="legend-dot" style="background: #e67e22;"></span> Hitit & Tunç / Demir Çağı</div>
+      <div class="legend-item"><span class="legend-dot" style="background: #00e5ff;"></span> Klasik & Helenistik</div>
+      <div class="legend-item"><span class="legend-dot" style="background: #f1c40f;"></span> Roma İmparatorluğu</div>
+      <div class="legend-item"><span class="legend-dot" style="background: #9b59b6;"></span> Doğu Roma (Bizans)</div>
+      <div class="legend-item"><span class="legend-dot" style="background: #e74c3c;"></span> Selçuklu & Osmanlı</div>
+    </div>
   </div>
 
   <div id="map"></div>
 
   <script>
-    const map = L.map('map', { 
-      center: [41.015, 28.979],
-      zoom: 12, 
-      minZoom: 5, 
-      zoomControl: false 
+    // 1. MapLibre GL 3D Harita Başlatma
+    const map = new maplibregl.Map({
+      container: 'map',
+      style: {
+        version: 8,
+        glyphs: 'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf',
+        sources: {
+          // Antik Parşömen / Topoğrafik Rölyef Tabanı (Esri Shaded Relief)
+          'shaded-relief': {
+            type: 'raster',
+            tiles: [
+              'https://server.arcgisonline.com/ArcGIS/rest/services/World_Shaded_Relief/MapServer/tile/{z}/{y}/{x}'
+            ],
+            tileSize: 256,
+            attribution: 'Esri & USGS & Kültür Varlıkları ve Müzeler Genel Müdürlüğü'
+          },
+          // Gerçek 3B Yükseklik Modeli (AWS Terrarium DEM)
+          'terrain-source': {
+            type: 'raster-dem',
+            tiles: [
+              'https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png'
+            ],
+            encoding: 'terrarium',
+            tileSize: 256,
+            maxzoom: 15
+          }
+        },
+        layers: [
+          // 1. Zemin Parşömen / Topoğrafik Rölyef
+          {
+            id: 'shaded-relief-layer',
+            type: 'raster',
+            source: 'shaded-relief',
+            paint: {
+              'raster-contrast': 0.15,
+              'raster-brightness-min': 0.05,
+              'raster-saturation': -0.15
+            }
+          },
+          // 2. Sıcak Terracotta / Sepya Tonlama Katmanı
+          {
+            id: 'parchment-wash',
+            type: 'background',
+            paint: {
+              'background-color': '#16110c',
+              'background-opacity': 0.28
+            }
+          },
+          // 3. Dağ Gölgelendirme (Hillshade)
+          {
+            id: 'hills',
+            type: 'hillshade',
+            source: 'terrain-source',
+            layout: { visibility: 'visible' },
+            paint: {
+              'hillshade-shadow-color': '#1a1005',
+              'hillshade-highlight-color': '#fcedc7',
+              'hillshade-accent-color': '#8b5a2b',
+              'hillshade-exaggeration': 0.75
+            }
+          }
+        ]
+      },
+      center: [35.2, 39.0], // Anadolu Merkezi
+      zoom: 6.2,
+      pitch: 55,             // 3 Boyutlu Sinematik Açı
+      bearing: -10,
+      maxPitch: 85,
+      antialias: true
     });
-    L.control.zoom({ position: 'bottomright' }).addTo(map);
 
-    // HİÇBİR API KEY VEYA 403 ENGELİ BULUNMAYAN GÜVENİLİR AÇIK HARİTA ALTLIĞI
-    L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
-      maxZoom: 19,
-      attribution: '&copy; OpenStreetMap &copy; TTK & İBB Miras'
-    }).addTo(map);
+    // Harita Kontrolleri (Pusula, Yakınlaştırma, Tam Ekran)
+    map.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), 'bottom-right');
+    map.addControl(new maplibregl.FullscreenControl(), 'bottom-right');
 
-    const markersCluster = L.markerClusterGroup({
-      chunkedLoading: true,
-      maxClusterRadius: 35,
-      iconCreateFunction: function(cluster) {
-        const count = cluster.getChildCount();
-        let cClass = 'cluster-seal';
-        if (count > 8) cClass = 'cluster-seal cluster-seal-medium';
-        if (count > 25) cClass = 'cluster-seal cluster-seal-large';
-        return L.divIcon({
-          html: `<div class="${cClass}"><span>${count}</span></div>`,
-          className: '',
-          iconSize: [42, 42]
-        });
-      }
+    // 2. 3D Terrain (DEM) Etkinleştirme
+    map.on('load', async () => {
+      // Gerçek 3 Boyutlu Dağlar & Vadiler (1.7x Yükseklik Çarpanı)
+      map.setTerrain({ source: 'terrain-source', exaggeration: 1.7 });
+
+      // GeoJSON Verisini Yükle (12.046 Nokta)
+      await loadHeritageGeoJSON();
     });
-    map.addLayer(markersCluster);
 
-    // Dahili Zengin Çekirdek Liste (Dosya henüz oluşmadıysa devreye girer)
-    const fallbackData = [
-      {name:"Ayasofya-i Kebir", loc:"İstanbul, Fatih", coords:[28.9799,41.0086], cat:"Tarihi Kilise / Manastır", date:"MS 537", epoch:"Doğu Roma / Osmanlı", archive:"https://istanbultarihi.ist/ara?q=Ayasofya"},
-      {name:"Topkapı Sarayı", loc:"İstanbul, Fatih", coords:[28.9833,41.0115], cat:"Kale / Hisar / Tahkimat", date:"MS 1478", epoch:"Osmanlı Başkenti", archive:"https://ttk.gov.tr/eski-istanbul-fotograflari/?s=Topkapı"},
-      {name:"Yerebatan Sarnıcı", loc:"İstanbul, Fatih", coords:[28.9779,41.0084], cat:"Tarihi Sarnıç", date:"MS 542", epoch:"Justinianus Dönemi", archive:"https://istanbultarihi.ist/ara?q=Yerebatan"},
-      {name:"Binbirdirek Sarnıcı", loc:"İstanbul, Fatih", coords:[28.9753,41.0078], cat:"Tarihi Sarnıç", date:"MS 5. Yy", epoch:"Doğu Roma", archive:"https://istanbultarihi.ist/ara?q=Binbirdirek"},
-      {name:"Bozdoğan (Valens) Su Kemeri", loc:"İstanbul, Fatih", coords:[28.9556,41.0161], cat:"Tarihi Sarnıç", date:"MS 368", epoch:"Roma Su Sistemi", archive:"https://istanbultarihi.ist/ara?q=Valens"},
-      {name:"Sultanahmet Hipodromu & Dikilitaş", loc:"İstanbul, Fatih", coords:[28.9767,41.0064], cat:"Antik Kent / Ören Yeri", date:"MS 330", epoch:"Roma / Hipodrom", archive:"https://ttk.gov.tr/eski-istanbul-fotograflari/?s=Hipodrom"},
-      {name:"Theodosius Kara Surları", loc:"İstanbul, Fatih", coords:[28.9219,41.0203], cat:"Kale / Hisar / Tahkimat", date:"MS 413", epoch:"Doğu Roma", archive:"https://istanbultarihi.ist/ara?q=Surlar"},
-      {name:"Galata Kulesi", loc:"İstanbul, Beyoğlu", coords:[28.9742,41.0256], cat:"Kale / Hisar / Tahkimat", date:"MS 1348", epoch:"Ceneviz Kolonisi", archive:"https://ttk.gov.tr/eski-istanbul-fotograflari/?s=Galata"},
-      {name:"Kız Kulesi", loc:"İstanbul, Üsküdar", coords:[29.0042,41.0211], cat:"Kale / Hisar / Tahkimat", date:"MÖ 410", epoch:"Klasik / Doğu Roma", archive:"https://ttk.gov.tr/eski-istanbul-fotograflari/?s=Kız+Kulesi"},
-      {name:"Rumeli Hisarı", loc:"İstanbul, Sarıyer", coords:[29.0572,41.0847], cat:"Kale / Hisar / Tahkimat", date:"MS 1452", epoch:"Fatih Sultan Mehmed", archive:"https://ttk.gov.tr/eski-istanbul-fotograflari/?s=Rumelihisarı"},
-      {name:"Anadolu Hisarı", loc:"İstanbul, Beykoz", coords:[29.0667,41.0828], cat:"Kale / Hisar / Tahkimat", date:"MS 1395", epoch:"Yıldırım Bayezid", archive:"https://ttk.gov.tr/eski-istanbul-fotograflari/?s=Anadoluhisarı"},
-      {name:"Yoros Kalesi", loc:"İstanbul, Beykoz", coords:[29.1575,41.1783], cat:"Kale / Hisar / Tahkimat", date:"MS 13. Yy", epoch:"Doğu Roma / Ceneviz", archive:"https://istanbultarihi.ist/ara?q=Yoros"},
-      {name:"Yarımburgaz Mağarası", loc:"İstanbul, Başakşehir", coords:[28.7425,41.0719], cat:"Höyük / Tümülüs", date:"MÖ 400.000", epoch:"Paleolitik", archive:"https://istanbultarihi.ist/ara?q=Yarımburgaz"},
-      {name:"Bathonea Antik Limanı", loc:"İstanbul, Avcılar", coords:[28.7231,41.0028], cat:"Antik Kent / Ören Yeri", date:"MÖ 2. Yy", epoch:"Helenistik / Roma", archive:"https://istanbultarihi.ist/ara?q=Bathonea"},
-      {name:"Efes Antik Metropolü", loc:"İzmir, Selçuk", coords:[27.3411,37.9409], cat:"Antik Kent / Ören Yeri", date:"MÖ 10. Yy", epoch:"İyonya / Roma", archive:"https://ttk.gov.tr/eski-istanbul-fotograflari/?s=Efes"},
-      {name:"Göbekli Tepe", loc:"Şanlıurfa, Haliliye", coords:[38.9225,37.2232], cat:"Höyük / Tümülüs", date:"MÖ 9600", epoch:"Neolitik", archive:"https://ttk.gov.tr/eski-istanbul-fotograflari/?s=Göbeklitepe"},
-      {name:"Hattuşa Hitit Başkenti", loc:"Çorum, Boğazkale", coords:[34.6153,40.0197], cat:"Antik Kent / Ören Yeri", date:"MÖ 1650", epoch:"Hitit İmparatorluğu", archive:"https://ttk.gov.tr/eski-istanbul-fotograflari/?s=Hattuşa"},
-      {name:"Nemrut Dağı", loc:"Adıyaman, Kâhta", coords:[38.7408,37.9806], cat:"Höyük / Tümülüs", date:"MÖ 69", epoch:"Kommagene", archive:"https://ttk.gov.tr/eski-istanbul-fotograflari/?s=Nemrut"},
-      {name:"Ani Harabeleri", loc:"Kars, Arpaçay", coords:[43.5728,40.5075], cat:"Antik Kent / Ören Yeri", date:"MS 961", epoch:"Orta Çağ", archive:"https://ttk.gov.tr/eski-istanbul-fotograflari/?s=Ani"}
-    ];
+    let rawGeojsonData = null;
 
-    let currentDataset = [];
-
-    async function loadData() {
+    async function loadHeritageGeoJSON() {
+      const statusEl = document.getElementById('loading-status');
       try {
-        const res = await fetch('turkiye_tum_tarihi_yapilar.geojson');
-        if (!res.ok) throw new Error("Dosya yok");
-        const json = await res.json();
-        currentDataset = json.features.map(f => ({
-          name: f.properties.name,
-          loc: f.properties.province_district,
-          coords: f.geometry.coordinates,
-          cat: f.properties.category,
-          date: f.properties.dating,
-          epoch: f.properties.period,
-          archive: f.properties.photo_archive_url
-        }));
-      } catch (e) {
-        currentDataset = fallbackData;
+        statusEl.innerText = "12.046 TESCİLLİ KÜLTÜR VARLIĞI İNDEKSLENİYOR...";
+        const response = await fetch('turkiye_tum_tarihi_yapilar.geojson');
+        rawGeojsonData = await response.json();
+
+        document.getElementById('total-heritage-count').innerText = 
+          rawGeojsonData.features.length.toLocaleString('tr-TR');
+
+        // MapLibre Kaynağı Olarak Ekle (GPU Destekli Clustering)
+        map.addSource('heritage-source', {
+          type: 'geojson',
+          data: rawGeojsonData,
+          cluster: true,
+          clusterMaxZoom: 13,
+          clusterRadius: 55
+        });
+
+        // KÜMELEME KATMANLARI (Antik Bronz ve Mühür Tasarımı)
+        // A. Dış Halka (Işıltı & Gölge)
+        map.addLayer({
+          id: 'clusters-glow',
+          type: 'circle',
+          source: 'heritage-source',
+          filter: ['has', 'point_count'],
+          paint: {
+            'circle-color': [
+              'step', ['get', 'point_count'],
+              'rgba(184, 134, 11, 0.4)', 30,
+              'rgba(212, 175, 55, 0.5)', 150,
+              'rgba(178, 34, 34, 0.6)'
+            ],
+            'circle-radius': [
+              'step', ['get', 'point_count'],
+              24, 30,
+              30, 150,
+              38
+            ],
+            'circle-blur': 0.3
+          }
+        });
+
+        // B. Antik Mühür Gövdesi
+        map.addLayer({
+          id: 'clusters',
+          type: 'circle',
+          source: 'heritage-source',
+          filter: ['has', 'point_count'],
+          paint: {
+            'circle-color': [
+              'step', ['get', 'point_count'],
+              '#b8860b', 30, // Bronz Mühür (< 30)
+              '#d4af37', 150, // Antik Altın Mühür (30 - 150)
+              '#8b1a1a'       // İmparatorluk Kırmızısı (> 150)
+            ],
+            'circle-radius': [
+              'step', ['get', 'point_count'],
+              18, 30,
+              24, 150,
+              30
+            ],
+            'circle-stroke-width': 2.5,
+            'circle-stroke-color': '#fff2cc'
+          }
+        });
+
+        // C. Mühür Sayı Metni (Tipografi)
+        map.addLayer({
+          id: 'cluster-count',
+          type: 'symbol',
+          source: 'heritage-source',
+          filter: ['has', 'point_count'],
+          layout: {
+            'text-field': '{point_count_abbreviated}',
+            'text-font': ['Open Sans Bold'],
+            'text-size': 13
+          },
+          paint: {
+            'text-color': '#ffffff'
+          }
+        });
+
+        // TEKİL NOKTALAR (Döneme Göre Renk Kodlu Işıltılı Antik Taşlar)
+        map.addLayer({
+          id: 'unclustered-point',
+          type: 'circle',
+          source: 'heritage-source',
+          filter: ['!', ['has', 'point_count']],
+          paint: {
+            'circle-radius': [
+              'interpolate', ['linear'], ['zoom'],
+              7, 4.5,
+              12, 8,
+              16, 12
+            ],
+            'circle-color': [
+              'case',
+              ['in', 'Neolitik', ['get', 'period_epoch']], '#2ecc71',
+              ['in', 'Hitit', ['get', 'period_epoch']], '#e67e22',
+              ['in', 'Tunç', ['get', 'period_epoch']], '#e67e22',
+              ['in', 'Helenistik', ['get', 'period_epoch']], '#00e5ff',
+              ['in', 'Klasik', ['get', 'period_epoch']], '#00e5ff',
+              ['in', 'Roma', ['get', 'period_epoch']], '#f1c40f',
+              ['in', 'Bizans', ['get', 'period_epoch']], '#9b59b6',
+              ['in', 'Selçuklu', ['get', 'period_epoch']], '#e74c3c',
+              ['in', 'Osmanlı', ['get', 'period_epoch']], '#d63031',
+              '#ffd700' // Varsayılan Antik Altın
+            ],
+            'circle-stroke-width': 1.8,
+            'circle-stroke-color': '#ffffff'
+          }
+        });
+
+        // Yükleme Ekranını Kapat
+        const loadingScreen = document.getElementById('loading-screen');
+        loadingScreen.style.opacity = '0';
+        setTimeout(() => { loadingScreen.style.display = 'none'; }, 500);
+
+      } catch (err) {
+        console.error("GeoJSON yükleme hatası:", err);
+        statusEl.innerText = "VERİ YÜKLENEMEDİ. LÜTFEN DOSYAYI KONTROL EDİN.";
       }
-      render(document.getElementById('category-select').value);
     }
 
-    function render(cat) {
-      markersCluster.clearLayers();
-      let cnt = 0;
+    // 3. Etkileşimler: Kümeye Tıklayınca Yakınlaşma
+    map.on('click', 'clusters', async (e) => {
+      const features = map.queryRenderedFeatures(e.point, { layers: ['clusters'] });
+      const clusterId = features[0].properties.cluster_id;
+      const zoom = await map.getSource('heritage-source').getClusterExpansionZoom(clusterId);
+      map.easeTo({
+        center: features[0].geometry.coordinates,
+        zoom: zoom + 0.5,
+        duration: 800
+      });
+    });
 
-      currentDataset.forEach(s => {
-        if (cat !== "ALL" && s.cat !== cat) return;
-        cnt++;
+    // 4. Tekil Noktaya Tıklayınca Zengin Bilimsel Pop-up (Dış Bağlantısız)
+    map.on('click', 'unclustered-point', (e) => {
+      const p = e.features[0].properties;
+      const coords = e.features[0].geometry.coordinates.slice();
 
-        const [lon, lat] = s.coords;
-        const marker = L.circleMarker([lat, lon], {
-          radius: 6.5,
-          fillColor: "#e63946",
-          color: "#fff",
-          weight: 1.5,
-          opacity: 1,
-          fillOpacity: 0.95
-        });
+      const popupHtml = `
+        <span class="popup-badge">${p.category || 'Tescilli Kültür Mirası'}</span>
+        <div class="popup-title">${p.name}</div>
+        <div class="popup-row"><b>Dönem / Çağ:</b> <span>${p.period_epoch || 'Belirtilmemiş'}</span></div>
+        <div class="popup-row"><b>Tarihleme:</b> <span>${p.approx_dating || 'MÖ / MS'}</span></div>
+        <div class="popup-row"><b>Konum:</b> <span>${p.province_district || 'Türkiye'}</span></div>
+        <div class="popup-row"><b>Statü:</b> <span>${p.protection_status || 'Tescilli Taşınmaz Varlık'}</span></div>
+        <div class="popup-row"><b>WGS84:</b> <span>${coords[1].toFixed(5)}°K, ${coords[0].toFixed(5)}°D</span></div>
+        <div class="popup-row"><b>Envanter Ref:</b> <span>${p.source_citation || p.id}</span></div>
+      `;
 
-        marker.bindPopup(`
-          <div class="popup-title">${s.name}</div>
-          <span class="popup-tag">${s.cat}</span>
-          <div style="font-size:12px; line-height:1.55; color:#e0cfb8;">
-            <b>Konum:</b> ${s.loc}<br>
-            <b>Dönem:</b> ${s.epoch} (${s.date})
-          </div>
-          <a href="${s.archive}" target="_blank" class="archive-btn">📜 TTK / İBB Miras Arşivini Gör</a>
-        `);
+      new maplibregl.Popup({ offset: 12 })
+        .setLngLat(coords)
+        .setHTML(popupHtml)
+        .addTo(map);
 
-        markersCluster.addLayer(marker);
+      // Kamerayı hafifçe hedefe eğ
+      map.easeTo({
+        center: coords,
+        pitch: Math.max(map.getPitch(), 60),
+        duration: 900
+      });
+    });
+
+    // Cursor Efektleri
+    map.on('mouseenter', 'clusters', () => { map.getCanvas().style.cursor = 'pointer'; });
+    map.on('mouseleave', 'clusters', () => { map.getCanvas().style.cursor = ''; });
+    map.on('mouseenter', 'unclustered-point', () => { map.getCanvas().style.cursor = 'pointer'; });
+    map.on('mouseleave', 'unclustered-point', () => { map.getCanvas().style.cursor = ''; });
+
+    // 5. Filtreleme Fonksiyonu (Dönem & Kategori)
+    function applyFilters() {
+      if (!rawGeojsonData) return;
+      const periodVal = document.getElementById('period-filter').value;
+      const catVal = document.getElementById('category-filter').value;
+
+      const filteredFeatures = rawGeojsonData.features.filter(feat => {
+        const p = feat.properties;
+        const pe = p.period_epoch || "";
+        const cat = p.category || "";
+
+        // Dönem Denetimi
+        let matchPeriod = (periodVal === "ALL");
+        if (periodVal === "NEOLITHIC") matchPeriod = pe.includes("Neolitik") || pe.includes("Kalkolitik");
+        else if (periodVal === "BRONZE_HITTITE") matchPeriod = pe.includes("Hitit") || pe.includes("Tunç");
+        else if (periodVal === "IRON_CLASSIC") matchPeriod = pe.includes("Demir") || pe.includes("Frig") || pe.includes("Lidya") || pe.includes("Urartu");
+        else if (periodVal === "HELLENISTIC_ROMAN") matchPeriod = pe.includes("Helenistik") || pe.includes("Roma") || pe.includes("Klasik");
+        else if (periodVal === "BYZANTINE") matchPeriod = pe.includes("Bizans");
+        else if (periodVal === "SELJUK") matchPeriod = pe.includes("Selçuklu") || pe.includes("Beylik");
+        else if (periodVal === "OTTOMAN") matchPeriod = pe.includes("Osmanlı");
+
+        // Kategori Denetimi
+        let matchCategory = (catVal === "ALL") || (cat === catVal);
+
+        return matchPeriod && matchCategory;
       });
 
-      document.getElementById('total-count').innerText = cnt.toLocaleString() + " Yapı";
+      map.getSource('heritage-source').setData({
+        type: 'FeatureCollection',
+        features: filteredFeatures
+      });
+
+      document.getElementById('total-heritage-count').innerText = 
+        filteredFeatures.length.toLocaleString('tr-TR');
     }
 
-    document.getElementById('category-select').addEventListener('change', (e) => render(e.target.value));
-    loadData();
+    document.getElementById('period-filter').addEventListener('change', applyFilters);
+    document.getElementById('category-filter').addEventListener('change', applyFilters);
+
+    // 6. Canlı Arama Motoru
+    document.getElementById('site-search').addEventListener('input', (e) => {
+      const term = e.target.value.trim().toLowerCase();
+      if (!rawGeojsonData) return;
+
+      if (term.length === 0) {
+        applyFilters();
+        return;
+      }
+
+      const matched = rawGeojsonData.features.filter(f => {
+        const name = (f.properties.name || "").toLowerCase();
+        const loc = (f.properties.province_district || "").toLowerCase();
+        return name.includes(term) || loc.includes(term);
+      });
+
+      map.getSource('heritage-source').setData({
+        type: 'FeatureCollection',
+        features: matched
+      });
+      document.getElementById('total-heritage-count').innerText = matched.length.toLocaleString('tr-TR');
+
+      // İlk eşleşen kayda uç
+      if (matched.length > 0 && term.length >= 3) {
+        const top = matched[0];
+        map.flyTo({
+          center: top.geometry.coordinates,
+          zoom: 14,
+          pitch: 65,
+          speed: 1.2
+        });
+      }
+    });
+
+    // 7. 3 Boyutlu Sinematik Lokasyon Uçuşları (Camera Fly-To Presets)
+    const PRESETS = {
+      'NEMRUT': { center: [38.7408, 37.9806], zoom: 14.5, pitch: 75, bearing: 35 },
+      'KAPADOKYA': { center: [34.8631, 38.6431], zoom: 13.5, pitch: 72, bearing: -45 },
+      'ISTANBUL': { center: [28.9784, 41.0082], zoom: 14.0, pitch: 65, bearing: 42 },
+      'EFES': { center: [27.3411, 37.9409], zoom: 14.2, pitch: 68, bearing: -25 },
+      'LİKYA': { center: [29.3181, 36.3567], zoom: 13.8, pitch: 74, bearing: 55 },
+      'GOBEKLITEPE': { center: [38.9225, 37.2232], zoom: 14.5, pitch: 65, bearing: 20 }
+    };
+
+    function flyToPreset(key) {
+      const target = PRESETS[key];
+      if (target) {
+        map.flyTo({
+          center: target.center,
+          zoom: target.zoom,
+          pitch: target.pitch,
+          bearing: target.bearing,
+          duration: 3500,
+          essential: true
+        });
+      }
+    }
+
+    // 8. 3B Eğim Modu Aç/Kapat & Kamera Sıfırlama
+    let is3DActive = true;
+    function toggle3DPerspective() {
+      const btn = document.getElementById('btn-pitch-toggle');
+      if (is3DActive) {
+        map.easeTo({ pitch: 0, bearing: 0, duration: 800 });
+        btn.innerText = "3B Eğim Modu [Kapalı]";
+        btn.style.background = "#3a2b1b";
+      } else {
+        map.easeTo({ pitch: 65, bearing: -15, duration: 800 });
+        btn.innerText = "3B Eğim Modu [Açık]";
+        btn.style.background = "linear-gradient(135deg, #8b6508, #5c4305)";
+      }
+      is3DActive = !is3DActive;
+    }
+
+    function resetCamera() {
+      map.flyTo({
+        center: [35.2, 39.0],
+        zoom: 6.2,
+        pitch: 55,
+        bearing: -10,
+        duration: 2000
+      });
+      is3DActive = true;
+      document.getElementById('btn-pitch-toggle').innerText = "3B Eğim Modu [Açık]";
+    }
   </script>
 </body>
 </html>
