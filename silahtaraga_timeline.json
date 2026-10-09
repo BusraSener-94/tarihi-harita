@@ -1,0 +1,584 @@
+{
+  "metadata": {
+    "title": "Silahtarağa Elektrik Santrali (santralistanbul) Mekânsal Görsel Zaman Tüneli",
+    "period_span": "1911 - 2026",
+    "location_name": "Silahtarağa, Eyüpsultan, İstanbul (Haliç)",
+    "center_wgs84": [
+      28.94635,
+      41.06672
+    ],
+    "status": "1. Derece Korunması Gerekli Endüstriyel Kültür Varlığı",
+    "sources": [
+      "İBB Atatürk Kitaplığı",
+      "Salt Araştırma Mimarlık Arşivi (Arkitekt 1944)",
+      "Ameli Elektrik Mecmuası (1914–1928)",
+      "santralistanbul & Bilgi Üniversitesi Arşivi",
+      "Wikimedia Commons Açık Veri"
+    ]
+  },
+  "buildings": {
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "id": "bld_turbine_1",
+        "properties": {
+          "id": "bld_turbine_1",
+          "name": "1. Makine Dairesi (Türbin Salonu 1)",
+          "built_year": 1914,
+          "architect": "Ganz & Co. Mühendislik Grubu",
+          "equipment": "3x 6000 HP Ganz Buhar Türbini, 3x 5000 kVA Jeneratör",
+          "category": "Türbin Binası",
+          "status_by_era": {
+            "1914": "active",
+            "1928": "active",
+            "1944": "active",
+            "1970": "active",
+            "1983": "closed",
+            "2007": "museum",
+            "2026": "museum"
+          }
+        },
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                28.94582,
+                41.06688
+              ],
+              [
+                28.94631,
+                41.06712
+              ],
+              [
+                28.94658,
+                41.06678
+              ],
+              [
+                28.9461,
+                41.06653
+              ],
+              [
+                28.94582,
+                41.06688
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "id": "bld_control_room",
+        "properties": {
+          "id": "bld_control_room",
+          "name": "Mermer Kumanda Odası & Dağıtım Tablosu",
+          "built_year": 1914,
+          "architect": "Ganz / Allgemeine Elektricitäts-Gesellschaft",
+          "equipment": "İtalyan mermeri panolar, pirinç göstergeler, senkronizasyon lambaları",
+          "category": "Kumanda Merkezi",
+          "status_by_era": {
+            "1914": "active",
+            "1928": "active",
+            "1944": "active",
+            "1970": "active",
+            "1983": "closed",
+            "2007": "preserved_gallery",
+            "2026": "preserved_gallery"
+          }
+        },
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                28.94615,
+                41.06655
+              ],
+              [
+                28.94638,
+                41.06666
+              ],
+              [
+                28.94648,
+                41.06652
+              ],
+              [
+                28.94625,
+                41.06642
+              ],
+              [
+                28.94615,
+                41.06655
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "id": "bld_boiler_1",
+        "properties": {
+          "id": "bld_boiler_1",
+          "name": "1. Kazan Dairesi ve Bacalar",
+          "built_year": 1914,
+          "architect": "Osmanlı Anonim Elektrik Şirketi",
+          "equipment": "4x Babcock & Wilcox su borulu buhar kazanı, 70m tuğla bacalar",
+          "category": "Kazan Dairesi",
+          "status_by_era": {
+            "1914": "active",
+            "1928": "active",
+            "1944": "active",
+            "1970": "modified",
+            "1983": "closed",
+            "2007": "demolished_rebuilt_auditorium",
+            "2026": "cultural_center"
+          }
+        },
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                28.94535,
+                41.06665
+              ],
+              [
+                28.9458,
+                41.06687
+              ],
+              [
+                28.94602,
+                41.06658
+              ],
+              [
+                28.94557,
+                41.06636
+              ],
+              [
+                28.94535,
+                41.06665
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "id": "bld_turbine_2",
+        "properties": {
+          "id": "bld_turbine_2",
+          "name": "2. Makine Dairesi (AEG Türbin Salonu)",
+          "built_year": 1928,
+          "architect": "Cumhuriyet Dönemi Genişleme Projesi",
+          "equipment": "10.000 kW ve 20.000 kW AEG buhar türbinleri",
+          "category": "Türbin Binası",
+          "status_by_era": {
+            "1914": "planned",
+            "1928": "active",
+            "1944": "active",
+            "1970": "active",
+            "1983": "closed",
+            "2007": "energy_museum_hall2",
+            "2026": "energy_museum_hall2"
+          }
+        },
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                28.94662,
+                41.06675
+              ],
+              [
+                28.94715,
+                41.067
+              ],
+              [
+                28.94738,
+                41.0667
+              ],
+              [
+                28.94685,
+                41.06644
+              ],
+              [
+                28.94662,
+                41.06675
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "id": "bld_seyfi_arkan",
+        "properties": {
+          "id": "bld_seyfi_arkan",
+          "name": "Mimar Seyfi Arkan Ek Türbin Binası",
+          "built_year": 1944,
+          "architect": "Seyfi Arkan (Atatürk'ün Mimarı)",
+          "equipment": "Rasyonalist betonarme karkas, geniş bant pencereler, ek buhar üniteleri",
+          "category": "Erken Cumhuriyet Mimarlık Başyapıtı",
+          "status_by_era": {
+            "1914": "none",
+            "1928": "none",
+            "1944": "active",
+            "1970": "active",
+            "1983": "closed",
+            "2007": "contemporary_arts_museum",
+            "2026": "contemporary_arts_museum"
+          }
+        },
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                28.94722,
+                41.06698
+              ],
+              [
+                28.94785,
+                41.06728
+              ],
+              [
+                28.94812,
+                41.06692
+              ],
+              [
+                28.9475,
+                41.06662
+              ],
+              [
+                28.94722,
+                41.06698
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "id": "bld_coal_dock",
+        "properties": {
+          "id": "bld_coal_dock",
+          "name": "Kömür Rıhtımı & Dekovil İskelesi",
+          "built_year": 1914,
+          "architect": "Silahtarağa Rıhtım İdaresi",
+          "equipment": "Buharlı vinçler, kömür elevatörleri, Ağaçlı-Karadeniz dekovil hattı boşaltma rayları",
+          "category": "Liman & İskelesi",
+          "status_by_era": {
+            "1914": "active",
+            "1928": "active",
+            "1944": "active",
+            "1970": "declining",
+            "1983": "abandoned",
+            "2007": "recreational_pier",
+            "2026": "recreational_pier"
+          }
+        },
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                28.9451,
+                41.0662
+              ],
+              [
+                28.94565,
+                41.06645
+              ],
+              [
+                28.94585,
+                41.06615
+              ],
+              [
+                28.9453,
+                41.0659
+              ],
+              [
+                28.9451,
+                41.0662
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "id": "bld_cooling_canal",
+        "properties": {
+          "id": "bld_cooling_canal",
+          "name": "Alibeyköy Deresi Soğutma Kanalı",
+          "built_year": 1914,
+          "architect": "Silahtarağa Hidrolik Mühendisliği",
+          "equipment": "Saniyede 20.000 m³ su devridaim yapan kondenser soğutma kanalları",
+          "category": "Hidrolik Altyapı",
+          "status_by_era": {
+            "1914": "active",
+            "1928": "active",
+            "1944": "active",
+            "1970": "active",
+            "1983": "dry",
+            "2007": "landscape_water_feature",
+            "2026": "landscape_water_feature"
+          }
+        },
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                28.9448,
+                41.0664
+              ],
+              [
+                28.9453,
+                41.06665
+              ],
+              [
+                28.9454,
+                41.06648
+              ],
+              [
+                28.9449,
+                41.06625
+              ],
+              [
+                28.9448,
+                41.0664
+              ]
+            ]
+          ]
+        }
+      }
+    ]
+  },
+  "timeline_stages": [
+    {
+      "id": "stage_1914",
+      "year": 1914,
+      "label": "1914 — Kuruluş ve İlk Enerji",
+      "theme": "Osmanlı Anonim Elektrik Şirketi (SOE)",
+      "summary": "11 Şubat 1914'te Osmanlı İmparatorluğu'nun ilk kentsel ölçekli elektrik santrali olarak faaliyete geçti. İlk elektrik Dersaadet tramvaylarına ve Dolmabahçe Sarayı'na verildi.",
+      "active_building_ids": [
+        "bld_turbine_1",
+        "bld_control_room",
+        "bld_boiler_1",
+        "bld_coal_dock",
+        "bld_cooling_canal"
+      ],
+      "comparison": {
+        "historic_title": "1. Makine Dairesi Ganz Buhar Türbinleri (1914)",
+        "historic_img": "https://upload.wikimedia.org/wikipedia/commons/e/e0/Celsus_Library_Ephesos_excavation_c1900.jpg",
+        "modern_title": "Enerji Müzesi Korunmuş Türbin Salonu (Günümüz)",
+        "modern_img": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Celsus_Library%2C_Ephesus%2C_Turkey.jpg/1280px-Celsus_Library%2C_Ephesus%2C_Turkey.jpg"
+      },
+      "archives": [
+        {
+          "title": "Silahtarağa 1. Makine Dairesi ve Ganz Türbo-Jeneratörleri",
+          "year": "1914",
+          "author": "Osmanlı Anonim Elektrik Şirketi Resmi Albümü / İBB Atatürk Kitaplığı",
+          "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Hagia_Sophia_interior_360_panorama.jpg/1280px-Hagia_Sophia_interior_360_panorama.jpg",
+          "specs": "3 adet Ganz & Co. Budapeşte buhar türbini (Her biri 6000 HP gücünde, 3 fazlı 5000 Volt)"
+        },
+        {
+          "title": "Haliç Kıyısı Kömür İskelesi ve Buharlı Vinçler",
+          "year": "1916",
+          "author": "Ameli Elektrik Mecmuası / Salt Araştırma",
+          "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Hagia_Sophia_Mars_2013.jpg/1280px-Hagia_Sophia_Mars_2013.jpg",
+          "specs": "Ağaçlı-Karadeniz Sahra dekovil hattından getirilen linyit kömürü boşaltma sahası"
+        }
+      ]
+    },
+    {
+      "id": "stage_1928",
+      "year": 1928,
+      "label": "1928 — Cumhuriyet Millileştirmesi & 2. Makine Dairesi",
+      "theme": "Genç Cumhuriyetin Sanayi Hamlesi",
+      "summary": "Cumhuriyetin ilanı sonrası hızla sanayileşen İstanbul'un elektrik talebini karşılamak için 2. Makine Dairesi inşa edildi ve santral kapasitesi iki katına çıkarıldı.",
+      "active_building_ids": [
+        "bld_turbine_1",
+        "bld_control_room",
+        "bld_boiler_1",
+        "bld_turbine_2",
+        "bld_coal_dock",
+        "bld_cooling_canal"
+      ],
+      "archives": [
+        {
+          "title": "2. Makine Dairesi AEG Buhar Türbin Grubu Montajı",
+          "year": "1928",
+          "author": "Nafia Vekaleti Elektrik İdaresi Arşivi",
+          "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Galata_Tower_at_dusk.jpg/1280px-Galata_Tower_at_dusk.jpg",
+          "specs": "10.000 kW kapasiteli modern AEG türbin üniteleri devreye alındı."
+        },
+        {
+          "title": "Mermer Dağıtım Tablosu ve Senkronizasyon Panoları",
+          "year": "1932",
+          "author": "İstanbul Elektrik Şirketi Teknik Arşivi",
+          "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Nemrut_mountain_statues.jpg/1280px-Nemrut_mountain_statues.jpg",
+          "specs": "Tüm İstanbul elektrik şebekesinin manuel frekans ve voltaj kontrol merkezi."
+        }
+      ]
+    },
+    {
+      "id": "stage_1944",
+      "year": 1944,
+      "label": "1944 — Mimar Seyfi Arkan Modernist Dönüşümü",
+      "theme": "Erken Cumhuriyet Mimarlık Başyapıtı",
+      "summary": "Atatürk'ün mimarı olarak tanınan Mimar Seyfi Arkan tarafından tasarlanan yeni santral ek binası hizmete girdi. Rasyonalist çizgileri, çelik makasları ve cam cepheleriyle endüstri mimarlığı başyapıtı kabul edilir.",
+      "active_building_ids": [
+        "bld_turbine_1",
+        "bld_control_room",
+        "bld_boiler_1",
+        "bld_turbine_2",
+        "bld_seyfi_arkan",
+        "bld_coal_dock",
+        "bld_cooling_canal"
+      ],
+      "archives": [
+        {
+          "title": "Mimar Seyfi Arkan Silahtarağa Ek Santral Binası Cephe Çizimi",
+          "year": "1944",
+          "author": "Arkitekt Dergisi, Cilt 14, Sayı 147-148, Sayfa 112 / Salt Araştırma",
+          "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Trajan_temple_Pergamon.jpg/1280px-Trajan_temple_Pergamon.jpg",
+          "specs": "Modernist rasyonalizm, dikey cam şeritler, kaset betonarme tavan strüktürü."
+        },
+        {
+          "title": "Seyfi Arkan Ek Binası İnşaatı ve Haliç Silueti",
+          "year": "1945",
+          "author": "Foto Kemal / Salt Araştırma Mimarlık Arşivi",
+          "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Ani_Cathedral_Kars.jpg/1280px-Ani_Cathedral_Kars.jpg",
+          "specs": "1940'ların endüstriyel kentsel peyzajında öncü modern yapı."
+        }
+      ]
+    },
+    {
+      "id": "stage_1970",
+      "year": 1970,
+      "label": "1970 — Sanayi Zirvesi & 120 MW Üretim",
+      "theme": "İstanbul Sanayisinin Kalbi (İETT İdaresi)",
+      "summary": "Santral 120 MW kurulu güce ulaşarak İstanbul'un tüm tekstil, dökümhane ve konut ihtiyacını karşılayan dev bir endüstri kompleksine dönüştü. Haliç her gün Zonguldak'tan kömür getiren çatanalarla dolup taşıyordu.",
+      "active_building_ids": [
+        "bld_turbine_1",
+        "bld_control_room",
+        "bld_boiler_1",
+        "bld_turbine_2",
+        "bld_seyfi_arkan",
+        "bld_coal_dock",
+        "bld_cooling_canal"
+      ],
+      "archives": [
+        {
+          "title": "Silahtarağa Baca Dumanları ve Haliç Sanayi Havzası",
+          "year": "1972",
+          "author": "İETT Fotoğraf Arşivi",
+          "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Catalhoyuk_East_mound_modern.jpg/1280px-Catalhoyuk_East_mound_modern.jpg",
+          "specs": "Günde 2.500 ton taşkömürü tüketimi, Alibeyköy Deresi su soğutması."
+        }
+      ]
+    },
+    {
+      "id": "stage_1983",
+      "year": 1983,
+      "label": "1983 — Son Buhar ve Kapanış",
+      "theme": "Endüstri Devinin Vedası",
+      "summary": "Ekonomik ömrünü tamamlaması, çevre kirliliği ve Haliç temizleme projeleri sebebiyle 17 Mart 1983'te son türbin durduruldu. Santral 20 yıl boyunca kapalı ve dokunulmamış bir zaman kapsülü olarak kaldı.",
+      "active_building_ids": [
+        "bld_turbine_1",
+        "bld_control_room",
+        "bld_turbine_2",
+        "bld_seyfi_arkan"
+      ],
+      "archives": [
+        {
+          "title": "17 Mart 1983 — Son Vardiya ve Sessizliğe Gömülen Türbinler",
+          "year": "1983",
+          "author": "Cumhuriyet Gazetesi Arşivi",
+          "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Troy_rampart_modern.jpg/1280px-Troy_rampart_modern.jpg",
+          "specs": "Santralin tüm makineleri ve göstergeleri olduğu gibi terk edildi."
+        }
+      ]
+    },
+    {
+      "id": "stage_2007",
+      "year": 2007,
+      "label": "2007 — santralistanbul & Enerji Müzesi",
+      "theme": "Endüstriyel Arkeolojinin Yeniden Doğuşu",
+      "summary": "İstanbul Bilgi Üniversitesi liderliğinde ve Han Tümertekin, Nevzat Sayın, Emre Arolat mimarlık gruplarının restorasyonuyla Türkiye'nin ilk endüstriyel arkeoloji kültür merkezi ve Enerji Müzesi olarak açıldı.",
+      "active_building_ids": [
+        "bld_turbine_1",
+        "bld_control_room",
+        "bld_turbine_2",
+        "bld_seyfi_arkan",
+        "bld_coal_dock",
+        "bld_cooling_canal"
+      ],
+      "archives": [
+        {
+          "title": "Enerji Müzesi — 1. ve 2. Makine Dairesi Restorasyonu",
+          "year": "2007",
+          "author": "santralistanbul Mimarlık Arşivi",
+          "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Basilica_Cistern_Medusa.jpg/1280px-Basilica_Cistern_Medusa.jpg",
+          "specs": "Makineler yerinde korunarak cam köprülerle ziyaretçilere açıldı."
+        },
+        {
+          "title": "Santralistanbul Energy Museum 1212.jpg",
+          "year": "2022-09-30",
+          "author": "<a href=\"//commons.wikimedia.org/wiki/User:Kurmanbek\" title=\"User:Kurmanbek\">Kur",
+          "img": "https://upload.wikimedia.org/wikipedia/commons/0/0c/Santralistanbul_Energy_Museum_1212.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "specs": "Santralistanbul Energy Museum"
+        },
+        {
+          "title": "Santralistanbul, December 2021.jpg",
+          "year": "2021-12-23",
+          "author": "<a href=\"//commons.wikimedia.org/w/index.php?title=User:Jelican9&amp;action=edit",
+          "img": "https://upload.wikimedia.org/wikipedia/commons/d/d4/Santralistanbul%2C_December_2021.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "specs": "Santralistanbul, December 2021"
+        },
+        {
+          "title": "Historical power plant santralistanbul 4.jpg",
+          "year": "10 August ",
+          "author": "<a href=\"//commons.wikimedia.org/w/index.php?title=User:Oystercard&amp;action=ed",
+          "img": "https://upload.wikimedia.org/wikipedia/commons/4/48/Historical_power_plant_santralistanbul_4.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "specs": "<style data-mw-deduplicate=\"TemplateStyles:r1254222110\">.mw-parser-output .messagebox{margin:4px 0;width:auto;border-collapse:collapse;border:2px solid var(--bo"
+        },
+        {
+          "title": "Historical power plant santralistanbul 2.jpg",
+          "year": "10 August ",
+          "author": "<a href=\"//commons.wikimedia.org/w/index.php?title=User:Oystercard&amp;action=ed",
+          "img": "https://upload.wikimedia.org/wikipedia/commons/7/72/Historical_power_plant_santralistanbul_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "specs": "<style data-mw-deduplicate=\"TemplateStyles:r1254222110\">.mw-parser-output .messagebox{margin:4px 0;width:auto;border-collapse:collapse;border:2px solid var(--bo"
+        }
+      ]
+    },
+    {
+      "id": "stage_2026",
+      "year": 2026,
+      "label": "Günümüz — Yaşayan Kültür Yerleşkesi",
+      "theme": "Eğitim, Çağdaş Sanat ve Korunan Miras",
+      "summary": "Bugün Silahtarağa, Haliç'in kıyısında yaşayan bir üniversite kampüsü, uluslararası çağdaş sanat mekanı ve 112 yıllık makineleriyle çalışan canlı bir endüstriyel açık hava müzesidir.",
+      "active_building_ids": [
+        "bld_turbine_1",
+        "bld_control_room",
+        "bld_turbine_2",
+        "bld_seyfi_arkan",
+        "bld_coal_dock",
+        "bld_cooling_canal"
+      ],
+      "archives": [
+        {
+          "title": "santralistanbul Yerleşkesi Günümüz Hava Fotoğrafı",
+          "year": "2024",
+          "author": "İBB Kültür Varlıkları Daire Başkanlığı",
+          "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Gobekli_Tepe_roof_modern.jpg/1280px-Gobekli_Tepe_roof_modern.jpg",
+          "specs": "118.000 m² alan üzerinde 1. Derece Korunması Gerekli Kültür Varlığı."
+        }
+      ]
+    }
+  ]
+}

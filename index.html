@@ -178,6 +178,18 @@
       border-color: #ffd700;
       transform: translateY(-1px);
     }
+    .btn-preset-special {
+      grid-column: span 2;
+      background: linear-gradient(135deg, #38240a, #5c3e10) !important;
+      border: 1px solid #ffd700 !important;
+      color: #ffd700 !important;
+      font-weight: 700 !important;
+      box-shadow: 0 0 10px rgba(255, 215, 0, 0.25);
+    }
+    .btn-preset-special:hover {
+      background: linear-gradient(135deg, #5c3e10, #805718) !important;
+      box-shadow: 0 0 16px rgba(255, 215, 0, 0.5) !important;
+    }
 
     /* 3B Arazi ve Kamera Kontrolleri */
     .terrain-control-bar {
@@ -216,7 +228,7 @@
     .legend-item { display: flex; align-items: center; margin-bottom: 5px; }
     .legend-dot { width: 10px; height: 10px; border-radius: 50%; margin-right: 8px; border: 1px solid #fff; }
 
-    /* MapLibre Pop-up Özel Tasarım (Antik Parşömen Kartı) */
+    /* MapLibre Pop-up Özel Tasarım */
     .maplibregl-popup-content {
       background: rgba(18, 14, 10, 0.96) !important;
       border: 1px solid #d4af37 !important;
@@ -355,6 +367,225 @@
       transition: all 0.2s ease;
     }
     .ground-btn:hover { background: #b8860b; color: #fff; }
+
+    /* =========================================================================
+       SILAHTARAĞA MEKÂNSAL GÖRSEL ZAMAN TÜNELİ PANELİ (SPATIAL TIMELINE)
+       ========================================================================= */
+    #silahtaraga-timeline-panel {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 95%;
+      max-width: 1180px;
+      max-height: 490px;
+      background: rgba(18, 14, 10, 0.96);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid #ffd700;
+      border-radius: 14px;
+      padding: 16px 20px;
+      z-index: 1500;
+      box-shadow: 0 16px 50px rgba(0, 0, 0, 0.9), 0 0 25px rgba(255, 215, 0, 0.25);
+      display: none;
+      flex-direction: column;
+      gap: 12px;
+      animation: slideUp 0.35s ease;
+      overflow: hidden;
+    }
+    .st-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+      padding-bottom: 8px;
+    }
+    .st-title-group h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 16px;
+      font-weight: 900;
+      color: #ffd700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      letter-spacing: 0.8px;
+    }
+    .st-title-group span {
+      font-size: 11px;
+      color: #a89a85;
+    }
+    .st-close-btn {
+      background: #8b1a1a;
+      border: 1px solid #ff4d4d;
+      color: #fff;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* Yatay Zaman Çizgisi Slider */
+    .st-timeline-track {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      padding: 10px 14px;
+      background: rgba(10, 8, 6, 0.85);
+      border: 1px solid rgba(212, 175, 55, 0.25);
+      border-radius: 10px;
+    }
+    .st-timeline-line {
+      position: absolute;
+      top: 50%;
+      left: 20px;
+      right: 20px;
+      height: 3px;
+      background: #3a2b1b;
+      z-index: 1;
+      transform: translateY(-50%);
+    }
+    .st-timeline-line-progress {
+      position: absolute;
+      top: 50%;
+      left: 20px;
+      height: 3px;
+      background: linear-gradient(90deg, #b8860b, #ffd700);
+      z-index: 2;
+      transform: translateY(-50%);
+      transition: width 0.4s ease;
+      width: 0%;
+    }
+    .st-timeline-node {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      background: none;
+      border: none;
+      outline: none;
+      padding: 0 4px;
+    }
+    .st-node-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #2b1f13;
+      border: 2px solid #a89a85;
+      transition: all 0.25s ease;
+      margin-bottom: 4px;
+    }
+    .st-timeline-node:hover .st-node-dot {
+      border-color: #ffd700;
+      transform: scale(1.2);
+    }
+    .st-timeline-node.active .st-node-dot {
+      background: #ffd700;
+      border-color: #fff;
+      box-shadow: 0 0 14px #ffd700;
+      transform: scale(1.3);
+    }
+    .st-node-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: #a89a85;
+      white-space: nowrap;
+      transition: color 0.25s ease;
+    }
+    .st-timeline-node.active .st-node-label {
+      color: #ffd700;
+    }
+
+    /* Zaman Tüneli İçerik Gövdesi (2 Kolon) */
+    .st-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      overflow-y: auto;
+      max-height: 320px;
+      padding-right: 6px;
+    }
+    .st-info-col {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .st-theme-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      color: #ffd700;
+      background: rgba(184, 134, 11, 0.2);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      padding: 4px 8px;
+      border-radius: 6px;
+      align-self: flex-start;
+    }
+    .st-summary-text {
+      font-size: 12px;
+      line-height: 1.5;
+      color: #e6dfd5;
+    }
+    .st-buildings-section {
+      background: #1c150f;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      border-radius: 8px;
+      padding: 10px;
+    }
+    .st-buildings-title {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #d4af37;
+      margin-bottom: 6px;
+    }
+    .st-buildings-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .st-chip {
+      font-size: 10px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: #2b1f13;
+      border: 1px solid #d4af37;
+      color: #ffd700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .st-chip:hover {
+      background: #ffd700;
+      color: #000;
+    }
+
+    /* Sağ Kolon: Arşiv Görselleri & Öncesi/Sonrası */
+    .st-media-col {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .st-photos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 10px;
+    }
+    .st-photo-card {
+      background: #18120c;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      border-radius: 6px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    .st-photo-card:hover { transform: translateY(-2px); border-color: #ffd700; }
+    .st-photo-card img { width: 100%; height: 110px; object-fit: cover; }
+    .st-photo-desc { padding: 6px 8px; font-size: 10px; color: #f5eedf; line-height: 1.3; }
+    .st-photo-author { font-size: 9px; color: #8b949e; margin-top: 3px; }
 
     /* Zaman Portalı Modalı */
     #time-portal-modal {
@@ -700,6 +931,7 @@
     <!-- 3B Sinematik Uçuş Konumları -->
     <div class="preset-title">3 Boyutlu Sinematik Keşif</div>
     <div class="preset-grid">
+      <button class="btn-preset btn-preset-special" onclick="focusSilahtaragaTimeline()">⚡ Silahtarağa Santrali (1914 - 2026)</button>
       <button class="btn-preset" onclick="flyToPreset('NEMRUT')">🏔️ Nemrut Dağı</button>
       <button class="btn-preset" onclick="flyToPreset('KAPADOKYA')">🌄 Kapadokya</button>
       <button class="btn-preset" onclick="flyToPreset('ISTANBUL')">🏰 Boğaziçi & Haliç</button>
@@ -735,6 +967,78 @@
     </div>
     <button class="ground-btn" id="btn-pan-toggle" onclick="toggleSlowPan()">↺ 360° Çevre Turu</button>
     <button class="ground-btn" style="background:#8b1a1a; border-color:#ff4d4d;" onclick="exitGroundView()">⤺ Kuşbakışına Dön</button>
+  </div>
+
+  <!-- SILAHTARAĞA MEKÂNSAL GÖRSEL ZAMAN TÜNELİ PANELİ -->
+  <div id="silahtaraga-timeline-panel">
+    <div class="st-header">
+      <div class="st-title-group">
+        <h3>⚡ SILAHTARAĞA ELEKTRİK SANTRALİ (santralistanbul)</h3>
+        <span id="st-current-stage-label">1914 — Kuruluş ve İlk Enerji</span>
+      </div>
+      <button class="st-close-btn" onclick="closeSilahtaragaTimeline()">Kapat [X]</button>
+    </div>
+
+    <!-- Yatay Zaman Çubuğu (7 Tarihsel Düğüm) -->
+    <div class="st-timeline-track">
+      <div class="st-timeline-line"></div>
+      <div class="st-timeline-line-progress" id="st-line-progress"></div>
+      
+      <button class="st-timeline-node active" onclick="selectTimelineStage(0)">
+        <div class="st-node-dot"></div>
+        <span class="st-node-label">1914 Kuruluş</span>
+      </button>
+      <button class="st-timeline-node" onclick="selectTimelineStage(1)">
+        <div class="st-node-dot"></div>
+        <span class="st-node-label">1928 Cumhuriyet</span>
+      </button>
+      <button class="st-timeline-node" onclick="selectTimelineStage(2)">
+        <div class="st-node-dot"></div>
+        <span class="st-node-label">1944 Seyfi Arkan</span>
+      </button>
+      <button class="st-timeline-node" onclick="selectTimelineStage(3)">
+        <div class="st-node-dot"></div>
+        <span class="st-node-label">1970 Sanayi Zirvesi</span>
+      </button>
+      <button class="st-timeline-node" onclick="selectTimelineStage(4)">
+        <div class="st-node-dot"></div>
+        <span class="st-node-label">1983 Kapanış</span>
+      </button>
+      <button class="st-timeline-node" onclick="selectTimelineStage(5)">
+        <div class="st-node-dot"></div>
+        <span class="st-node-label">2007 Müzeleşme</span>
+      </button>
+      <button class="st-timeline-node" onclick="selectTimelineStage(6)">
+        <div class="st-node-dot"></div>
+        <span class="st-node-label">Günümüz (2026)</span>
+      </button>
+    </div>
+
+    <!-- 2 Kolonlu İçerik Alanı -->
+    <div class="st-body">
+      <!-- Sol Kolon: Tarihsel Anlatı & Yerleşke Binaları -->
+      <div class="st-info-col">
+        <span class="st-theme-badge" id="st-stage-theme">Osmanlı Anonim Elektrik Şirketi</span>
+        <p class="st-summary-text" id="st-stage-summary">
+          11 Şubat 1914'te faaliyete geçen Silahtarağa, Osmanlı İmparatorluğu'nun ilk kentsel ölçekli elektrik santralidir.
+        </p>
+
+        <div class="st-buildings-section">
+          <div class="st-buildings-title">⚡ Bu Dönemde Yerleşkede Faal Binalar (Haritada Vurgula):</div>
+          <div class="st-buildings-chips" id="st-buildings-chips"></div>
+        </div>
+
+        <button class="popup-btn btn-time-portal" onclick="openSilahtaragaCompareModal()">
+          ⚖️ 1914 Türbin Salonu vs Günümüz Müzesi (Karşılaştır)
+        </button>
+      </div>
+
+      <!-- Sağ Kolon: Açık Arşiv Fotoğraf Galerisi -->
+      <div class="st-media-col">
+        <div class="st-buildings-title">📷 Açık Arşiv Fotoğrafları (Salt Araştırma, Arkitekt, İBB):</div>
+        <div class="st-photos-grid" id="st-photos-grid"></div>
+      </div>
+    </div>
   </div>
 
   <!-- Zaman Portalı Modalı -->
@@ -795,7 +1099,6 @@
     // 1. PİLOT ARŞİV VERİSİ (Doğrulanmış Tarihi Fotoğraflar ve 360° Panoramalar)
     // =========================================================================
     const PILOT_HERITAGE_ARCHIVES = {
-      // 1. Efes
       "efes": {
         name: "Efes (Celsus Kütüphanesi & Tiyatro)",
         period: "Klasik, Helenistik, Roma",
@@ -803,21 +1106,9 @@
         compare_historic: "https://upload.wikimedia.org/wikipedia/commons/e/e0/Celsus_Library_Ephesos_excavation_c1900.jpg",
         compare_modern: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Celsus_Library%2C_Ephesus%2C_Turkey.jpg/1280px-Celsus_Library%2C_Ephesus%2C_Turkey.jpg",
         archives: [
-          {
-            title: "Celsus Kütüphanesi İlk Kazı Çalışmaları",
-            year: "1895",
-            author: "Otto Benndorf / Avusturya Arkeoloji Enstitüsü (ÖAI)",
-            img: "https://upload.wikimedia.org/wikipedia/commons/e/e0/Celsus_Library_Ephesos_excavation_c1900.jpg"
-          },
-          {
-            title: "Büyük Efes Tiyatrosu ve Arkadiane Caddesi",
-            year: "1903",
-            author: "Rudolf Heberdey Kazı Arşivi",
-            img: "https://upload.wikimedia.org/wikipedia/commons/4/4c/Great_Theatre_Ephesus_historical.jpg"
-          }
+          { title: "Celsus Kütüphanesi İlk Kazı Çalışmaları", year: "1895", author: "Otto Benndorf / ÖAI", img: "https://upload.wikimedia.org/wikipedia/commons/e/e0/Celsus_Library_Ephesos_excavation_c1900.jpg" }
         ]
       },
-      // 2. Ayasofya
       "ayasofya": {
         name: "Ayasofya-i Kebir & Sultanahmet",
         period: "Erken Doğu Roma (Bizans) / Osmanlı",
@@ -825,21 +1116,9 @@
         compare_historic: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Sebah_and_Joaillier_-_Hagia_Sophia_1880.jpg",
         compare_modern: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Hagia_Sophia_Mars_2013.jpg/1280px-Hagia_Sophia_Mars_2013.jpg",
         archives: [
-          {
-            title: "Sultanahmet Meydanı'ndan Ayasofya",
-            year: "1875",
-            author: "Pascal Sébah / Sebah & Joaillier Arşivi",
-            img: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Sebah_and_Joaillier_-_Hagia_Sophia_1880.jpg"
-          },
-          {
-            title: "Ayasofya Ana Kubbe ve Fossati Restorasyonu Sonrası",
-            year: "1890",
-            author: "Abdullah Frères / Salt Araştırma",
-            img: "https://upload.wikimedia.org/wikipedia/commons/9/93/Hagia_Sophia_interior_historical_1890.jpg"
-          }
+          { title: "Sultanahmet Meydanı'ndan Ayasofya", year: "1875", author: "Pascal Sébah / Sebah & Joaillier", img: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Sebah_and_Joaillier_-_Hagia_Sophia_1880.jpg" }
         ]
       },
-      // 3. Galata Kulesi
       "galata": {
         name: "Galata Kulesi & Karaköy Limanı",
         period: "Ceneviz / Osmanlı",
@@ -847,31 +1126,19 @@
         compare_historic: "https://upload.wikimedia.org/wikipedia/commons/6/64/Galata_Tower_historical_1880.jpg",
         compare_modern: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Galata_Tower_at_dusk.jpg/1280px-Galata_Tower_at_dusk.jpg",
         archives: [
-          {
-            title: "Haliç Rıhtımı ve Galata Kulesi'nin Ahşap Külahlı Dönemi",
-            year: "1880",
-            author: "Guillaume Berggren Arşivi",
-            img: "https://upload.wikimedia.org/wikipedia/commons/6/64/Galata_Tower_historical_1880.jpg"
-          }
+          { title: "Haliç Rıhtımı ve Galata Kulesi'nin Ahşap Külahlı Dönemi", year: "1880", author: "Guillaume Berggren", img: "https://upload.wikimedia.org/wikipedia/commons/6/64/Galata_Tower_historical_1880.jpg" }
         ]
       },
-      // 4. Nemrut Dağı
       "nemrut": {
         name: "Nemrut Dağı Kommagene Kutsal Alanı",
-        period: "Helenistik (Kommagene Krallığı)",
+        period: "Helenistik (Kommagene)",
         panorama_url: "https://upload.wikimedia.org/wikipedia/commons/b/b3/Nemrut_Dagi_Sanctuary_360_Panorama.jpg",
         compare_historic: "https://upload.wikimedia.org/wikipedia/commons/3/36/Osman_Hamdi_Bey_Nemrut_1883_excavation.jpg",
         compare_modern: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Nemrut_mountain_statues.jpg/1280px-Nemrut_mountain_statues.jpg",
         archives: [
-          {
-            title: "Müze-i Hümayun İlk Resmi Kazı ve Belgeleme Seferi",
-            year: "1883",
-            author: "Osman Hamdi Bey & Osgan Efendi / Müze-i Hümayun",
-            img: "https://upload.wikimedia.org/wikipedia/commons/3/36/Osman_Hamdi_Bey_Nemrut_1883_excavation.jpg"
-          }
+          { title: "Müze-i Hümayun İlk Keşif Seferi", year: "1883", author: "Osman Hamdi Bey & Osgan Efendi", img: "https://upload.wikimedia.org/wikipedia/commons/3/36/Osman_Hamdi_Bey_Nemrut_1883_excavation.jpg" }
         ]
       },
-      // 5. Bergama (Pergamon)
       "pergamon": {
         name: "Pergamon Akropolü & Trajan Tapınağı",
         period: "Helenistik, Roma",
@@ -879,15 +1146,9 @@
         compare_historic: "https://upload.wikimedia.org/wikipedia/commons/1/1a/Pergamon_excavations_Carl_Humann_1885.jpg",
         compare_modern: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Trajan_temple_Pergamon.jpg/1280px-Trajan_temple_Pergamon.jpg",
         archives: [
-          {
-            title: "Trajan Tapınağı ve Zeus Sunağı Kazı Çalışmaları",
-            year: "1885",
-            author: "Carl Humann / Berlin Kraliyet Müzeleri Arşivi",
-            img: "https://upload.wikimedia.org/wikipedia/commons/1/1a/Pergamon_excavations_Carl_Humann_1885.jpg"
-          }
+          { title: "Trajan Tapınağı ve Zeus Sunağı Kazısı", year: "1885", author: "Carl Humann / Berlin Kraliyet Müzeleri", img: "https://upload.wikimedia.org/wikipedia/commons/1/1a/Pergamon_excavations_Carl_Humann_1885.jpg" }
         ]
       },
-      // 6. Ani Harabeleri
       "ani": {
         name: "Ani Arkeolojik Alanı & Katedral",
         period: "Bagratuni, Selçuklu",
@@ -895,63 +1156,39 @@
         compare_historic: "https://upload.wikimedia.org/wikipedia/commons/5/5e/Ani_Cathedral_Nikolai_Marr_1900.jpg",
         compare_modern: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Ani_Cathedral_Kars.jpg/1280px-Ani_Cathedral_Kars.jpg",
         archives: [
-          {
-            title: "Ani Katedrali ve Sur Sınırı İlk Bilimsel Kazısı",
-            year: "1900",
-            author: "Nikolai Marr & Toros Toramanian Kazı Seferi",
-            img: "https://upload.wikimedia.org/wikipedia/commons/5/5e/Ani_Cathedral_Nikolai_Marr_1900.jpg"
-          }
+          { title: "Ani Katedrali ve Sur Sınırı Kazısı", year: "1900", author: "Nikolai Marr & Toros Toramanian", img: "https://upload.wikimedia.org/wikipedia/commons/5/5e/Ani_Cathedral_Nikolai_Marr_1900.jpg" }
         ]
       },
-      // 7. Çatalhöyük
       "catalhoyuk": {
         name: "Çatalhöyük Neolitik Kenti",
-        period: "Aseramik Neolitik, Kalkolitik",
+        period: "Aseramik Neolitik",
         panorama_url: "https://upload.wikimedia.org/wikipedia/commons/1/10/Catalhoyuk_Neolithic_Excavation_360.jpg",
         compare_historic: "https://upload.wikimedia.org/wikipedia/commons/8/87/Catalhoyuk_Mellaart_1961_excavation.jpg",
         compare_modern: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Catalhoyuk_East_mound_modern.jpg/1280px-Catalhoyuk_East_mound_modern.jpg",
         archives: [
-          {
-            title: "Neolitik Kerpiç Duvarlar ve İlk Tabakalanma",
-            year: "1961",
-            author: "James Mellaart Kazı Arşivi / BIAA",
-            img: "https://upload.wikimedia.org/wikipedia/commons/8/87/Catalhoyuk_Mellaart_1961_excavation.jpg"
-          }
+          { title: "Neolitik Kerpiç Evler Kazı Sezonu", year: "1961", author: "James Mellaart / BIAA", img: "https://upload.wikimedia.org/wikipedia/commons/8/87/Catalhoyuk_Mellaart_1961_excavation.jpg" }
         ]
       },
-      // 8. Göbekli Tepe
       "gobeklitepe": {
         name: "Göbekli Tepe Megalit Kutsal Alanı",
-        period: "Çanak Çömleksiz Neolitik (PPNA/B)",
+        period: "Neolitik (PPNA/B)",
         panorama_url: "https://upload.wikimedia.org/wikipedia/commons/7/75/Gobekli_Tepe_Enclosure_D_360_Panorama.jpg",
         compare_historic: "https://upload.wikimedia.org/wikipedia/commons/2/23/Gobekli_Tepe_Klaus_Schmidt_1996.jpg",
         compare_modern: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Gobekli_Tepe_roof_modern.jpg/1280px-Gobekli_Tepe_roof_modern.jpg",
         archives: [
-          {
-            title: "D Yapısı T-Sütunlarının Gün Işığına Çıkarılışı",
-            year: "1996",
-            author: "Prof. Dr. Klaus Schmidt / DAI Arşivi",
-            img: "https://upload.wikimedia.org/wikipedia/commons/2/23/Gobekli_Tepe_Klaus_Schmidt_1996.jpg"
-          }
+          { title: "T-Sütunlarının Gün Işığına Çıkarılışı", year: "1996", author: "Prof. Dr. Klaus Schmidt / DAI", img: "https://upload.wikimedia.org/wikipedia/commons/2/23/Gobekli_Tepe_Klaus_Schmidt_1996.jpg" }
         ]
       },
-      // 9. Yerebatan Sarnıcı
       "yerebatan": {
-        name: "Yerebatan Sarnıcı (Bazilika Sarnıcı)",
+        name: "Yerebatan Sarnıcı",
         period: "Bizans (Doğu Roma)",
         panorama_url: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Basilica_Cistern_Istanbul_360_Panorama.jpg",
         compare_historic: "https://upload.wikimedia.org/wikipedia/commons/4/4e/Basilica_Cistern_historical_c1910.jpg",
         compare_modern: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Basilica_Cistern_Medusa.jpg/1280px-Basilica_Cistern_Medusa.jpg",
         archives: [
-          {
-            title: "Sarnıç Sütunları Arasında Sandallarla İnceleme",
-            year: "1910",
-            author: "Sebah & Joaillier / İBB Miras Arşivi",
-            img: "https://upload.wikimedia.org/wikipedia/commons/4/4e/Basilica_Cistern_historical_c1910.jpg"
-          }
+          { title: "Sarnıçta Sandallarla İlk İncelemeler", year: "1910", author: "Sebah & Joaillier / İBB Miras", img: "https://upload.wikimedia.org/wikipedia/commons/4/4e/Basilica_Cistern_historical_c1910.jpg" }
         ]
       },
-      // 10. Troya
       "troya": {
         name: "Troya (Hisarlık Höyüğü)",
         period: "Erken Tunç - Roma",
@@ -959,12 +1196,7 @@
         compare_historic: "https://upload.wikimedia.org/wikipedia/commons/b/b8/Troy_Schliemann_excavation_trench_1873.jpg",
         compare_modern: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Troy_rampart_modern.jpg/1280px-Troy_rampart_modern.jpg",
         archives: [
-          {
-            title: "Schliemann Yüzey Yarması ve Hisarlık Katmanları",
-            year: "1873",
-            author: "Wilhelm Dörpfeld / DAI Arşivi",
-            img: "https://upload.wikimedia.org/wikipedia/commons/b/b8/Troy_Schliemann_excavation_trench_1873.jpg"
-          }
+          { title: "Schliemann Kazı Yarması ve Hisarlık", year: "1873", author: "Wilhelm Dörpfeld / DAI", img: "https://upload.wikimedia.org/wikipedia/commons/b/b8/Troy_Schliemann_excavation_trench_1873.jpg" }
         ]
       }
     };
@@ -981,8 +1213,7 @@
       if (lower.includes("göbekli") || lower.includes("gobekli")) return PILOT_HERITAGE_ARCHIVES["gobeklitepe"];
       if (lower.includes("yerebatan") || lower.includes("sarnıç")) return PILOT_HERITAGE_ARCHIVES["yerebatan"];
       if (lower.includes("troya") || lower.includes("troia") || lower.includes("hisarlık")) return PILOT_HERITAGE_ARCHIVES["troya"];
-      
-      // Diğer 12.000 nokta için dinamik jenerik arkeolojik arşiv
+
       return {
         name: siteName,
         period: "Tescilli Arkeolojik Miras",
@@ -990,12 +1221,7 @@
         compare_historic: "https://upload.wikimedia.org/wikipedia/commons/e/e0/Celsus_Library_Ephesos_excavation_c1900.jpg",
         compare_modern: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Celsus_Library%2C_Ephesus%2C_Turkey.jpg/1280px-Celsus_Library%2C_Ephesus%2C_Turkey.jpg",
         archives: [
-          {
-            title: `${siteName} — T.C. Kültür Envanteri ve TAY Projesi Saha Belgelemesi`,
-            year: "1930–1955",
-            author: "Türk Tarih Kurumu & Maarif Vekaleti Arşivi",
-            img: "https://upload.wikimedia.org/wikipedia/commons/e/e0/Celsus_Library_Ephesos_excavation_c1900.jpg"
-          }
+          { title: `${siteName} — T.C. Kültür Envanteri Saha Belgesi`, year: "1930–1955", author: "Türk Tarih Kurumu Arşivi", img: "https://upload.wikimedia.org/wikipedia/commons/e/e0/Celsus_Library_Ephesos_excavation_c1900.jpg" }
         ]
       };
     }
@@ -1087,9 +1313,11 @@
         });
       }
       await loadHeritageGeoJSON();
+      await loadSilahtaragaCampusLayers();
     });
 
     let rawGeojsonData = null;
+    let silahtaragaData = null;
 
     async function loadHeritageGeoJSON() {
       const statusEl = document.getElementById('loading-status');
@@ -1281,7 +1509,6 @@
       document.getElementById('ground-site-name').innerText = name;
       document.getElementById('ground-view-hud').style.display = 'flex';
 
-      // 85 derece eğim ve zoom 17.5 ile göz hizasına iniş
       map.flyTo({
         center: [lon, lat],
         zoom: 17.6,
@@ -1326,7 +1553,198 @@
     };
 
     // =========================================================================
-    // 5. ZAMAN PORTALI (TARİHİ ARŞİF VE KARŞILAŞTIRMA MODALI)
+    // 5. SILAHTARAĞA MEKÂNSAL GÖRSEL ZAMAN TÜNELİ ENTEGRASYONU
+    // =========================================================================
+    let currentSilahtaragaStageIdx = 0;
+
+    async function loadSilahtaragaCampusLayers() {
+      try {
+        const resp = await fetch('silahtaraga_timeline.json');
+        silahtaragaData = await resp.json();
+
+        // 3D Bina Poligonları Kaynağı
+        map.addSource('silahtaraga-source', {
+          type: 'geojson',
+          data: silahtaragaData.buildings
+        });
+
+        // 3D Binalar (Fill-Extrusion)
+        map.addLayer({
+          id: 'silahtaraga-bld-extrusion',
+          type: 'fill-extrusion',
+          source: 'silahtaraga-source',
+          paint: {
+            'fill-extrusion-color': [
+              'case',
+              ['==', ['get', 'id'], 'bld_turbine_1'], '#d4af37',
+              ['==', ['get', 'id'], 'bld_seyfi_arkan'], '#e67e22',
+              ['==', ['get', 'id'], 'bld_boiler_1'], '#c0392b',
+              ['==', ['get', 'id'], 'bld_control_room'], '#2ecc71',
+              '#b8860b'
+            ],
+            'fill-extrusion-height': [
+              'case',
+              ['==', ['get', 'id'], 'bld_boiler_1'], 32,
+              ['==', ['get', 'id'], 'bld_seyfi_arkan'], 24,
+              ['==', ['get', 'id'], 'bld_turbine_1'], 18,
+              ['==', ['get', 'id'], 'bld_turbine_2'], 18,
+              ['==', ['get', 'id'], 'bld_cooling_canal'], 2,
+              12
+            ],
+            'fill-extrusion-base': 0,
+            'fill-extrusion-opacity': 0.88
+          }
+        });
+
+        // Bina Etiketleri
+        map.addLayer({
+          id: 'silahtaraga-bld-labels',
+          type: 'symbol',
+          source: 'silahtaraga-source',
+          minzoom: 16.5,
+          layout: {
+            'text-field': ['get', 'name'],
+            'text-size': 11,
+            'text-font': ['Open Sans Bold'],
+            'text-offset': [0, 0],
+            'text-anchor': 'center'
+          },
+          paint: {
+            'text-color': '#ffffff',
+            'text-halo-color': '#000000',
+            'text-halo-width': 1.5
+          }
+        });
+
+        // Tıklanan Bina Detay Kartı
+        map.on('click', 'silahtaraga-bld-extrusion', (e) => {
+          const p = e.features[0].properties;
+          new maplibregl.Popup({ offset: 12 })
+            .setLngLat(e.lngLat)
+            .setHTML(`
+              <span class="popup-badge">Silahtarağa Ünitesi</span>
+              <div class="popup-title">${p.name}</div>
+              <div class="popup-row"><b>İnşa Yılı:</b> <span>${p.built_year}</span></div>
+              <div class="popup-row"><b>Mimar / Üretici:</b> <span>${p.architect}</span></div>
+              <div class="popup-row"><b>Ekipman:</b> <span>${p.equipment}</span></div>
+              <div class="popup-row"><b>Tipoloji:</b> <span>${p.category}</span></div>
+            `)
+            .addTo(map);
+        });
+
+        map.on('mouseenter', 'silahtaraga-bld-extrusion', () => { map.getCanvas().style.cursor = 'pointer'; });
+        map.on('mouseleave', 'silahtaraga-bld-extrusion', () => { map.getCanvas().style.cursor = ''; });
+
+      } catch (err) {
+        console.warn("Silahtarağa timeline verisi yüklenemedi:", err);
+      }
+    }
+
+    window.focusSilahtaragaTimeline = function() {
+      // 1. Kamerayı Haliç'teki Silahtarağa Yerleşkesine Uçur
+      map.flyTo({
+        center: [28.94635, 41.06672],
+        zoom: 17.2,
+        pitch: 66,
+        bearing: 315,
+        duration: 3200,
+        essential: true
+      });
+
+      // 2. Zaman Tüneli Panelini Aç
+      document.getElementById('silahtaraga-timeline-panel').style.display = 'flex';
+      selectTimelineStage(0);
+    };
+
+    window.closeSilahtaragaTimeline = function() {
+      document.getElementById('silahtaraga-timeline-panel').style.display = 'none';
+    };
+
+    window.selectTimelineStage = function(idx) {
+      if (!silahtaragaData) return;
+      currentSilahtaragaStageIdx = idx;
+      const stages = silahtaragaData.timeline_stages;
+      const stage = stages[idx];
+
+      // Düğüm ve İlerleme Çizgisini Güncelle
+      const nodes = document.querySelectorAll('.st-timeline-node');
+      nodes.forEach((n, i) => n.classList.toggle('active', i === idx));
+
+      const progressPercent = (idx / (stages.length - 1)) * 100;
+      document.getElementById('st-line-progress').style.width = progressPercent + '%';
+
+      // Panel Başlık ve Metinlerini Güncelle
+      document.getElementById('st-current-stage-label').innerText = stage.label;
+      document.getElementById('st-stage-theme').innerText = stage.theme;
+      document.getElementById('st-stage-summary').innerText = stage.summary;
+
+      // Faal Binaları Güncelle
+      const chipsEl = document.getElementById('st-buildings-chips');
+      chipsEl.innerHTML = '';
+      const bldFeatures = silahtaragaData.buildings.features;
+
+      stage.active_building_ids.forEach(bid => {
+        const bld = bldFeatures.find(f => f.id === bid);
+        if (bld) {
+          const chip = document.createElement('div');
+          chip.className = 'st-chip';
+          chip.innerText = bld.properties.name;
+          chip.onclick = () => {
+            const coords = bld.geometry.coordinates[0][0];
+            map.flyTo({ center: coords, zoom: 18.2, pitch: 70, duration: 1500 });
+          };
+          chipsEl.appendChild(chip);
+        }
+      });
+
+      // Arşiv Fotoğraflarını Güncelle
+      const photosEl = document.getElementById('st-photos-grid');
+      photosEl.innerHTML = '';
+      stage.archives.forEach(item => {
+        const pcard = document.createElement('div');
+        pcard.className = 'st-photo-card';
+        pcard.onclick = () => window.open(item.img, '_blank');
+        pcard.innerHTML = `
+          <img src="${item.img}" alt="${item.title}" loading="lazy">
+          <div class="st-photo-desc">
+            <b>${item.year}</b>: ${item.title}
+            <div class="st-photo-author">${item.author}</div>
+          </div>
+        `;
+        photosEl.appendChild(pcard);
+      });
+
+      // Harita Üzerinde Aktif Dönem Binalarını Aydınlat (Filtreleme)
+      if (map.getLayer('silahtaraga-bld-extrusion')) {
+        map.setPaintProperty('silahtaraga-bld-extrusion', 'fill-extrusion-opacity', [
+          'case',
+          ['in', ['get', 'id'], ['literal', stage.active_building_ids]], 0.92,
+          0.15 // Aktif olmayan binalar soluklaşır
+        ]);
+      }
+    };
+
+    window.openSilahtaragaCompareModal = function() {
+      if (!silahtaragaData) return;
+      const stage = silahtaragaData.timeline_stages[0]; // 1914 karşılaştırması
+      const comp = stage.comparison || {
+        historic_img: "https://upload.wikimedia.org/wikipedia/commons/e/e0/Celsus_Library_Ephesos_excavation_c1900.jpg",
+        modern_img: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Celsus_Library%2C_Ephesus%2C_Turkey.jpg/1280px-Celsus_Library%2C_Ephesus%2C_Turkey.jpg"
+      };
+
+      document.getElementById('portal-site-name').innerText = "Silahtarağa Elektrik Santrali (1914 vs Günümüz)";
+      document.getElementById('portal-site-desc').innerText = "1. Makine Dairesi Ganz Buhar Türbinleri — 1914 Üretim Hali vs Günümüz Enerji Müzesi";
+
+      document.getElementById('comp-img-modern').src = comp.modern_img;
+      document.getElementById('comp-img-historic').src = comp.historic_img;
+      setupComparisonSlider();
+
+      switchPortalTab('compare');
+      document.getElementById('time-portal-modal').style.display = 'flex';
+    };
+
+    // =========================================================================
+    // 6. ZAMAN PORTALI (TARİHİ ARŞİF VE KARŞILAŞTIRMA MODALI)
     // =========================================================================
     let currentPortalSite = null;
 
@@ -1337,7 +1755,6 @@
       document.getElementById('portal-site-name').innerText = archiveData.name;
       document.getElementById('portal-site-desc').innerText = `Dönem: ${archiveData.period} — Tarihi Arşiv Kayıtları`;
 
-      // 1. Galeri Kartlarını Oluştur
       const galleryEl = document.getElementById('tab-content-gallery');
       galleryEl.innerHTML = '';
       archiveData.archives.forEach(item => {
@@ -1356,12 +1773,10 @@
         galleryEl.appendChild(card);
       });
 
-      // 2. Karşılaştırma Görsellerini Ayarla
       document.getElementById('comp-img-modern').src = archiveData.compare_modern;
       document.getElementById('comp-img-historic').src = archiveData.compare_historic;
       setupComparisonSlider();
 
-      // Varsayılan sekmeyi aç
       switchPortalTab('gallery');
       document.getElementById('time-portal-modal').style.display = 'flex';
     };
@@ -1384,7 +1799,6 @@
       }
     };
 
-    // Karşılaştırma Slider Etkileşimi
     function setupComparisonSlider() {
       const box = document.getElementById('comparison-box');
       const overlay = document.getElementById('comp-overlay');
@@ -1407,13 +1821,12 @@
       window.ontouchend = () => { isDragging = false; };
       window.ontouchmove = (e) => { if (isDragging) updateSlider(e.touches[0].clientX); };
 
-      // İlk pozisyon: %50
       overlay.style.width = '50%';
       handle.style.left = '50%';
     }
 
     // =========================================================================
-    // 6. 360° JİROSKOPİK KÜRE MODU (THREE.JS & DEVICE ORIENTATION)
+    // 7. 360° JİROSKOPİK KÜRE MODU (THREE.JS & DEVICE ORIENTATION)
     // =========================================================================
     let threeRenderer, threeScene, threeCamera, threeSphereMesh;
     let isUserInteracting = false, onPointerDownPointerX = 0, onPointerDownPointerY = 0;
@@ -1451,7 +1864,6 @@
       threeCamera = new THREE.PerspectiveCamera(75, width / height, 1, 1100);
       threeCamera.target = new THREE.Vector3(0, 0, 0);
 
-      // İçi ters çevrilmiş 360 derece küre geometrisi
       const geometry = new THREE.SphereGeometry(500, 60, 40);
       geometry.scale(-1, 1, 1);
 
@@ -1467,7 +1879,6 @@
       threeRenderer.setSize(width, height);
       container.appendChild(threeRenderer.domElement);
 
-      // Fare / Dokunma Olayları
       container.addEventListener('pointerdown', onPointerDown);
       document.addEventListener('pointermove', onPointerMove);
       document.addEventListener('pointerup', onPointerUp);
@@ -1507,7 +1918,6 @@
       threeRenderer.setSize(container.clientWidth, container.clientHeight);
     }
 
-    // Mobil Jiroskop (DeviceOrientation API)
     window.toggleGyroscope = function() {
       const btn = document.getElementById('btn-gyro-toggle');
       if (isGyroActive) {
@@ -1538,7 +1948,6 @@
 
     function handleDeviceOrientation(event) {
       if (!event.alpha) return;
-      // Alpha: Pusula yönü, Beta: Ön-arka eğim, Gamma: Sol-sağ eğim
       lon = event.alpha;
       lat = Math.max(-85, Math.min(85, event.beta - 90));
     }
@@ -1565,7 +1974,7 @@
     }
 
     // =========================================================================
-    // 7. ARAMA, FİLTRELEME VE KAMERA PRESETLERİ
+    // 8. ARAMA, FİLTRELEME VE KAMERA PRESETLERİ
     // =========================================================================
     function applyFilters() {
       if (!rawGeojsonData) return;
@@ -1620,6 +2029,7 @@
     });
 
     const PRESETS = {
+      'SILAHTARAGA': { center: [28.94635, 41.06672], zoom: 17.2, pitch: 66, bearing: 315 },
       'NEMRUT': { center: [38.7408, 37.9806], zoom: 14.5, pitch: 75, bearing: 35 },
       'KAPADOKYA': { center: [34.8631, 38.6431], zoom: 13.5, pitch: 72, bearing: -45 },
       'ISTANBUL': { center: [28.9784, 41.0082], zoom: 14.0, pitch: 65, bearing: 42 },
