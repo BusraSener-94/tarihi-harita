@@ -1007,6 +1007,94 @@
       letter-spacing: 1.5px;
     }
     @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    /* Mobil Responsive Çekmece (Drawer) */
+    .mobile-hud-btn {
+      display: none;
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      z-index: 25;
+      padding: 9px 16px;
+      border-radius: 25px;
+      background: rgba(20, 16, 12, 0.94);
+      border: 1px solid #ffd700;
+      color: #ffd700;
+      font-family: 'Cinzel', serif;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.8);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transition: all 0.2s ease;
+    }
+    .mobile-hud-btn:hover { background: #ffd700; color: #000; }
+
+    .mobile-hud-close-btn {
+      display: none;
+      background: rgba(139, 26, 26, 0.85);
+      border: 1px solid #ff4d4d;
+      color: #fff;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+    }
+
+    @media (max-width: 768px) {
+      .mobile-hud-btn {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .mobile-hud-close-btn {
+        display: flex;
+      }
+      .brand-header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+      }
+      .antique-hud {
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 320px;
+        max-width: 88vw;
+        height: 100vh;
+        max-height: 100vh;
+        border-radius: 0 16px 16px 0;
+        transform: translateX(-110%);
+        transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 1000;
+        box-shadow: 10px 0 50px rgba(0, 0, 0, 0.95);
+      }
+      .antique-hud.open {
+        transform: translateX(0);
+      }
+      #ground-view-hud {
+        bottom: 15px;
+        flex-direction: column;
+        gap: 6px;
+        padding: 8px 14px;
+      }
+      #silahtaraga-timeline-panel {
+        max-height: 200px;
+        height: 200px;
+        padding: 10px 14px;
+      }
+      .st-timeline-track {
+        overflow-x: auto;
+        padding-bottom: 8px;
+      }
+      .st-media-col {
+        max-width: 100%;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1017,11 +1105,17 @@
     <div class="loading-text" id="loading-status">ANADOLU 3D ARKEOLOJİK ATLASI YÜKLENİYOR...</div>
   </div>
 
+  <!-- Mobil Çekmece Açma Butonu -->
+  <button id="mobile-hud-toggle" class="mobile-hud-btn" onclick="toggleMobileHud()">🏛️ Atlas Menüsü</button>
+
   <!-- HUD Kontrol Paneli -->
   <div class="antique-hud">
     <div class="brand-header">
-      <div class="brand-title">🏛️ Antik Atlas 3D & XR</div>
-      <div class="brand-subtitle">Türkiye & İstanbul Arkeolojik Miras Coğrafyası</div>
+      <div>
+        <div class="brand-title">🏛️ Antik Atlas 3D & XR</div>
+        <div class="brand-subtitle">Türkiye & İstanbul Arkeolojik Miras Coğrafyası</div>
+      </div>
+      <button class="mobile-hud-close-btn" onclick="toggleMobileHud()" title="Menüyü Kapat">✕</button>
     </div>
 
     <div class="stat-ribbon">
@@ -1262,101 +1356,101 @@
       "efes": {
         name: "Efes (Celsus Kütüphanesi & Tiyatro)",
         period: "Klasik, Helenistik, Roma",
-        panorama_url: "https://upload.wikimedia.org/wikipedia/commons/4/43/Ephesus_Library_of_Celsus_360_Panorama.jpg",
-        compare_historic: "https://upload.wikimedia.org/wikipedia/commons/e/e0/Celsus_Library_Ephesos_excavation_c1900.jpg",
-        compare_modern: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Celsus_Library%2C_Ephesus%2C_Turkey.jpg/1280px-Celsus_Library%2C_Ephesus%2C_Turkey.jpg",
+        panorama_url: "assets/pilot/efes_360.jpg",
+        compare_historic: "assets/pilot/efes_historic.jpg",
+        compare_modern: "assets/pilot/efes_modern.jpg",
         archives: [
-          { title: "Celsus Kütüphanesi İlk Kazı Çalışmaları", year: "1895", author: "Otto Benndorf / ÖAI", img: "https://upload.wikimedia.org/wikipedia/commons/e/e0/Celsus_Library_Ephesos_excavation_c1900.jpg" }
+          { title: "Celsus Kütüphanesi İlk Kazı Çalışmaları", year: "1895", author: "Otto Benndorf / ÖAI Kazı Arşivi", img: "assets/pilot/efes_historic.jpg" }
         ]
       },
       "ayasofya": {
         name: "Ayasofya-i Kebir & Sultanahmet",
         period: "Erken Doğu Roma (Bizans) / Osmanlı",
-        panorama_url: "https://upload.wikimedia.org/wikipedia/commons/9/90/Hagia_Sophia_interior_360_panorama.jpg",
-        compare_historic: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Sebah_and_Joaillier_-_Hagia_Sophia_1880.jpg",
-        compare_modern: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Hagia_Sophia_Mars_2013.jpg/1280px-Hagia_Sophia_Mars_2013.jpg",
+        panorama_url: "assets/pilot/ayasofya_360.jpg",
+        compare_historic: "assets/pilot/ayasofya_historic.jpg",
+        compare_modern: "assets/pilot/ayasofya_modern.jpg",
         archives: [
-          { title: "Sultanahmet Meydanı'ndan Ayasofya", year: "1875", author: "Pascal Sébah / Sebah & Joaillier", img: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Sebah_and_Joaillier_-_Hagia_Sophia_1880.jpg" }
+          { title: "Sultanahmet Meydanı'ndan Ayasofya", year: "1880", author: "Pascal Sébah / Sebah & Joaillier", img: "assets/pilot/ayasofya_historic.jpg" }
         ]
       },
       "galata": {
         name: "Galata Kulesi & Karaköy Limanı",
         period: "Ceneviz / Osmanlı",
-        panorama_url: "https://upload.wikimedia.org/wikipedia/commons/a/a2/Galata_Tower_Istanbul_Panorama_360.jpg",
-        compare_historic: "https://upload.wikimedia.org/wikipedia/commons/6/64/Galata_Tower_historical_1880.jpg",
-        compare_modern: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Galata_Tower_at_dusk.jpg/1280px-Galata_Tower_at_dusk.jpg",
+        panorama_url: "assets/pilot/galata_360.jpg",
+        compare_historic: "assets/pilot/galata_historic.jpg",
+        compare_modern: "assets/pilot/galata_modern.jpg",
         archives: [
-          { title: "Haliç Rıhtımı ve Galata Kulesi'nin Ahşap Külahlı Dönemi", year: "1880", author: "Guillaume Berggren", img: "https://upload.wikimedia.org/wikipedia/commons/6/64/Galata_Tower_historical_1880.jpg" }
+          { title: "Haliç Rıhtımı ve Galata Kulesi'nin Ahşap Külahlı Dönemi", year: "1880", author: "Abdullah Frères / Guillaume Berggren", img: "assets/pilot/galata_historic.jpg" }
         ]
       },
       "nemrut": {
         name: "Nemrut Dağı Kommagene Kutsal Alanı",
         period: "Helenistik (Kommagene)",
-        panorama_url: "https://upload.wikimedia.org/wikipedia/commons/b/b3/Nemrut_Dagi_Sanctuary_360_Panorama.jpg",
-        compare_historic: "https://upload.wikimedia.org/wikipedia/commons/3/36/Osman_Hamdi_Bey_Nemrut_1883_excavation.jpg",
-        compare_modern: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Nemrut_mountain_statues.jpg/1280px-Nemrut_mountain_statues.jpg",
+        panorama_url: "assets/pilot/nemrut_360.jpg",
+        compare_historic: "assets/pilot/nemrut_historic.jpg",
+        compare_modern: "assets/pilot/nemrut_modern.jpg",
         archives: [
-          { title: "Müze-i Hümayun İlk Keşif Seferi", year: "1883", author: "Osman Hamdi Bey & Osgan Efendi", img: "https://upload.wikimedia.org/wikipedia/commons/3/36/Osman_Hamdi_Bey_Nemrut_1883_excavation.jpg" }
+          { title: "Müze-i Hümayun İlk Keşif Seferi", year: "1883", author: "Osman Hamdi Bey & Osgan Efendi", img: "assets/pilot/nemrut_historic.jpg" }
         ]
       },
       "pergamon": {
         name: "Pergamon Akropolü & Trajan Tapınağı",
         period: "Helenistik, Roma",
-        panorama_url: "https://upload.wikimedia.org/wikipedia/commons/5/5a/Pergamon_Acropolis_360_Panorama.jpg",
-        compare_historic: "https://upload.wikimedia.org/wikipedia/commons/1/1a/Pergamon_excavations_Carl_Humann_1885.jpg",
-        compare_modern: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Trajan_temple_Pergamon.jpg/1280px-Trajan_temple_Pergamon.jpg",
+        panorama_url: "assets/pilot/pergamon_360.jpg",
+        compare_historic: "assets/pilot/pergamon_historic.jpg",
+        compare_modern: "assets/pilot/pergamon_modern.jpg",
         archives: [
-          { title: "Trajan Tapınağı ve Zeus Sunağı Kazısı", year: "1885", author: "Carl Humann / Berlin Kraliyet Müzeleri", img: "https://upload.wikimedia.org/wikipedia/commons/1/1a/Pergamon_excavations_Carl_Humann_1885.jpg" }
+          { title: "Trajan Tapınağı ve Zeus Sunağı Kazısı", year: "1885", author: "Carl Humann / Berlin Kraliyet Müzeleri", img: "assets/pilot/pergamon_historic.jpg" }
         ]
       },
       "ani": {
         name: "Ani Arkeolojik Alanı & Katedral",
         period: "Bagratuni, Selçuklu",
-        panorama_url: "https://upload.wikimedia.org/wikipedia/commons/c/c8/Ani_Ruins_Cathedral_360_Panorama.jpg",
-        compare_historic: "https://upload.wikimedia.org/wikipedia/commons/5/5e/Ani_Cathedral_Nikolai_Marr_1900.jpg",
-        compare_modern: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Ani_Cathedral_Kars.jpg/1280px-Ani_Cathedral_Kars.jpg",
+        panorama_url: "assets/pilot/ani_360.jpg",
+        compare_historic: "assets/pilot/ani_historic.jpg",
+        compare_modern: "assets/pilot/ani_modern.jpg",
         archives: [
-          { title: "Ani Katedrali ve Sur Sınırı Kazısı", year: "1900", author: "Nikolai Marr & Toros Toramanian", img: "https://upload.wikimedia.org/wikipedia/commons/5/5e/Ani_Cathedral_Nikolai_Marr_1900.jpg" }
+          { title: "Ani Katedrali ve Sur Sınırı Kazısı", year: "1900", author: "Nikolai Marr & Toros Toramanian", img: "assets/pilot/ani_historic.jpg" }
         ]
       },
       "catalhoyuk": {
         name: "Çatalhöyük Neolitik Kenti",
         period: "Aseramik Neolitik",
-        panorama_url: "https://upload.wikimedia.org/wikipedia/commons/1/10/Catalhoyuk_Neolithic_Excavation_360.jpg",
-        compare_historic: "https://upload.wikimedia.org/wikipedia/commons/8/87/Catalhoyuk_Mellaart_1961_excavation.jpg",
-        compare_modern: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Catalhoyuk_East_mound_modern.jpg/1280px-Catalhoyuk_East_mound_modern.jpg",
+        panorama_url: "assets/pilot/catalhoyuk_360.jpg",
+        compare_historic: "assets/pilot/catalhoyuk_historic.jpg",
+        compare_modern: "assets/pilot/catalhoyuk_modern.jpg",
         archives: [
-          { title: "Neolitik Kerpiç Evler Kazı Sezonu", year: "1961", author: "James Mellaart / BIAA", img: "https://upload.wikimedia.org/wikipedia/commons/8/87/Catalhoyuk_Mellaart_1961_excavation.jpg" }
+          { title: "Neolitik Kerpiç Evler Kazı Sezonu", year: "1961", author: "James Mellaart / BIAA", img: "assets/pilot/catalhoyuk_historic.jpg" }
         ]
       },
       "gobeklitepe": {
         name: "Göbekli Tepe Megalit Kutsal Alanı",
         period: "Neolitik (PPNA/B)",
-        panorama_url: "https://upload.wikimedia.org/wikipedia/commons/7/75/Gobekli_Tepe_Enclosure_D_360_Panorama.jpg",
-        compare_historic: "https://upload.wikimedia.org/wikipedia/commons/2/23/Gobekli_Tepe_Klaus_Schmidt_1996.jpg",
-        compare_modern: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Gobekli_Tepe_roof_modern.jpg/1280px-Gobekli_Tepe_roof_modern.jpg",
+        panorama_url: "assets/pilot/gobeklitepe_360.jpg",
+        compare_historic: "assets/pilot/gobeklitepe_historic.jpg",
+        compare_modern: "assets/pilot/gobeklitepe_modern.jpg",
         archives: [
-          { title: "T-Sütunlarının Gün Işığına Çıkarılışı", year: "1996", author: "Prof. Dr. Klaus Schmidt / DAI", img: "https://upload.wikimedia.org/wikipedia/commons/2/23/Gobekli_Tepe_Klaus_Schmidt_1996.jpg" }
+          { title: "T-Sütunlarının Gün Işığına Çıkarılışı", year: "1996", author: "Prof. Dr. Klaus Schmidt / DAI", img: "assets/pilot/gobeklitepe_historic.jpg" }
         ]
       },
       "yerebatan": {
         name: "Yerebatan Sarnıcı",
         period: "Bizans (Doğu Roma)",
-        panorama_url: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Basilica_Cistern_Istanbul_360_Panorama.jpg",
-        compare_historic: "https://upload.wikimedia.org/wikipedia/commons/4/4e/Basilica_Cistern_historical_c1910.jpg",
-        compare_modern: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Basilica_Cistern_Medusa.jpg/1280px-Basilica_Cistern_Medusa.jpg",
+        panorama_url: "assets/pilot/yerebatan_360.jpg",
+        compare_historic: "assets/pilot/yerebatan_historic.jpg",
+        compare_modern: "assets/pilot/yerebatan_modern.jpg",
         archives: [
-          { title: "Sarnıçta Sandallarla İlk İncelemeler", year: "1910", author: "Sebah & Joaillier / İBB Miras", img: "https://upload.wikimedia.org/wikipedia/commons/4/4e/Basilica_Cistern_historical_c1910.jpg" }
+          { title: "Sarnıçta Sandallarla İlk İncelemeler", year: "1910", author: "Sebah & Joaillier / İBB Miras", img: "assets/pilot/yerebatan_historic.jpg" }
         ]
       },
       "troya": {
         name: "Troya (Hisarlık Höyüğü)",
         period: "Erken Tunç - Roma",
-        panorama_url: "https://upload.wikimedia.org/wikipedia/commons/9/91/Troy_Ancient_Ruins_360_Panorama.jpg",
-        compare_historic: "https://upload.wikimedia.org/wikipedia/commons/b/b8/Troy_Schliemann_excavation_trench_1873.jpg",
-        compare_modern: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Troy_rampart_modern.jpg/1280px-Troy_rampart_modern.jpg",
+        panorama_url: "assets/pilot/troya_360.jpg",
+        compare_historic: "assets/pilot/troya_historic.jpg",
+        compare_modern: "assets/pilot/troya_modern.jpg",
         archives: [
-          { title: "Schliemann Kazı Yarması ve Hisarlık", year: "1873", author: "Wilhelm Dörpfeld / DAI", img: "https://upload.wikimedia.org/wikipedia/commons/b/b8/Troy_Schliemann_excavation_trench_1873.jpg" }
+          { title: "Schliemann Kazı Yarması ve Hisarlık", year: "1873", author: "Wilhelm Dörpfeld / DAI", img: "assets/pilot/troya_historic.jpg" }
         ]
       },
       "silahtaraga": {
@@ -1395,11 +1489,11 @@
       return {
         name: siteName,
         period: "Tescilli Arkeolojik Miras",
-        panorama_url: "https://upload.wikimedia.org/wikipedia/commons/4/43/Ephesus_Library_of_Celsus_360_Panorama.jpg",
-        compare_historic: "https://upload.wikimedia.org/wikipedia/commons/e/e0/Celsus_Library_Ephesos_excavation_c1900.jpg",
-        compare_modern: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Celsus_Library%2C_Ephesus%2C_Turkey.jpg/1280px-Celsus_Library%2C_Ephesus%2C_Turkey.jpg",
+        panorama_url: "assets/pilot/efes_360.jpg",
+        compare_historic: "assets/pilot/efes_historic.jpg",
+        compare_modern: "assets/pilot/efes_modern.jpg",
         archives: [
-          { title: `${siteName} — T.C. Kültür Envanteri Saha Belgesi`, year: "1930–1955", author: "Türk Tarih Kurumu Arşivi", img: "https://upload.wikimedia.org/wikipedia/commons/e/e0/Celsus_Library_Ephesos_excavation_c1900.jpg" }
+          { title: `${siteName} — T.C. Kültür Envanteri Saha Belgesi`, year: "1930–1955", author: "Türk Tarih Kurumu Arşivi", img: "assets/pilot/efes_historic.jpg" }
         ]
       };
     }
@@ -1448,21 +1542,20 @@
         },
         layers: [
           { id: 'ocean-base', type: 'background', paint: { 'background-color': '#162836' } },
-          { id: 'layer-esri-topo', type: 'raster', source: 'esri-topo-source', paint: { 'raster-contrast': 0.12, 'raster-saturation': -0.18, 'raster-brightness-min': 0.05 } },
+          { id: 'layer-esri-topo', type: 'raster', source: 'esri-topo-source', paint: { 'raster-contrast': 0.10, 'raster-saturation': -0.05, 'raster-brightness-min': 0.04 } },
           { id: 'layer-opentopo', type: 'raster', source: 'opentopo-source', layout: { visibility: 'none' } },
           { id: 'layer-imagery', type: 'raster', source: 'imagery-source', layout: { visibility: 'none' } },
           { id: 'layer-dark', type: 'raster', source: 'dark-source', layout: { visibility: 'none' } },
-          { id: 'parchment-sepia-wash', type: 'background', paint: { 'background-color': '#2a1e12', 'background-opacity': 0.22 } },
           {
             id: 'hills',
             type: 'hillshade',
             source: 'terrain-source',
             layout: { visibility: 'visible' },
             paint: {
-              'hillshade-shadow-color': '#180e04',
-              'hillshade-highlight-color': '#fcedc7',
-              'hillshade-accent-color': '#8c5923',
-              'hillshade-exaggeration': 0.85
+              'hillshade-shadow-color': '#2a1e12',
+              'hillshade-highlight-color': '#ffffff',
+              'hillshade-accent-color': '#5c4305',
+              'hillshade-exaggeration': 0.20
             }
           }
         ]
@@ -1609,13 +1702,22 @@
         'layer-imagery': styleKey === 'IMAGERY_3D',
         'layer-dark': styleKey === 'DARK_MATTER'
       };
-      map.setPaintProperty('parchment-sepia-wash', 'background-opacity', 
-        styleKey === 'PARCHMENT_TOPO' ? 0.22 : (styleKey === 'OPENTOPO' ? 0.12 : 0.0));
 
       for (const [layerId, isVis] of Object.entries(layers)) {
         if (map.getLayer(layerId)) {
           map.setLayoutProperty(layerId, 'visibility', isVis ? 'visible' : 'none');
         }
+      }
+
+      if (map.getLayer('hills')) {
+        map.setLayoutProperty('hills', 'visibility', (styleKey === 'DARK_MATTER') ? 'none' : 'visible');
+      }
+    });
+
+    map.on('click', () => {
+      if (window.innerWidth <= 768) {
+        const hud = document.querySelector('.antique-hud');
+        if (hud) hud.classList.remove('open');
       }
     });
 
@@ -1833,6 +1935,10 @@
     }
 
     window.focusSilahtaragaTimeline = function() {
+      if (window.innerWidth <= 768) {
+        const hud = document.querySelector('.antique-hud');
+        if (hud) hud.classList.remove('open');
+      }
       // 1. Kamerayı Silahtarağa Yerleşkesine İndir (İstenen kesin koordinat ve açılar)
       map.flyTo({
         center: [28.94635, 41.06672],
@@ -1908,11 +2014,7 @@
 
       // Harita Üzerinde Aktif Dönem Binalarını Altın/Bakır Vurguyla Aydınlat
       if (map.getLayer('silahtaraga-bld-extrusion')) {
-        map.setPaintProperty('silahtaraga-bld-extrusion', 'fill-extrusion-opacity', [
-          'case',
-          ['in', ['get', 'id'], ['literal', stage.active_building_ids]], 0.96,
-          0.12
-        ]);
+        map.setPaintProperty('silahtaraga-bld-extrusion', 'fill-extrusion-opacity', 0.92);
         map.setPaintProperty('silahtaraga-bld-extrusion', 'fill-extrusion-color', [
           'case',
           ['in', ['get', 'id'], ['literal', stage.active_building_ids]],
@@ -1924,19 +2026,19 @@
               ['==', ['get', 'id'], 'bld_boiler_1'], '#e74c3c',
               '#d4af37'
             ],
-          '#221810'
+          'rgba(45, 35, 25, 0.20)'
         ]);
       }
       if (map.getLayer('silahtaraga-bld-outline')) {
-        map.setPaintProperty('silahtaraga-bld-outline', 'line-opacity', [
-          'case',
-          ['in', ['get', 'id'], ['literal', stage.active_building_ids]], 1.0,
-          0.15
-        ]);
         map.setPaintProperty('silahtaraga-bld-outline', 'line-color', [
           'case',
-          ['in', ['get', 'id'], ['literal', stage.active_building_ids]], '#ffd700',
-          '#554433'
+          ['in', ['get', 'id'], ['literal', stage.active_building_ids]], '#fff3b0',
+          'rgba(120, 100, 80, 0.20)'
+        ]);
+        map.setPaintProperty('silahtaraga-bld-outline', 'line-width', [
+          'case',
+          ['in', ['get', 'id'], ['literal', stage.active_building_ids]], 2.5,
+          0.6
         ]);
       }
     };
@@ -2349,7 +2451,16 @@
       'GOBEKLITEPE': { center: [38.9225, 37.2232], zoom: 14.5, pitch: 65, bearing: 20 }
     };
 
+    window.toggleMobileHud = function() {
+      const hud = document.querySelector('.antique-hud');
+      if (hud) hud.classList.toggle('open');
+    };
+
     window.flyToPreset = function(key) {
+      if (window.innerWidth <= 768) {
+        const hud = document.querySelector('.antique-hud');
+        if (hud) hud.classList.remove('open');
+      }
       const target = PRESETS[key];
       if (target) {
         map.flyTo({
