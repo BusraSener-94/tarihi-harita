@@ -373,75 +373,93 @@
        ========================================================================= */
     #silahtaraga-timeline-panel {
       position: absolute;
-      bottom: 20px;
+      bottom: 14px;
       left: 50%;
       transform: translateX(-50%);
-      width: 95%;
-      max-width: 1180px;
-      max-height: 490px;
-      background: rgba(18, 14, 10, 0.96);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid #ffd700;
-      border-radius: 14px;
-      padding: 16px 20px;
+      width: 96%;
+      max-width: 1240px;
+      max-height: 220px;
+      height: 220px;
+      background: rgba(14, 10, 7, 0.96);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 215, 0, 0.7);
+      border-radius: 10px;
+      padding: 8px 14px;
       z-index: 1500;
-      box-shadow: 0 16px 50px rgba(0, 0, 0, 0.9), 0 0 25px rgba(255, 215, 0, 0.25);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9), 0 0 20px rgba(255, 215, 0, 0.2);
       display: none;
       flex-direction: column;
-      gap: 12px;
-      animation: slideUp 0.35s ease;
+      gap: 6px;
+      animation: slideUp 0.3s ease;
       overflow: hidden;
+      box-sizing: border-box;
     }
     .st-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid rgba(212, 175, 55, 0.3);
-      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+      padding-bottom: 4px;
+      height: 22px;
+      flex-shrink: 0;
+    }
+    .st-title-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
     .st-title-group h3 {
       font-family: 'Cinzel', serif;
-      font-size: 16px;
-      font-weight: 900;
+      font-size: 13px;
+      font-weight: 800;
       color: #ffd700;
+      margin: 0;
+      letter-spacing: 0.6px;
       display: flex;
       align-items: center;
-      gap: 8px;
-      letter-spacing: 0.8px;
+      gap: 6px;
     }
     .st-title-group span {
       font-size: 11px;
-      color: #a89a85;
+      color: #d4af37;
+      font-weight: 600;
+      background: rgba(212, 175, 55, 0.15);
+      padding: 1px 6px;
+      border-radius: 4px;
     }
     .st-close-btn {
       background: #8b1a1a;
       border: 1px solid #ff4d4d;
       color: #fff;
-      padding: 4px 10px;
-      border-radius: 6px;
-      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 10px;
       font-weight: bold;
       cursor: pointer;
+      line-height: 1.2;
     }
 
-    /* Yatay Zaman Çizgisi Slider */
+    /* Yatay Zaman Çizgisi Slider (Kompakt 30px) */
     .st-timeline-track {
       display: flex;
       justify-content: space-between;
       align-items: center;
       position: relative;
-      padding: 10px 14px;
-      background: rgba(10, 8, 6, 0.85);
-      border: 1px solid rgba(212, 175, 55, 0.25);
-      border-radius: 10px;
+      padding: 3px 12px;
+      background: rgba(10, 8, 6, 0.7);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      border-radius: 6px;
+      height: 32px;
+      flex-shrink: 0;
+      box-sizing: border-box;
     }
     .st-timeline-line {
       position: absolute;
       top: 50%;
       left: 20px;
       right: 20px;
-      height: 3px;
+      height: 2px;
       background: #3a2b1b;
       z-index: 1;
       transform: translateY(-50%);
@@ -450,11 +468,11 @@
       position: absolute;
       top: 50%;
       left: 20px;
-      height: 3px;
+      height: 2px;
       background: linear-gradient(90deg, #b8860b, #ffd700);
       z-index: 2;
       transform: translateY(-50%);
-      transition: width 0.4s ease;
+      transition: width 0.35s ease;
       width: 0%;
     }
     .st-timeline-node {
@@ -470,13 +488,13 @@
       padding: 0 4px;
     }
     .st-node-dot {
-      width: 18px;
-      height: 18px;
+      width: 11px;
+      height: 11px;
       border-radius: 50%;
       background: #2b1f13;
       border: 2px solid #a89a85;
-      transition: all 0.25s ease;
-      margin-bottom: 4px;
+      transition: all 0.2s ease;
+      margin-bottom: 2px;
     }
     .st-timeline-node:hover .st-node-dot {
       border-color: #ffd700;
@@ -485,107 +503,181 @@
     .st-timeline-node.active .st-node-dot {
       background: #ffd700;
       border-color: #fff;
-      box-shadow: 0 0 14px #ffd700;
+      box-shadow: 0 0 10px #ffd700;
       transform: scale(1.3);
     }
     .st-node-label {
-      font-size: 11px;
+      font-size: 9.5px;
       font-weight: 700;
       color: #a89a85;
       white-space: nowrap;
-      transition: color 0.25s ease;
+      transition: color 0.2s ease;
+      line-height: 1;
     }
     .st-timeline-node.active .st-node-label {
       color: #ffd700;
     }
 
-    /* Zaman Tüneli İçerik Gövdesi (2 Kolon) */
+    /* Zaman Tüneli İçerik Gövdesi (Kompakt 140px) */
     .st-body {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      overflow-y: auto;
-      max-height: 320px;
-      padding-right: 6px;
+      grid-template-columns: 1fr 1.25fr;
+      gap: 12px;
+      flex: 1;
+      min-height: 0;
+      overflow: hidden;
+      align-items: stretch;
     }
     .st-info-col {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 4px;
+      overflow-y: auto;
+      padding-right: 4px;
+      min-height: 0;
+    }
+    .st-info-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
     .st-theme-badge {
       display: inline-block;
-      font-size: 11px;
+      font-size: 9.5px;
       font-weight: 700;
       color: #ffd700;
       background: rgba(184, 134, 11, 0.2);
-      border: 1px solid rgba(212, 175, 55, 0.4);
-      padding: 4px 8px;
-      border-radius: 6px;
-      align-self: flex-start;
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      padding: 2px 6px;
+      border-radius: 4px;
+      white-space: nowrap;
     }
     .st-summary-text {
-      font-size: 12px;
-      line-height: 1.5;
+      font-size: 11px;
+      line-height: 1.35;
       color: #e6dfd5;
+      margin: 2px 0;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
     .st-buildings-section {
-      background: #1c150f;
-      border: 1px solid rgba(212, 175, 55, 0.2);
-      border-radius: 8px;
-      padding: 10px;
+      background: #18120c;
+      border: 1px solid rgba(212, 175, 55, 0.18);
+      border-radius: 6px;
+      padding: 4px 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
     }
     .st-buildings-title {
-      font-size: 10px;
+      font-size: 9px;
       font-weight: 700;
       text-transform: uppercase;
       color: #d4af37;
-      margin-bottom: 6px;
+      letter-spacing: 0.4px;
     }
     .st-buildings-chips {
       display: flex;
       flex-wrap: wrap;
-      gap: 6px;
+      gap: 4px;
     }
     .st-chip {
-      font-size: 10px;
+      font-size: 9px;
       font-weight: 600;
-      padding: 3px 8px;
-      border-radius: 4px;
+      padding: 2px 6px;
+      border-radius: 3px;
       background: #2b1f13;
       border: 1px solid #d4af37;
       color: #ffd700;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all 0.15s ease;
+      white-space: nowrap;
     }
     .st-chip:hover {
       background: #ffd700;
       color: #000;
     }
+    .st-btn-compare-compact {
+      background: linear-gradient(135deg, #8b6508, #d4af37);
+      border: 1px solid #ffd700;
+      color: #000;
+      font-weight: 800;
+      font-size: 10px;
+      padding: 4px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      width: fit-content;
+      margin-top: 2px;
+      transition: all 0.2s ease;
+    }
+    .st-btn-compare-compact:hover {
+      box-shadow: 0 0 10px #ffd700;
+      transform: translateY(-1px);
+    }
 
-    /* Sağ Kolon: Arşiv Görselleri & Öncesi/Sonrası */
+    /* Sağ Kolon: Yatay Kayan Arşiv Fotoğraf Şeridi */
     .st-media-col {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 4px;
+      min-height: 0;
+      overflow: hidden;
     }
     .st-photos-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 10px;
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding-bottom: 2px;
+      height: 100%;
+      align-items: stretch;
     }
     .st-photo-card {
+      min-width: 145px;
+      max-width: 175px;
       background: #18120c;
       border: 1px solid rgba(212, 175, 55, 0.2);
-      border-radius: 6px;
+      border-radius: 5px;
       overflow: hidden;
       cursor: pointer;
-      transition: transform 0.2s ease;
+      transition: transform 0.15s ease, border-color 0.15s ease;
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
     }
-    .st-photo-card:hover { transform: translateY(-2px); border-color: #ffd700; }
-    .st-photo-card img { width: 100%; height: 110px; object-fit: cover; }
-    .st-photo-desc { padding: 6px 8px; font-size: 10px; color: #f5eedf; line-height: 1.3; }
-    .st-photo-author { font-size: 9px; color: #8b949e; margin-top: 3px; }
+    .st-photo-card:hover {
+      transform: translateY(-2px);
+      border-color: #ffd700;
+    }
+    .st-photo-card img {
+      width: 100%;
+      height: 76px;
+      object-fit: cover;
+      display: block;
+    }
+    .st-photo-desc {
+      padding: 4px 6px;
+      font-size: 9px;
+      color: #f5eedf;
+      line-height: 1.25;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex: 1;
+    }
+    .st-photo-author {
+      font-size: 8px;
+      color: #8b949e;
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
 
     /* Zaman Portalı Modalı */
     #time-portal-modal {
@@ -716,12 +808,22 @@
     .archive-caption { font-size: 12px; color: #f5eedf; font-weight: 600; line-height: 1.3; }
     .archive-author { font-size: 10px; color: #8b949e; margin-top: 6px; }
 
-    /* Karşılaştırma (Geçmiş vs Günümüz) Görünümü */
+    /* Karşılaştırma (Geçmiş ve Günümüz) Görünümü */
     .comparison-wrapper {
       display: flex;
       flex-direction: column;
       height: 100%;
-      gap: 14px;
+      min-height: 440px;
+      gap: 12px;
+    }
+    .comparison-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #d4af37;
+      letter-spacing: 0.5px;
     }
     .comparison-container {
       position: relative;
@@ -731,23 +833,39 @@
       border-radius: 8px;
       border: 1px solid #d4af37;
       user-select: none;
+      background: #0a0806;
+      cursor: ew-resize;
     }
     .comparison-img {
       position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
       object-fit: cover;
+      pointer-events: none;
     }
-    .comparison-overlay {
+    #comp-img-modern {
+      z-index: 1;
+    }
+    #comp-img-historic {
+      z-index: 2;
+      clip-path: inset(0 50% 0 0);
+    }
+    .comparison-divider {
       position: absolute;
-      top: 0; left: 0; height: 100%;
-      overflow: hidden;
-      border-right: 2px solid #ffd700;
+      top: 0; bottom: 0;
+      left: 50%;
+      width: 3px;
+      background: #ffd700;
+      box-shadow: 0 0 12px rgba(255, 215, 0, 0.95);
+      z-index: 5;
+      pointer-events: none;
     }
     .comparison-slider-handle {
       position: absolute;
       top: 50%;
+      left: 50%;
       transform: translate(-50%, -50%);
-      width: 36px; height: 36px;
+      width: 38px; height: 38px;
       border-radius: 50%;
       background: #ffd700;
       border: 2px solid #000;
@@ -755,19 +873,49 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: bold;
+      font-weight: 900;
       font-size: 13px;
-      box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+      box-shadow: 0 0 18px rgba(255, 215, 0, 0.95);
       cursor: ew-resize;
-      z-index: 10;
+      z-index: 6;
+      user-select: none;
     }
-    .comparison-labels {
+
+    /* Sekme 3: 360° Küre Sekmesi */
+    .sphere-tab-wrapper {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      min-height: 440px;
+      gap: 10px;
+    }
+    .portal-three-box {
+      flex: 1;
+      min-height: 410px;
+      width: 100%;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid #d4af37;
+      background: #000;
+      position: relative;
+    }
+    .portal-sphere-bar {
       display: flex;
       justify-content: space-between;
-      font-size: 12px;
-      font-weight: 700;
-      text-transform: uppercase;
-      color: #d4af37;
+      align-items: center;
+      padding: 8px 12px;
+      background: rgba(20, 16, 12, 0.95);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: 6px;
+    }
+    .sphere-hint {
+      font-size: 11px;
+      color: #ffd700;
+      font-weight: 600;
+    }
+    .sphere-btn-group {
+      display: flex;
+      gap: 8px;
     }
 
     /* 360° Küre Görüntüleyici Tam Ekran Modalı */
@@ -1014,28 +1162,29 @@
       </button>
     </div>
 
-    <!-- 2 Kolonlu İçerik Alanı -->
+    <!-- 2 Kolonlu İçerik Alanı (Kompakt) -->
     <div class="st-body">
       <!-- Sol Kolon: Tarihsel Anlatı & Yerleşke Binaları -->
       <div class="st-info-col">
-        <span class="st-theme-badge" id="st-stage-theme">Osmanlı Anonim Elektrik Şirketi</span>
+        <div class="st-info-row">
+          <span class="st-theme-badge" id="st-stage-theme">Osmanlı Anonim Elektrik Şirketi</span>
+          <button class="st-btn-compare-compact" onclick="openSilahtaragaCompareModal()">
+            ⚖️ 1914 vs Günümüz (Karşılaştır)
+          </button>
+        </div>
         <p class="st-summary-text" id="st-stage-summary">
           11 Şubat 1914'te faaliyete geçen Silahtarağa, Osmanlı İmparatorluğu'nun ilk kentsel ölçekli elektrik santralidir.
         </p>
 
         <div class="st-buildings-section">
-          <div class="st-buildings-title">⚡ Bu Dönemde Yerleşkede Faal Binalar (Haritada Vurgula):</div>
+          <div class="st-buildings-title">⚡ Bu Dönemde Faal Binalar (Haritada Vurgula):</div>
           <div class="st-buildings-chips" id="st-buildings-chips"></div>
         </div>
-
-        <button class="popup-btn btn-time-portal" onclick="openSilahtaragaCompareModal()">
-          ⚖️ 1914 Türbin Salonu vs Günümüz Müzesi (Karşılaştır)
-        </button>
       </div>
 
-      <!-- Sağ Kolon: Açık Arşiv Fotoğraf Galerisi -->
+      <!-- Sağ Kolon: Açık Arşiv Fotoğraf Şeridi (Yatay Kaydırılabilir) -->
       <div class="st-media-col">
-        <div class="st-buildings-title">📷 Açık Arşiv Fotoğrafları (Salt Araştırma, Arkitekt, İBB):</div>
+        <div class="st-buildings-title">📷 Dönem Fotoğrafları (Salt Araştırma, Arkitekt, İBB, santralistanbul):</div>
         <div class="st-photos-grid" id="st-photos-grid"></div>
       </div>
     </div>
@@ -1053,9 +1202,9 @@
       </div>
 
       <div class="portal-tabs">
-        <button class="portal-tab-btn active" id="tab-btn-gallery" onclick="switchPortalTab('gallery')">📷 Kazı Arşiv Fotoğrafları</button>
-        <button class="portal-tab-btn" id="tab-btn-compare" onclick="switchPortalTab('compare')">⏳ Geçmiş vs Günümüz</button>
-        <button class="portal-tab-btn" id="tab-btn-sphere" onclick="launch360FromPortal()">🔮 360° Arşiv Küresi</button>
+        <button class="portal-tab-btn active" id="tab-btn-gallery" onclick="switchPortalTab('gallery')">📷 Kazı/Arşiv Fotoğrafları</button>
+        <button class="portal-tab-btn" id="tab-btn-compare" onclick="switchPortalTab('compare')">⏳ Geçmiş ve Günümüz</button>
+        <button class="portal-tab-btn" id="tab-btn-sphere" onclick="switchPortalTab('sphere')">🔮 360° Arşiv Küresi</button>
       </div>
 
       <div class="portal-body">
@@ -1065,15 +1214,26 @@
         <!-- Sekme 2: Karşılaştırma -->
         <div id="tab-content-compare" class="comparison-wrapper" style="display:none;">
           <div class="comparison-labels">
-            <span>🏛️ Tarihi Kazı Hali (1880–1910)</span>
-            <span>✨ Günümüz Restorasyonu</span>
+            <span id="comp-label-historic">🏛️ Tarihi Kazı / Arşiv Hali</span>
+            <span id="comp-label-modern">✨ Günümüz Restorasyonu</span>
           </div>
           <div class="comparison-container" id="comparison-box">
             <img id="comp-img-modern" class="comparison-img" src="" alt="Günümüz">
-            <div id="comp-overlay" class="comparison-overlay">
-              <img id="comp-img-historic" class="comparison-img" style="width: 100%; max-width: none;" src="" alt="Tarihi">
-            </div>
+            <img id="comp-img-historic" class="comparison-img" src="" alt="Tarihi">
+            <div id="comp-divider" class="comparison-divider"></div>
             <div id="comp-handle" class="comparison-slider-handle">❮ ❯</div>
+          </div>
+        </div>
+
+        <!-- Sekme 3: 360° Arşiv Küresi -->
+        <div id="tab-content-sphere" class="sphere-tab-wrapper" style="display:none;">
+          <div id="portal-three-container" class="portal-three-box"></div>
+          <div class="portal-sphere-bar">
+            <span class="sphere-hint">🔮 Fareyle 360° sürükleyin / Mobil cihazda jiroskop ile keşfedin</span>
+            <div class="sphere-btn-group">
+              <button class="btn-sphere-ctrl" id="btn-portal-gyro" onclick="toggleGyroscope()">📱 Jiroskop</button>
+              <button class="btn-sphere-ctrl" onclick="launch360FromPortal()">⛶ Tam Ekran 360°</button>
+            </div>
           </div>
         </div>
       </div>
@@ -1198,11 +1358,29 @@
         archives: [
           { title: "Schliemann Kazı Yarması ve Hisarlık", year: "1873", author: "Wilhelm Dörpfeld / DAI", img: "https://upload.wikimedia.org/wikipedia/commons/b/b8/Troy_Schliemann_excavation_trench_1873.jpg" }
         ]
+      },
+      "silahtaraga": {
+        name: "Silahtarağa Elektrik Santrali (santralistanbul)",
+        period: "1914 - 2026 Endüstriyel Kültür Mirası",
+        panorama_url: "assets/silahtaraga/silahtaraga_360_panorama.jpg",
+        compare_historic: "assets/silahtaraga/1914_turbin_salonu_ganz.jpg",
+        compare_modern: "assets/silahtaraga/gunumuz_enerji_muzesi.jpg",
+        archives: [
+          { title: "1. Makine Dairesi Ganz Buhar Türbinleri", year: "1914", author: "Osmanlı Anonim Elektrik Şirketi Arşivi", img: "assets/silahtaraga/1914_turbin_salonu_ganz.jpg" },
+          { title: "2. Makine Dairesi AEG Buhar Türbin Grubu Montajı", year: "1928", author: "Nafia Vekaleti Elektrik İdaresi Arşivi", img: "assets/silahtaraga/1928_aeg_turbin.jpg" },
+          { title: "Mermer Kumanda Odası & Senkronizasyon Tablosu", year: "1932", author: "İstanbul Elektrik Şirketi Teknik Arşivi", img: "assets/silahtaraga/1932_kumanda_odasi.jpg" },
+          { title: "Mimar Seyfi Arkan Ek Santral Binası", year: "1944", author: "Arkitekt Dergisi & Salt Araştırma", img: "assets/silahtaraga/seyfi_arkan_yerel.jpg" },
+          { title: "120 MW Sanayi Zirvesi Şebeke Ölçüm ve Masaları", year: "1970", author: "İETT Fotoğraf ve Belge Arşivi", img: "assets/silahtaraga/1970_sanayi_donemi.jpg" },
+          { title: "17 Mart 1983 — Son Vardiya ve Sessizliğe Gömülen Türbinler", year: "1983", author: "Cumhuriyet Gazetesi Arşivi", img: "assets/silahtaraga/1983_kapanis.jpg" },
+          { title: "santralistanbul Enerji Müzesi Açılışı", year: "2007", author: "santralistanbul Mimarlık Arşivi", img: "assets/silahtaraga/2007_santralistanbul_muze.jpg" },
+          { title: "Bugünkü santralistanbul — Yaşayan Kampüs ve Müze", year: "2026", author: "santralistanbul Açık Koleksiyonu", img: "assets/silahtaraga/2026_santralistanbul_kampus.jpg" }
+        ]
       }
     };
 
     function findPilotArchive(siteName) {
       const lower = siteName.toLowerCase();
+      if (lower.includes("silahtar") || lower.includes("santral")) return PILOT_HERITAGE_ARCHIVES["silahtaraga"];
       if (lower.includes("efes") || lower.includes("ephesos") || lower.includes("celsus")) return PILOT_HERITAGE_ARCHIVES["efes"];
       if (lower.includes("ayasofya") || lower.includes("hagia sophia")) return PILOT_HERITAGE_ARCHIVES["ayasofya"];
       if (lower.includes("galata")) return PILOT_HERITAGE_ARCHIVES["galata"];
@@ -1568,7 +1746,7 @@
           data: silahtaragaData.buildings
         });
 
-        // 3D Binalar (Fill-Extrusion)
+        // 3D Binalar (Fill-Extrusion) - Canlı altın/bakır vurgular
         map.addLayer({
           id: 'silahtaraga-bld-extrusion',
           type: 'fill-extrusion',
@@ -1576,11 +1754,13 @@
           paint: {
             'fill-extrusion-color': [
               'case',
-              ['==', ['get', 'id'], 'bld_turbine_1'], '#d4af37',
+              ['==', ['get', 'id'], 'bld_turbine_1'], '#ffd700',
+              ['==', ['get', 'id'], 'bld_turbine_2'], '#f39c12',
               ['==', ['get', 'id'], 'bld_seyfi_arkan'], '#e67e22',
-              ['==', ['get', 'id'], 'bld_boiler_1'], '#c0392b',
-              ['==', ['get', 'id'], 'bld_control_room'], '#2ecc71',
-              '#b8860b'
+              ['==', ['get', 'id'], 'bld_boiler_1'], '#e74c3c',
+              ['==', ['get', 'id'], 'bld_control_room'], '#00e676',
+              ['==', ['get', 'id'], 'bld_coal_dock'], '#8b6508',
+              '#d4af37'
             ],
             'fill-extrusion-height': [
               'case',
@@ -1589,10 +1769,22 @@
               ['==', ['get', 'id'], 'bld_turbine_1'], 18,
               ['==', ['get', 'id'], 'bld_turbine_2'], 18,
               ['==', ['get', 'id'], 'bld_cooling_canal'], 2,
-              12
+              14
             ],
             'fill-extrusion-base': 0,
-            'fill-extrusion-opacity': 0.88
+            'fill-extrusion-opacity': 0.95
+          }
+        });
+
+        // Belirgin Kontur Çizgileri (Line Outline)
+        map.addLayer({
+          id: 'silahtaraga-bld-outline',
+          type: 'line',
+          source: 'silahtaraga-source',
+          paint: {
+            'line-color': '#fff3b0',
+            'line-width': 2.5,
+            'line-opacity': 0.95
           }
         });
 
@@ -1612,7 +1804,7 @@
           paint: {
             'text-color': '#ffffff',
             'text-halo-color': '#000000',
-            'text-halo-width': 1.5
+            'text-halo-width': 2
           }
         });
 
@@ -1641,13 +1833,13 @@
     }
 
     window.focusSilahtaragaTimeline = function() {
-      // 1. Kamerayı Haliç'teki Silahtarağa Yerleşkesine Uçur
+      // 1. Kamerayı Silahtarağa Yerleşkesine İndir (İstenen kesin koordinat ve açılar)
       map.flyTo({
         center: [28.94635, 41.06672],
-        zoom: 17.2,
-        pitch: 66,
-        bearing: 315,
-        duration: 3200,
+        zoom: 17.8,
+        pitch: 70,
+        bearing: 310,
+        duration: 2500,
         essential: true
       });
 
@@ -1697,7 +1889,7 @@
         }
       });
 
-      // Arşiv Fotoğraflarını Güncelle
+      // Arşiv Fotoğraflarını Güncelle (Kompakt yatay şerit)
       const photosEl = document.getElementById('st-photos-grid');
       photosEl.innerHTML = '';
       stage.archives.forEach(item => {
@@ -1714,12 +1906,37 @@
         photosEl.appendChild(pcard);
       });
 
-      // Harita Üzerinde Aktif Dönem Binalarını Aydınlat (Filtreleme)
+      // Harita Üzerinde Aktif Dönem Binalarını Altın/Bakır Vurguyla Aydınlat
       if (map.getLayer('silahtaraga-bld-extrusion')) {
         map.setPaintProperty('silahtaraga-bld-extrusion', 'fill-extrusion-opacity', [
           'case',
-          ['in', ['get', 'id'], ['literal', stage.active_building_ids]], 0.92,
-          0.15 // Aktif olmayan binalar soluklaşır
+          ['in', ['get', 'id'], ['literal', stage.active_building_ids]], 0.96,
+          0.12
+        ]);
+        map.setPaintProperty('silahtaraga-bld-extrusion', 'fill-extrusion-color', [
+          'case',
+          ['in', ['get', 'id'], ['literal', stage.active_building_ids]],
+            ['case',
+              ['==', ['get', 'id'], 'bld_turbine_1'], '#ffd700',
+              ['==', ['get', 'id'], 'bld_turbine_2'], '#f39c12',
+              ['==', ['get', 'id'], 'bld_seyfi_arkan'], '#e67e22',
+              ['==', ['get', 'id'], 'bld_control_room'], '#00e676',
+              ['==', ['get', 'id'], 'bld_boiler_1'], '#e74c3c',
+              '#d4af37'
+            ],
+          '#221810'
+        ]);
+      }
+      if (map.getLayer('silahtaraga-bld-outline')) {
+        map.setPaintProperty('silahtaraga-bld-outline', 'line-opacity', [
+          'case',
+          ['in', ['get', 'id'], ['literal', stage.active_building_ids]], 1.0,
+          0.15
+        ]);
+        map.setPaintProperty('silahtaraga-bld-outline', 'line-color', [
+          'case',
+          ['in', ['get', 'id'], ['literal', stage.active_building_ids]], '#ffd700',
+          '#554433'
         ]);
       }
     };
@@ -1728,19 +1945,53 @@
       if (!silahtaragaData) return;
       const stage = silahtaragaData.timeline_stages[0]; // 1914 karşılaştırması
       const comp = stage.comparison || {
-        historic_img: "https://upload.wikimedia.org/wikipedia/commons/e/e0/Celsus_Library_Ephesos_excavation_c1900.jpg",
-        modern_img: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Celsus_Library%2C_Ephesus%2C_Turkey.jpg/1280px-Celsus_Library%2C_Ephesus%2C_Turkey.jpg"
+        historic_img: "assets/silahtaraga/1914_turbin_salonu_ganz.jpg",
+        modern_img: "assets/silahtaraga/gunumuz_enerji_muzesi.jpg"
       };
+
+      currentPortalSite = {
+        name: "Silahtarağa Elektrik Santrali (santralistanbul)",
+        period: "1914 - 2026 Endüstriyel Kültür Mirası",
+        panorama_url: "assets/silahtaraga/silahtaraga_360_panorama.jpg",
+        compare_historic: comp.historic_img,
+        compare_modern: comp.modern_img,
+        archives: []
+      };
+
+      // Tüm Silahtarağa dönem arşivlerini topla
+      silahtaragaData.timeline_stages.forEach(st => {
+        currentPortalSite.archives = currentPortalSite.archives.concat(st.archives);
+      });
 
       document.getElementById('portal-site-name').innerText = "Silahtarağa Elektrik Santrali (1914 vs Günümüz)";
       document.getElementById('portal-site-desc').innerText = "1. Makine Dairesi Ganz Buhar Türbinleri — 1914 Üretim Hali vs Günümüz Enerji Müzesi";
 
+      // Galeri sekmesini Silahtarağa fotoğraflarıyla doldur
+      const galleryEl = document.getElementById('tab-content-gallery');
+      galleryEl.innerHTML = '';
+      currentPortalSite.archives.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'archive-card';
+        card.innerHTML = `
+          <div class="archive-img-wrapper" onclick="window.open('${item.img}', '_blank')">
+            <img src="${item.img}" alt="${item.title}" loading="lazy">
+          </div>
+          <div class="archive-meta">
+            <span class="archive-year-badge">⚡ ${item.year}</span>
+            <div class="archive-caption">${item.title}</div>
+            <div class="archive-author">Arşiv: ${item.author}</div>
+          </div>
+        `;
+        galleryEl.appendChild(card);
+      });
+
       document.getElementById('comp-img-modern').src = comp.modern_img;
       document.getElementById('comp-img-historic').src = comp.historic_img;
-      setupComparisonSlider();
+      document.getElementById('comp-label-historic').innerText = "🏛️ 1914 Türbin Salonu (Arşiv Fotoğrafı)";
+      document.getElementById('comp-label-modern').innerText = "✨ santralistanbul Enerji Müzesi";
 
-      switchPortalTab('compare');
       document.getElementById('time-portal-modal').style.display = 'flex';
+      switchPortalTab('compare');
     };
 
     // =========================================================================
@@ -1775,22 +2026,45 @@
 
       document.getElementById('comp-img-modern').src = archiveData.compare_modern;
       document.getElementById('comp-img-historic').src = archiveData.compare_historic;
-      setupComparisonSlider();
+      document.getElementById('comp-label-historic').innerText = "🏛️ Tarihi Kazı / Arşiv Hali";
+      document.getElementById('comp-label-modern').innerText = "✨ Günümüz Restorasyonu";
 
-      switchPortalTab('gallery');
       document.getElementById('time-portal-modal').style.display = 'flex';
+      switchPortalTab('gallery');
     };
 
     window.closeTimePortal = function() {
       document.getElementById('time-portal-modal').style.display = 'none';
+      const container = document.getElementById('portal-three-container');
+      if (container) container.innerHTML = '';
     };
 
     window.switchPortalTab = function(tabName) {
-      document.getElementById('tab-btn-gallery').classList.toggle('active', tabName === 'gallery');
-      document.getElementById('tab-btn-compare').classList.toggle('active', tabName === 'compare');
-      document.getElementById('tab-content-gallery').style.display = tabName === 'gallery' ? 'grid' : 'none';
-      document.getElementById('tab-content-compare').style.display = tabName === 'compare' ? 'flex' : 'none';
+      const btnGallery = document.getElementById('tab-btn-gallery');
+      const btnCompare = document.getElementById('tab-btn-compare');
+      const btnSphere = document.getElementById('tab-btn-sphere');
+
+      const contentGallery = document.getElementById('tab-content-gallery');
+      const contentCompare = document.getElementById('tab-content-compare');
+      const contentSphere = document.getElementById('tab-content-sphere');
+
+      if (btnGallery) btnGallery.classList.toggle('active', tabName === 'gallery');
+      if (btnCompare) btnCompare.classList.toggle('active', tabName === 'compare');
+      if (btnSphere) btnSphere.classList.toggle('active', tabName === 'sphere');
+
+      if (contentGallery) contentGallery.style.display = (tabName === 'gallery') ? 'grid' : 'none';
+      if (contentCompare) contentCompare.style.display = (tabName === 'compare') ? 'flex' : 'none';
+      if (contentSphere) contentSphere.style.display = (tabName === 'sphere') ? 'flex' : 'none';
+
+      if (tabName === 'compare') {
+        setupComparisonSlider();
+      } else if (tabName === 'sphere') {
+        const panoUrl = currentPortalSite ? currentPortalSite.panorama_url : 'assets/silahtaraga/silahtaraga_360_panorama.jpg';
+        initThree360(panoUrl, 'portal-three-container');
+        setTimeout(onThreeResize, 60);
+      }
     };
+    window.switchTab = window.switchPortalTab;
 
     window.launch360FromPortal = function() {
       if (currentPortalSite) {
@@ -1801,28 +2075,36 @@
 
     function setupComparisonSlider() {
       const box = document.getElementById('comparison-box');
-      const overlay = document.getElementById('comp-overlay');
+      const historicImg = document.getElementById('comp-img-historic');
+      const divider = document.getElementById('comp-divider');
       const handle = document.getElementById('comp-handle');
+      if (!box || !historicImg || !handle) return;
+
       let isDragging = false;
 
-      function updateSlider(x) {
+      function updateSlider(clientX) {
         const rect = box.getBoundingClientRect();
-        let posX = Math.max(0, Math.min(x - rect.left, rect.width));
+        if (rect.width <= 0) return;
+        let posX = Math.max(0, Math.min(clientX - rect.left, rect.width));
         let percent = (posX / rect.width) * 100;
-        overlay.style.width = percent + '%';
-        handle.style.left = percent + '%';
+        let rightPercent = 100 - percent;
+        historicImg.style.clipPath = `inset(0 ${rightPercent.toFixed(2)}% 0 0)`;
+        if (divider) divider.style.left = `${percent.toFixed(2)}%`;
+        handle.style.left = `${percent.toFixed(2)}%`;
       }
 
-      box.onmousedown = (e) => { isDragging = true; updateSlider(e.clientX); };
+      // Başlangıçta tam ortadan (%50) böl
+      historicImg.style.clipPath = 'inset(0 50% 0 0)';
+      if (divider) divider.style.left = '50%';
+      handle.style.left = '50%';
+
+      box.onmousedown = (e) => { isDragging = true; updateSlider(e.clientX); e.preventDefault(); };
       window.onmouseup = () => { isDragging = false; };
-      window.onmousemove = (e) => { if (isDragging) updateSlider(e.clientX); };
+      window.onmousemove = (e) => { if (isDragging) { updateSlider(e.clientX); e.preventDefault(); } };
 
       box.ontouchstart = (e) => { isDragging = true; updateSlider(e.touches[0].clientX); };
       window.ontouchend = () => { isDragging = false; };
-      window.ontouchmove = (e) => { if (isDragging) updateSlider(e.touches[0].clientX); };
-
-      overlay.style.width = '50%';
-      handle.style.left = '50%';
+      window.ontouchmove = (e) => { if (isDragging) { updateSlider(e.touches[0].clientX); } };
     }
 
     // =========================================================================
@@ -1833,6 +2115,8 @@
     let lon = 0, onPointerDownLon = 0, lat = 0, onPointerDownLat = 0;
     let phi = 0, theta = 0;
     let isGyroActive = false;
+    let activeThreeContainer = null;
+    let isThreeRunning = false;
 
     window.launch360Sphere = function(siteName) {
       const archive = findPilotArchive(siteName);
@@ -1840,25 +2124,27 @@
       document.getElementById('sphere-hud-subtitle').innerText = `Dönem: ${archive.period} — Arşiv Panorama Küresi`;
 
       document.getElementById('sphere-modal').style.display = 'flex';
-      initThree360(archive.panorama_url);
+      initThree360(archive.panorama_url, 'three-canvas-container');
     };
 
     window.close360Sphere = function() {
       document.getElementById('sphere-modal').style.display = 'none';
       if (isGyroActive) toggleGyroscope();
-      if (threeRenderer) {
-        threeRenderer.dispose();
-        const container = document.getElementById('three-canvas-container');
-        while (container.firstChild) container.removeChild(container.firstChild);
-      }
+      const container = document.getElementById('three-canvas-container');
+      if (container) container.innerHTML = '';
     };
 
-    function initThree360(panoramaUrl) {
-      const container = document.getElementById('three-canvas-container');
+    function initThree360(panoramaUrl, containerId = 'three-canvas-container') {
+      const container = document.getElementById(containerId);
+      if (!container) return;
       container.innerHTML = '';
 
       const width = container.clientWidth || window.innerWidth;
-      const height = container.clientHeight || window.innerHeight;
+      const height = container.clientHeight || 450;
+
+      if (threeRenderer) {
+        try { threeRenderer.dispose(); } catch(e) {}
+      }
 
       threeScene = new THREE.Scene();
       threeCamera = new THREE.PerspectiveCamera(75, width / height, 1, 1100);
@@ -1879,13 +2165,20 @@
       threeRenderer.setSize(width, height);
       container.appendChild(threeRenderer.domElement);
 
-      container.addEventListener('pointerdown', onPointerDown);
-      document.addEventListener('pointermove', onPointerMove);
-      document.addEventListener('pointerup', onPointerUp);
-      container.addEventListener('wheel', onDocumentWheel);
+      activeThreeContainer = container;
+
+      container.onpointerdown = onPointerDown;
+      document.onpointermove = onPointerMove;
+      document.onpointerup = onPointerUp;
+      container.onwheel = onDocumentWheel;
+
+      window.removeEventListener('resize', onThreeResize);
       window.addEventListener('resize', onThreeResize);
 
-      animateThree();
+      if (!isThreeRunning) {
+        isThreeRunning = true;
+        requestAnimationFrame(animateThree);
+      }
     }
 
     function onPointerDown(event) {
@@ -1906,40 +2199,49 @@
     function onPointerUp() { isUserInteracting = false; }
 
     function onDocumentWheel(event) {
-      threeCamera.fov = Math.max(35, Math.min(95, threeCamera.fov + event.deltaY * 0.05));
+      if (!threeCamera) return;
+      threeCamera.fov = Math.max(30, Math.min(95, threeCamera.fov + event.deltaY * 0.05));
       threeCamera.updateProjectionMatrix();
     }
 
     function onThreeResize() {
-      const container = document.getElementById('three-canvas-container');
-      if (!container || !threeCamera || !threeRenderer) return;
-      threeCamera.aspect = container.clientWidth / container.clientHeight;
-      threeCamera.updateProjectionMatrix();
-      threeRenderer.setSize(container.clientWidth, container.clientHeight);
+      if (!activeThreeContainer || !threeCamera || !threeRenderer) return;
+      const w = activeThreeContainer.clientWidth;
+      const h = activeThreeContainer.clientHeight;
+      if (w > 0 && h > 0) {
+        threeCamera.aspect = w / h;
+        threeCamera.updateProjectionMatrix();
+        threeRenderer.setSize(w, h);
+      }
     }
 
     window.toggleGyroscope = function() {
-      const btn = document.getElementById('btn-gyro-toggle');
+      const btnModal = document.getElementById('btn-gyro-toggle');
+      const btnPortal = document.getElementById('btn-portal-gyro');
+      const updateButtons = (active) => {
+        const txt = active ? "🟢 Jiroskop Aktif" : "📱 Jiroskop";
+        const bg = active ? "#10b981" : "rgba(20, 16, 12, 0.9)";
+        if (btnModal) { btnModal.innerText = active ? "🟢 Jiroskop Aktif" : "📱 Jiroskop Modu"; btnModal.style.background = bg; }
+        if (btnPortal) { btnPortal.innerText = txt; btnPortal.style.background = bg; }
+      };
+
       if (isGyroActive) {
         window.removeEventListener('deviceorientation', handleDeviceOrientation);
         isGyroActive = false;
-        btn.innerText = "📱 Jiroskop Modu (Telefonu Çevir)";
-        btn.style.background = "rgba(20, 16, 12, 0.9)";
+        updateButtons(false);
       } else {
         if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
           DeviceOrientationEvent.requestPermission().then(permissionState => {
             if (permissionState === 'granted') {
               window.addEventListener('deviceorientation', handleDeviceOrientation);
               isGyroActive = true;
-              btn.innerText = "🟢 Jiroskop Aktif";
-              btn.style.background = "#10b981";
+              updateButtons(true);
             }
           }).catch(console.error);
         } else if ('ondeviceorientation' in window) {
           window.addEventListener('deviceorientation', handleDeviceOrientation);
           isGyroActive = true;
-          btn.innerText = "🟢 Jiroskop Aktif";
-          btn.style.background = "#10b981";
+          updateButtons(true);
         } else {
           alert("Cihazınızda jiroskop / yön sensörü bulunamadı.");
         }
@@ -1958,7 +2260,14 @@
     };
 
     function animateThree() {
-      if (document.getElementById('sphere-modal').style.display !== 'flex') return;
+      const isSphereModalOpen = document.getElementById('sphere-modal') && document.getElementById('sphere-modal').style.display === 'flex';
+      const isTabSphereOpen = document.getElementById('tab-content-sphere') && document.getElementById('tab-content-sphere').style.display === 'flex';
+
+      if (!isSphereModalOpen && !isTabSphereOpen) {
+        isThreeRunning = false;
+        return;
+      }
+
       requestAnimationFrame(animateThree);
 
       lat = Math.max(-85, Math.min(85, lat));
@@ -1969,8 +2278,10 @@
       const targetY = 500 * Math.cos(phi);
       const targetZ = 500 * Math.sin(phi) * Math.sin(theta);
 
-      threeCamera.lookAt(targetX, targetY, targetZ);
-      threeRenderer.render(threeScene, threeCamera);
+      if (threeCamera && threeRenderer && threeScene) {
+        threeCamera.lookAt(targetX, targetY, targetZ);
+        threeRenderer.render(threeScene, threeCamera);
+      }
     }
 
     // =========================================================================
@@ -2029,7 +2340,7 @@
     });
 
     const PRESETS = {
-      'SILAHTARAGA': { center: [28.94635, 41.06672], zoom: 17.2, pitch: 66, bearing: 315 },
+      'SILAHTARAGA': { center: [28.94635, 41.06672], zoom: 17.8, pitch: 70, bearing: 310 },
       'NEMRUT': { center: [38.7408, 37.9806], zoom: 14.5, pitch: 75, bearing: 35 },
       'KAPADOKYA': { center: [34.8631, 38.6431], zoom: 13.5, pitch: 72, bearing: -45 },
       'ISTANBUL': { center: [28.9784, 41.0082], zoom: 14.0, pitch: 65, bearing: 42 },
