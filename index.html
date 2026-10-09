@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anadolu & İstanbul Kadim Miras Atlası</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@600;700&family=MedievalSharp&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+  
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body, html { 
+      height: 100%; width: 100%; 
+      font-family: 'Cinzel', serif; 
+      background: #0f0a06; 
+      overflow: hidden; 
+    }
+    #map { height: 100%; width: 100%; z-index: 1; background: #1a1109; }
+
+    /* Netlik & Sinematik Ton: Siliklik yok, keskin hatlar */
+    .leaflet-tile-pane {
+      filter: contrast(1.15) brightness(0.95);
+    }
+
+    .magic-vignette {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none; z-index: 500;
+      box-shadow: inset 0 0 90px rgba(10, 5, 2, 0.8), inset 0 0 180px rgba(5, 2, 1, 0.7);
+    }
+
+    .magic-panel {
+      position: absolute; top: 16px; left: 16px; z-index: 1000;
+      background: rgba(26, 17, 10, 0.94);
+      backdrop-filter: blur(8px);
+      border: 2px solid #c99b42;
+      border-radius: 6px;
+      padding: 12px 16px; width: 290px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.85), 0 0 15px rgba(201, 155, 66, 0.25);
+    }
+    .panel-header h1 {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 13.5px; font-weight: 900;
+      color: #e8c374; letter-spacing: 1px;
+    }
+    .panel-header .subtitle {
+      font-size: 11px; color: #a88456; margin-top: 2px;
+      font-style: italic; font-family: 'MedievalSharp', cursive;
+    }
+    .count-box {
+      font-size: 12px; color: #dfcaa7; margin-top: 6px;
+      padding-top: 4px; border-top: 1px solid rgba(201, 155, 66, 0.3);
+    }
+    .count-box b { color: #f7d080; }
+
+    select {
+      width: 100%; background: #1a1109; color: #f2e2c4;
+      border: 1px solid #8f6a2b; padding: 6px 8px; border-radius: 4px;
+      font-family: 'Cinzel', serif; font-size: 11px; margin-top: 6px;
+      outline: none; cursor: pointer;
+    }
+
+    /* Antik Yakut Mühürler */
+    .cluster-seal {
+      width: 42px; height: 42px; border-radius: 50%;
+      background: radial-gradient(circle, #b81414 0%, #6e0808 70%, #290202 100%);
+      border: 2px solid #f7d080; color: #fff5db;
+      font-family: 'Cinzel Decorative', serif; font-weight: 700; font-size: 12px;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 0 15px rgba(232, 38, 38, 0.6), inset 0 0 6px rgba(0,0,0,0.8);
+    }
+    .cluster-seal-medium {
+      width: 48px; height: 48px; font-size: 13px;
+      background: radial-gradient(circle, #d97706 0%, #8c4404 70%, #3d1c01 100%);
+      border-color: #ffd88a;
+    }
+    .cluster-seal-large {
+      width: 56px; height: 56px; font-size: 14px;
+      background: radial-gradient(circle, #4a1d96 0%, #290d59 70%, #100326 100%);
+      border-color: #d8b4fe;
+    }
+
+    .leaflet-popup-content-wrapper {
+      background: #1c130b linear-gradient(145deg, #24190e, #140d07) !important;
+      border: 2px solid #c99b42 !important;
+      border-radius: 6px !important;
+      color: #ebd7b5 !important;
+    }
+    .leaflet-popup-tip { background: #1c130b !important; border: 1px solid #c99b42 !important; }
+    .popup-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 14px; font-weight: 700; color: #f5c76c;
+      border-bottom: 1px solid rgba(201, 155, 66, 0.4);
+      padding-bottom: 3px; margin-bottom: 5px;
+    }
+    .popup-tag {
+      display: inline-block; font-size: 10px; color: #d4a757;
+      background: rgba(201, 155, 66, 0.15); padding: 2px 6px;
+      border: 1px solid #8f6a2b; border-radius: 3px; margin-bottom: 6px;
+    }
+    .archive-btn {
+      display: inline-block; width: 100%; margin-top: 8px; padding: 6px;
+      background: #8b1e28; color: #fff; text-align: center; text-decoration: none;
+      font-size: 11px; font-weight: bold; border-radius: 4px; border: 1px solid #c99b42;
+    }
+    .archive-btn:hover { background: #b02534; }
+  </style>
+</head>
+<body>
+
+  <div class="magic-vignette"></div>
+
+  <div class="magic-panel">
+    <div class="panel-header">
+      <h1>Kadim Miras Atlası</h1>
+      <div class="subtitle">"Anadolu & İstanbul Envanteri"</div>
+      <div class="count-box">Kayıtlı Yapı: <b id="total-count">0</b></div>
+    </div>
+
+    <select id="category-select">
+      <option value="ALL">Bütün Kadim Yapılar</option>
+      <option value="Antik Kent / Ören Yeri">Antik Kentler & Ören Yerleri</option>
+      <option value="Kale / Hisar / Tahkimat">Kaleler, Hisarlar & Surlar</option>
+      <option value="Tarihi Kilise / Manastır">Kiliseler & Manastırlar</option>
+      <option value="Tarihi Cami / Külliye / Mescit">Camiler & Külliyeler</option>
+      <option value="Tarihi Sarnıç">Sarnıçlar & Su Mimarisi</option>
+      <option value="Höyük / Tümülüs">Höyükler & Tümülüsler</option>
+    </select>
+  </div>
+
+  <div id="map"></div>
+
+  <script>
+    const map = L.map('map', { 
+      center: [41.015, 28.979],
+      zoom: 12, 
+      minZoom: 5, 
+      zoomControl: false 
+    });
+    L.control.zoom({ position: 'bottomright' }).addTo(map);
+
+    // HİÇBİR API KEY VEYA 403 ENGELİ BULUNMAYAN GÜVENİLİR AÇIK HARİTA ALTLIĞI
+    L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; OpenStreetMap &copy; TTK & İBB Miras'
+    }).addTo(map);
+
+    const markersCluster = L.markerClusterGroup({
+      chunkedLoading: true,
+      maxClusterRadius: 35,
+      iconCreateFunction: function(cluster) {
+        const count = cluster.getChildCount();
+        let cClass = 'cluster-seal';
+        if (count > 8) cClass = 'cluster-seal cluster-seal-medium';
+        if (count > 25) cClass = 'cluster-seal cluster-seal-large';
+        return L.divIcon({
+          html: `<div class="${cClass}"><span>${count}</span></div>`,
+          className: '',
+          iconSize: [42, 42]
+        });
+      }
+    });
+    map.addLayer(markersCluster);
+
+    // Dahili Zengin Çekirdek Liste (Dosya henüz oluşmadıysa devreye girer)
+    const fallbackData = [
+      {name:"Ayasofya-i Kebir", loc:"İstanbul, Fatih", coords:[28.9799,41.0086], cat:"Tarihi Kilise / Manastır", date:"MS 537", epoch:"Doğu Roma / Osmanlı", archive:"https://istanbultarihi.ist/ara?q=Ayasofya"},
+      {name:"Topkapı Sarayı", loc:"İstanbul, Fatih", coords:[28.9833,41.0115], cat:"Kale / Hisar / Tahkimat", date:"MS 1478", epoch:"Osmanlı Başkenti", archive:"https://ttk.gov.tr/eski-istanbul-fotograflari/?s=Topkapı"},
+      {name:"Yerebatan Sarnıcı", loc:"İstanbul, Fatih", coords:[28.9779,41.0084], cat:"Tarihi Sarnıç", date:"MS 542", epoch:"Justinianus Dönemi", archive:"https://istanbultarihi.ist/ara?q=Yerebatan"},
+      {name:"Binbirdirek Sarnıcı", loc:"İstanbul, Fatih", coords:[28.9753,41.0078], cat:"Tarihi Sarnıç", date:"MS 5. Yy", epoch:"Doğu Roma", archive:"https://istanbultarihi.ist/ara?q=Binbirdirek"},
+      {name:"Bozdoğan (Valens) Su Kemeri", loc:"İstanbul, Fatih", coords:[28.9556,41.0161], cat:"Tarihi Sarnıç", date:"MS 368", epoch:"Roma Su Sistemi", archive:"https://istanbultarihi.ist/ara?q=Valens"},
+      {name:"Sultanahmet Hipodromu & Dikilitaş", loc:"İstanbul, Fatih", coords:[28.9767,41.0064], cat:"Antik Kent / Ören Yeri", date:"MS 330", epoch:"Roma / Hipodrom", archive:"https://ttk.gov.tr/eski-istanbul-fotograflari/?s=Hipodrom"},
+      {name:"Theodosius Kara Surları", loc:"İstanbul, Fatih", coords:[28.9219,41.0203], cat:"Kale / Hisar / Tahkimat", date:"MS 413", epoch:"Doğu Roma", archive:"https://istanbultarihi.ist/ara?q=Surlar"},
+      {name:"Galata Kulesi", loc:"İstanbul, Beyoğlu", coords:[28.9742,41.0256], cat:"Kale / Hisar / Tahkimat", date:"MS 1348", epoch:"Ceneviz Kolonisi", archive:"https://ttk.gov.tr/eski-istanbul-fotograflari/?s=Galata"},
+      {name:"Kız Kulesi", loc:"İstanbul, Üsküdar", coords:[29.0042,41.0211], cat:"Kale / Hisar / Tahkimat", date:"MÖ 410", epoch:"Klasik / Doğu Roma", archive:"https://ttk.gov.tr/eski-istanbul-fotograflari/?s=Kız+Kulesi"},
+      {name:"Rumeli Hisarı", loc:"İstanbul, Sarıyer", coords:[29.0572,41.0847], cat:"Kale / Hisar / Tahkimat", date:"MS 1452", epoch:"Fatih Sultan Mehmed", archive:"https://ttk.gov.tr/eski-istanbul-fotograflari/?s=Rumelihisarı"},
+      {name:"Anadolu Hisarı", loc:"İstanbul, Beykoz", coords:[29.0667,41.0828], cat:"Kale / Hisar / Tahkimat", date:"MS 1395", epoch:"Yıldırım Bayezid", archive:"https://ttk.gov.tr/eski-istanbul-fotograflari/?s=Anadoluhisarı"},
+      {name:"Yoros Kalesi", loc:"İstanbul, Beykoz", coords:[29.1575,41.1783], cat:"Kale / Hisar / Tahkimat", date:"MS 13. Yy", epoch:"Doğu Roma / Ceneviz", archive:"https://istanbultarihi.ist/ara?q=Yoros"},
+      {name:"Yarımburgaz Mağarası", loc:"İstanbul, Başakşehir", coords:[28.7425,41.0719], cat:"Höyük / Tümülüs", date:"MÖ 400.000", epoch:"Paleolitik", archive:"https://istanbultarihi.ist/ara?q=Yarımburgaz"},
+      {name:"Bathonea Antik Limanı", loc:"İstanbul, Avcılar", coords:[28.7231,41.0028], cat:"Antik Kent / Ören Yeri", date:"MÖ 2. Yy", epoch:"Helenistik / Roma", archive:"https://istanbultarihi.ist/ara?q=Bathonea"},
+      {name:"Efes Antik Metropolü", loc:"İzmir, Selçuk", coords:[27.3411,37.9409], cat:"Antik Kent / Ören Yeri", date:"MÖ 10. Yy", epoch:"İyonya / Roma", archive:"https://ttk.gov.tr/eski-istanbul-fotograflari/?s=Efes"},
+      {name:"Göbekli Tepe", loc:"Şanlıurfa, Haliliye", coords:[38.9225,37.2232], cat:"Höyük / Tümülüs", date:"MÖ 9600", epoch:"Neolitik", archive:"https://ttk.gov.tr/eski-istanbul-fotograflari/?s=Göbeklitepe"},
+      {name:"Hattuşa Hitit Başkenti", loc:"Çorum, Boğazkale", coords:[34.6153,40.0197], cat:"Antik Kent / Ören Yeri", date:"MÖ 1650", epoch:"Hitit İmparatorluğu", archive:"https://ttk.gov.tr/eski-istanbul-fotograflari/?s=Hattuşa"},
+      {name:"Nemrut Dağı", loc:"Adıyaman, Kâhta", coords:[38.7408,37.9806], cat:"Höyük / Tümülüs", date:"MÖ 69", epoch:"Kommagene", archive:"https://ttk.gov.tr/eski-istanbul-fotograflari/?s=Nemrut"},
+      {name:"Ani Harabeleri", loc:"Kars, Arpaçay", coords:[43.5728,40.5075], cat:"Antik Kent / Ören Yeri", date:"MS 961", epoch:"Orta Çağ", archive:"https://ttk.gov.tr/eski-istanbul-fotograflari/?s=Ani"}
+    ];
+
+    let currentDataset = [];
+
+    async function loadData() {
+      try {
+        const res = await fetch('turkiye_tum_tarihi_yapilar.geojson');
+        if (!res.ok) throw new Error("Dosya yok");
+        const json = await res.json();
+        currentDataset = json.features.map(f => ({
+          name: f.properties.name,
+          loc: f.properties.province_district,
+          coords: f.geometry.coordinates,
+          cat: f.properties.category,
+          date: f.properties.dating,
+          epoch: f.properties.period,
+          archive: f.properties.photo_archive_url
+        }));
+      } catch (e) {
+        currentDataset = fallbackData;
+      }
+      render(document.getElementById('category-select').value);
+    }
+
+    function render(cat) {
+      markersCluster.clearLayers();
+      let cnt = 0;
+
+      currentDataset.forEach(s => {
+        if (cat !== "ALL" && s.cat !== cat) return;
+        cnt++;
+
+        const [lon, lat] = s.coords;
+        const marker = L.circleMarker([lat, lon], {
+          radius: 6.5,
+          fillColor: "#e63946",
+          color: "#fff",
+          weight: 1.5,
+          opacity: 1,
+          fillOpacity: 0.95
+        });
+
+        marker.bindPopup(`
+          <div class="popup-title">${s.name}</div>
+          <span class="popup-tag">${s.cat}</span>
+          <div style="font-size:12px; line-height:1.55; color:#e0cfb8;">
+            <b>Konum:</b> ${s.loc}<br>
+            <b>Dönem:</b> ${s.epoch} (${s.date})
+          </div>
+          <a href="${s.archive}" target="_blank" class="archive-btn">📜 TTK / İBB Miras Arşivini Gör</a>
+        `);
+
+        markersCluster.addLayer(marker);
+      });
+
+      document.getElementById('total-count').innerText = cnt.toLocaleString() + " Yapı";
+    }
+
+    document.getElementById('category-select').addEventListener('change', (e) => render(e.target.value));
+    loadData();
+  </script>
+</body>
+</html>
