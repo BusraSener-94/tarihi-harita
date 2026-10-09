@@ -20,7 +20,7 @@
       width: 100%; height: 100%;
       overflow: hidden;
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background: #0f0c08;
+      background: #111b24; /* Antik deniz / derin su rengi */
       color: #e6dfd5;
     }
     #map { width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: 1; }
@@ -34,7 +34,7 @@
       width: 360px;
       max-height: calc(100vh - 36px);
       overflow-y: auto;
-      background: rgba(22, 17, 12, 0.88);
+      background: rgba(20, 16, 12, 0.90);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border: 1px solid rgba(212, 175, 55, 0.35);
@@ -154,7 +154,7 @@
       margin-bottom: 12px;
     }
     .btn-preset {
-      background: rgba(30, 22, 14, 0.8);
+      background: rgba(30, 22, 14, 0.85);
       border: 1px solid rgba(212, 175, 55, 0.25);
       border-radius: 6px;
       padding: 7px 6px;
@@ -175,7 +175,7 @@
       transform: translateY(-1px);
     }
 
-    /* 3B Arazi ve Katman Kontrolleri */
+    /* 3B Arazi ve Kamera Kontrolleri */
     .terrain-control-bar {
       display: flex;
       gap: 6px;
@@ -322,6 +322,17 @@
       <input type="text" id="site-search" class="search-input" placeholder="Antik kent, höyük, kale veya ilçe ara..." autocomplete="off">
     </div>
 
+    <!-- Kartografik Altlık Seçici (Basemap Switcher) -->
+    <div class="filter-group">
+      <label class="filter-label">Kartografik Altlık Stili</label>
+      <select id="basemap-style-select" class="antique-select">
+        <option value="PARCHMENT_TOPO">📜 Antik Parşömen & Topoğrafya (Önerilen)</option>
+        <option value="OPENTOPO">🏔️ OpenTopo Rölyef & Nehirler</option>
+        <option value="IMAGERY_3D">🛰️ 3B Uydu & Doğal Peyzaj</option>
+        <option value="DARK_MATTER">🌒 Karanlık İmparatorluk (Dark Matter)</option>
+      </select>
+    </div>
+
     <!-- Dönem Filtresi -->
     <div class="filter-group">
       <label class="filter-label">Kronolojik Dönem</label>
@@ -383,23 +394,54 @@
   <div id="map"></div>
 
   <script>
-    // 1. MapLibre GL 3D Harita Başlatma
+    // 1. MapLibre GL 3D Harita Başlatma - Kesintisiz Yüksek Zoom ve Antik Parşömen Yapılandırması
     const map = new maplibregl.Map({
       container: 'map',
       style: {
         version: 8,
         glyphs: 'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf',
         sources: {
-          // Antik Parşömen / Topoğrafik Rölyef Tabanı (Esri Shaded Relief)
-          'shaded-relief': {
+          // A. Kesintisiz Topoğrafik Altlık (Esri World Topo Map - Zoom 0..18 tam kapsama, gri kare vermez)
+          'esri-topo-source': {
             type: 'raster',
             tiles: [
-              'https://server.arcgisonline.com/ArcGIS/rest/services/World_Shaded_Relief/MapServer/tile/{z}/{y}/{x}'
+              'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}'
             ],
             tileSize: 256,
-            attribution: 'Esri & USGS & Kültür Varlıkları ve Müzeler Genel Müdürlüğü'
+            maxzoom: 18,
+            attribution: 'Esri, USGS, Kültür Varlıkları ve Müzeler Genel Müdürlüğü'
           },
-          // Gerçek 3B Yükseklik Modeli (AWS Terrarium DEM)
+          // B. Alternatif OpenTopoMap (Konturlar, Nehirler, Yükseklik Çizgileri - Maxzoom: 17 korumalı)
+          'opentopo-source': {
+            type: 'raster',
+            tiles: [
+              'https://tile.opentopomap.org/{z}/{x}/{y}.png'
+            ],
+            tileSize: 256,
+            maxzoom: 17,
+            attribution: 'OpenTopoMap & OSM contributors'
+          },
+          // C. Alternatif Yüksek Çözünürlüklü 3B Uydu
+          'imagery-source': {
+            type: 'raster',
+            tiles: [
+              'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
+            ],
+            tileSize: 256,
+            maxzoom: 18,
+            attribution: 'Esri Satellite & Maxar'
+          },
+          // D. Alternatif Karanlık Harita
+          'dark-source': {
+            type: 'raster',
+            tiles: [
+              'https://a.basemaps.cartocdn.com/rastertiles/dark_nolabels/{z}/{x}/{y}.png'
+            ],
+            tileSize: 256,
+            maxzoom: 18,
+            attribution: 'CartoDB Dark Matter'
+          },
+          // E. Gerçek 3B Yükseklik Modeli (AWS Terrarium DEM - Maxzoom: 15 aşımında otomatik overzoom)
           'terrain-source': {
             type: 'raster-dem',
             tiles: [
@@ -411,37 +453,71 @@
           }
         },
         layers: [
-          // 1. Zemin Parşömen / Topoğrafik Rölyef
+          // 0. Antik Deniz / Okyanus Arka Planı (Derin Akdeniz & Ege Mavisi)
           {
-            id: 'shaded-relief-layer',
-            type: 'raster',
-            source: 'shaded-relief',
-            paint: {
-              'raster-contrast': 0.15,
-              'raster-brightness-min': 0.05,
-              'raster-saturation': -0.15
-            }
-          },
-          // 2. Sıcak Terracotta / Sepya Tonlama Katmanı
-          {
-            id: 'parchment-wash',
+            id: 'ocean-base',
             type: 'background',
             paint: {
-              'background-color': '#16110c',
-              'background-opacity': 0.28
+              'background-color': '#162836'
             }
           },
-          // 3. Dağ Gölgelendirme (Hillshade)
+          // 1. Ana Topoğrafik Zemin Katmanı (Esri World Topo Map)
+          {
+            id: 'layer-esri-topo',
+            type: 'raster',
+            source: 'esri-topo-source',
+            paint: {
+              'raster-contrast': 0.12,
+              'raster-saturation': -0.18,
+              'raster-brightness-min': 0.05
+            }
+          },
+          // 2. Açık Topoğrafya Katmanı (Başlangıçta gizli)
+          {
+            id: 'layer-opentopo',
+            type: 'raster',
+            source: 'opentopo-source',
+            layout: { visibility: 'none' },
+            paint: {
+              'raster-contrast': 0.15,
+              'raster-saturation': -0.10
+            }
+          },
+          // 3. Uydu Katmanı (Başlangıçta gizli)
+          {
+            id: 'layer-imagery',
+            type: 'raster',
+            source: 'imagery-source',
+            layout: { visibility: 'none' },
+            paint: { 'raster-contrast': 0.1 }
+          },
+          // 4. Karanlık Katman (Başlangıçta gizli)
+          {
+            id: 'layer-dark',
+            type: 'raster',
+            source: 'dark-source',
+            layout: { visibility: 'none' }
+          },
+          // 5. Antik Sıcak Parşömen & Terracotta Ton Yıkama Katmanı (Sepya / Antik Kağıt Efekti)
+          {
+            id: 'parchment-sepia-wash',
+            type: 'background',
+            paint: {
+              'background-color': '#2a1e12',
+              'background-opacity': 0.22
+            }
+          },
+          // 6. 3B Dağ Gölgelendirme ve Rölyef Kabartması (Hillshade)
           {
             id: 'hills',
             type: 'hillshade',
             source: 'terrain-source',
             layout: { visibility: 'visible' },
             paint: {
-              'hillshade-shadow-color': '#1a1005',
+              'hillshade-shadow-color': '#180e04',
               'hillshade-highlight-color': '#fcedc7',
-              'hillshade-accent-color': '#8b5a2b',
-              'hillshade-exaggeration': 0.75
+              'hillshade-accent-color': '#8c5923',
+              'hillshade-exaggeration': 0.85
             }
           }
         ]
@@ -458,10 +534,22 @@
     map.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), 'bottom-right');
     map.addControl(new maplibregl.FullscreenControl(), 'bottom-right');
 
-    // 2. 3D Terrain (DEM) Etkinleştirme
+    // 2. 3D Terrain ve Atmosfer (Sky & Fog) Yapılandırması
     map.on('load', async () => {
-      // Gerçek 3 Boyutlu Dağlar & Vadiler (1.7x Yükseklik Çarpanı)
+      // 3B Dağlar & Vadiler (1.7x Yükseklik Çarpanı)
       map.setTerrain({ source: 'terrain-source', exaggeration: 1.7 });
+
+      // Antik Sıcak Ufuk Atmosferi (Sky & Mountain Fog)
+      if (map.setSky) {
+        map.setSky({
+          'sky-color': '#14100c',
+          'sky-horizon-blend': 0.4,
+          'horizon-color': '#4a331c',
+          'horizon-fog-blend': 0.7,
+          'fog-color': '#2b1c0e',
+          'fog-ground-blend': 0.5
+        });
+      }
 
       // GeoJSON Verisini Yükle (12.046 Nokta)
       await loadHeritageGeoJSON();
@@ -594,7 +682,38 @@
       }
     }
 
-    // 3. Etkileşimler: Kümeye Tıklayınca Yakınlaşma
+    // 3. Basemap Katman Değiştirici
+    document.getElementById('basemap-style-select').addEventListener('change', (e) => {
+      const styleKey = e.target.value;
+      const layers = {
+        'layer-esri-topo': false,
+        'layer-opentopo': false,
+        'layer-imagery': false,
+        'layer-dark': false
+      };
+
+      if (styleKey === 'PARCHMENT_TOPO') {
+        layers['layer-esri-topo'] = true;
+        map.setPaintProperty('parchment-sepia-wash', 'background-opacity', 0.22);
+      } else if (styleKey === 'OPENTOPO') {
+        layers['layer-opentopo'] = true;
+        map.setPaintProperty('parchment-sepia-wash', 'background-opacity', 0.12);
+      } else if (styleKey === 'IMAGERY_3D') {
+        layers['layer-imagery'] = true;
+        map.setPaintProperty('parchment-sepia-wash', 'background-opacity', 0.0);
+      } else if (styleKey === 'DARK_MATTER') {
+        layers['layer-dark'] = true;
+        map.setPaintProperty('parchment-sepia-wash', 'background-opacity', 0.0);
+      }
+
+      for (const [layerId, isVisible] of Object.entries(layers)) {
+        if (map.getLayer(layerId)) {
+          map.setLayoutProperty(layerId, 'visibility', isVisible ? 'visible' : 'none');
+        }
+      }
+    });
+
+    // 4. Etkileşimler: Kümeye Tıklayınca Yakınlaşma
     map.on('click', 'clusters', async (e) => {
       const features = map.queryRenderedFeatures(e.point, { layers: ['clusters'] });
       const clusterId = features[0].properties.cluster_id;
@@ -606,7 +725,7 @@
       });
     });
 
-    // 4. Tekil Noktaya Tıklayınca Zengin Bilimsel Pop-up (Dış Bağlantısız)
+    // 5. Tekil Noktaya Tıklayınca Zengin Bilimsel Pop-up (Dış Bağlantısız)
     map.on('click', 'unclustered-point', (e) => {
       const p = e.features[0].properties;
       const coords = e.features[0].geometry.coordinates.slice();
@@ -627,7 +746,7 @@
         .setHTML(popupHtml)
         .addTo(map);
 
-      // Kamerayı hafifçe hedefe eğ
+      // Kamerayı hedefe hafifçe eğ
       map.easeTo({
         center: coords,
         pitch: Math.max(map.getPitch(), 60),
@@ -641,7 +760,7 @@
     map.on('mouseenter', 'unclustered-point', () => { map.getCanvas().style.cursor = 'pointer'; });
     map.on('mouseleave', 'unclustered-point', () => { map.getCanvas().style.cursor = ''; });
 
-    // 5. Filtreleme Fonksiyonu (Dönem & Kategori)
+    // 6. Filtreleme Fonksiyonu (Dönem & Kategori)
     function applyFilters() {
       if (!rawGeojsonData) return;
       const periodVal = document.getElementById('period-filter').value;
@@ -680,7 +799,7 @@
     document.getElementById('period-filter').addEventListener('change', applyFilters);
     document.getElementById('category-filter').addEventListener('change', applyFilters);
 
-    // 6. Canlı Arama Motoru
+    // 7. Canlı Arama Motoru
     document.getElementById('site-search').addEventListener('input', (e) => {
       const term = e.target.value.trim().toLowerCase();
       if (!rawGeojsonData) return;
@@ -714,7 +833,7 @@
       }
     });
 
-    // 7. 3 Boyutlu Sinematik Lokasyon Uçuşları (Camera Fly-To Presets)
+    // 8. 3 Boyutlu Sinematik Lokasyon Uçuşları (Camera Fly-To Presets)
     const PRESETS = {
       'NEMRUT': { center: [38.7408, 37.9806], zoom: 14.5, pitch: 75, bearing: 35 },
       'KAPADOKYA': { center: [34.8631, 38.6431], zoom: 13.5, pitch: 72, bearing: -45 },
@@ -738,7 +857,7 @@
       }
     }
 
-    // 8. 3B Eğim Modu Aç/Kapat & Kamera Sıfırlama
+    // 9. 3B Eğim Modu Aç/Kapat & Kamera Sıfırlama
     let is3DActive = true;
     function toggle3DPerspective() {
       const btn = document.getElementById('btn-pitch-toggle');
